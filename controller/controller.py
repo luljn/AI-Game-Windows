@@ -8,8 +8,13 @@ class Controller :
     
     def __init__(self) :
         
+        #Pygame initailization
         pygame.init()
+        
+        #Game loop variable
         self.running = True
+        
+        #
         self.window = Window()
         self.circle = Circle(self.window)
     
@@ -29,7 +34,7 @@ class Controller :
             pygame.display.flip()
         
         self.quit()
-            
+    
     def quit(self):
         
         pygame.quit()

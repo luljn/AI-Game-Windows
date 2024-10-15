@@ -20,7 +20,7 @@ class Window :
         
         self.screen.fill("black")
         self.dt = self.clock.tick(60) / 1000
-        
+    
     def getScreenWidth(self) :
         
         return self.screen_width
