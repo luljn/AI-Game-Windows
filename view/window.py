@@ -22,25 +22,16 @@ class Window :
         
         #
         self.player_pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
+        #Keyboard keys
         self.keys = 0
     
     def show(self) :
-        
-        while self.running :
-            
-            for event in pygame.event.get() :
-                
-                if event.type == pygame.QUIT :
                     
-                    self.running = False
-                    
-            self.screen.fill("black")
-            self.move()
-            pygame.display.flip()
+        self.screen.fill("black")
+        self.move()
+        pygame.display.flip()
             
-            self.dt = self.clock.tick(60) / 1000
-            
-        self.quit()
+        self.dt = self.clock.tick(60) / 1000
         
     def move(self) :
         
@@ -67,7 +58,10 @@ class Window :
             
         self.dt = self.clock.tick(60) / 1000
         
+    def getScreenWidth(self) :
         
-    def quit(self):
-            
-        pygame.quit()
+        return self.screen_width
+    
+    def getScreenHeight(self) :
+        
+        return self.screen_height
