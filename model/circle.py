@@ -9,7 +9,6 @@ class Circle :
         
         self.window = Window()
         self.position = pygame.Vector2(self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
-        self.sprite = pygame.draw.circle(self.window.screen, "green", self.position, 40)
         
         #Keyboard keys
         self.keys = 0

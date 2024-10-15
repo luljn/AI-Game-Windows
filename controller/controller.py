@@ -6,7 +6,6 @@ from view.window import *
 
 class Controller :
     
-    
     def __init__(self) :
         
         pygame.init()
@@ -14,6 +13,7 @@ class Controller :
         self.window = Window()
         self.circle = Circle()
     
+    #main controller method
     def run(self) :
         
         while self.running :
