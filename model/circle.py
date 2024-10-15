@@ -1,13 +1,12 @@
 import pygame
-from view.window import *
 
 
 
 class Circle :
     
-    def __init__(self):
+    def __init__(self, window):
         
-        self.window = Window()
+        self.window = window
         self.position = pygame.Vector2(self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
         
         #Keyboard keys

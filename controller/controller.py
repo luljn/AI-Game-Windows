@@ -11,7 +11,7 @@ class Controller :
         pygame.init()
         self.running = True
         self.window = Window()
-        self.circle = Circle()
+        self.circle = Circle(self.window)
     
     #main controller method
     def run(self) :
@@ -31,5 +31,5 @@ class Controller :
         self.quit()
             
     def quit(self):
-            
+        
         pygame.quit()
