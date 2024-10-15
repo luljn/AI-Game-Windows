@@ -1,4 +1,5 @@
 import pygame
+from model.circle import *
 from view.window import *
 
 
@@ -11,6 +12,7 @@ class Controller :
         pygame.init()
         self.running = True
         self.window = Window()
+        self.circle = Circle()
     
     def run(self) :
         
@@ -23,6 +25,8 @@ class Controller :
                     self.running = False
             
             self.window.show()
+            self.circle.move(self.window.dt)
+            pygame.display.flip()
         
         self.quit()
             

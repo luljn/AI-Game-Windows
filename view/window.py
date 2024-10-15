@@ -6,30 +6,27 @@ class Window :
     
     def __init__(self):
         
-        #pygame initialization
-        pygame.init()
-        
         #screen dimensions
         self.info = pygame.display.Info()
         self.screen_width = self.info.current_w
         self.screen_height = self.info.current_h
         
-        #
+        #screen configurations
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.clock = pygame.time.Clock()
-        self.running = True
         self.dt = 0
+        
+        #Keyboard keys
+        self.keys = 0
         
         #
         self.player_pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
-        #Keyboard keys
-        self.keys = 0
     
     def show(self) :
-                    
+        
         self.screen.fill("black")
-        self.move()
-        pygame.display.flip()
+        # self.move()
+        # pygame.display.flip()
             
         self.dt = self.clock.tick(60) / 1000
         
