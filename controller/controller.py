@@ -35,6 +35,7 @@ class Controller :
             self.square.move(self.window.dt)
             self.circle.move(self.window.dt)
             pygame.display.flip()
+            pygame.display.update()
             
         self.quit()
     
