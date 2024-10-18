@@ -32,7 +32,7 @@ class Form :
             
             self.position.x += 300 * dt
             
-        pygame.display.flip()
+        # pygame.display.flip()
             
         dt = self.window.clock.tick(60) / 1000
         

@@ -20,6 +20,7 @@ class Window :
     
     def show(self) :
         
+        pygame.display.set_caption("Pygame-UI")
         self.screen.fill("black")
         self.dt = self.clock.tick(60) / 1000
     
