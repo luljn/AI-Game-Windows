@@ -35,4 +35,4 @@ class Circle(Form) :
         
     def drawSprite(self) :
         
-        pygame.draw.circle(self.window.screen, "green", self.position, 40)
+        pygame.draw.circle(self.window.screen, "green", self.position, 30)

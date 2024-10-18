@@ -8,10 +8,10 @@ class Window :
         
         #screen dimensions
         self.info = pygame.display.Info()
-        # self.screen_width = self.info.current_w
-        # self.screen_height = self.info.current_h
-        self.screen_width = 1280
-        self.screen_height = 720
+        self.screen_width = self.info.current_w
+        self.screen_height = self.info.current_h
+        # self.screen_width = 1280
+        # self.screen_height = 720
         
         #screen configurations
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
