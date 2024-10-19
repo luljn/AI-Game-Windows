@@ -30,10 +30,11 @@ class Controller :
             for event in pygame.event.get() :
                 
                 if event.type == pygame.QUIT :
-                        
+                    
                     self.running = False
             
-            self.window.show()
+            # self.window.gameView()
+            self.window.welcomeView()
             self.square.move(self.window.dt)
             self.circle.move(self.window.dt)
             pygame.display.flip()

@@ -23,17 +23,13 @@ class Button :
         self.rect = self.image.get_rect(center = (self.position_x, self.position_y))
         self.text_rect = self.text.get_rect(center = (self.position_x, self.position_y))
 
-
-
     def update(self, window) :
 
         if (self.image is not None) :
 
             window.blit(self.image, self.rect)
-
+    
         window.blit(self.text, self.text_rect)
-
-
 
     def checkPosition(self, position) :
 
@@ -42,8 +38,6 @@ class Button :
             return True
 
         return False
-
-
 
     def changeColor(self, position) :
 

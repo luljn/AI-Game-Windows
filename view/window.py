@@ -18,8 +18,12 @@ class Window :
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.clock = pygame.time.Clock()
         self.dt = 0
+        
+    def welcomeView(self) :
+        
+        self.screen.fill("white")
     
-    def show(self) :
+    def gameView(self) :
         
         self.screen.fill("black")
         self.dt = self.clock.tick(60) / 1000
