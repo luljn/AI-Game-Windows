@@ -7,7 +7,7 @@ class Form :
     def __init__(self, window):
         
         self.window = window
-        self.position = pygame.Vector2(self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
+        self.position = 0
         
         #Keyboard keys
         self.keys = 0
@@ -32,10 +32,8 @@ class Form :
             
             self.position.x += 300 * dt
             
-        # pygame.display.flip()
-            
         dt = self.window.clock.tick(60) / 1000
-        
+    
     def drawSprite(self) :
         
         pass

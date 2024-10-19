@@ -23,6 +23,8 @@ class Controller :
     #main controller method
     def run(self) :
         
+        pygame.display.set_caption(self.window.getTitle())
+        
         while self.running :
             
             for event in pygame.event.get() :

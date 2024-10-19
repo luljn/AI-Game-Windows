@@ -14,13 +14,13 @@ class Window :
         # self.screen_height = 720
         
         #screen configurations
+        self.title = "Pygame-UI"
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.clock = pygame.time.Clock()
         self.dt = 0
     
     def show(self) :
         
-        pygame.display.set_caption("Pygame-UI")
         self.screen.fill("black")
         self.dt = self.clock.tick(60) / 1000
     
@@ -31,3 +31,7 @@ class Window :
     def getScreenHeight(self) :
         
         return self.screen_height
+    
+    def getTitle(self) :
+        
+        return self.title
