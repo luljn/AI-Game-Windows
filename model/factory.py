@@ -1,7 +1,7 @@
 #The factory of the programm
 import pygame
-from view.button import *
-from view.font import *
+from model.button import *
+from model.font import *
 
 
 
