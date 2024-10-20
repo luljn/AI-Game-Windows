@@ -42,16 +42,22 @@ class Controller :
                     #Click event management 
                     if(event.type == pygame.MOUSEBUTTONDOWN) :
                         
+                        #Launch the game view.
+                        if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Jouer") :
+                            
+                            self.window.setView("game")
+                        
+                        #Launch the options view.
+                        if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Options") :
+                            
+                            self.window.setView("options")
+                        
                         #Close the window and quit the game
                         if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Quitter") :
                         
                             self.running == False
                             self.quit()
                             exit()
-                            
-                        if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Jouer") :
-                            
-                            self.window.setView("game")
             
             if(self.window.getView() == "welcome") : 
                 
@@ -66,6 +72,12 @@ class Controller :
                 self.circle.drawSprite()
                 self.square.move(self.window.dt)
                 self.circle.move(self.window.dt)
+                pygame.display.flip()
+                pygame.display.update()
+                
+            if(self.window.getView() == "options") : 
+                
+                self.window.optionsView()
                 pygame.display.flip()
                 pygame.display.update()
             

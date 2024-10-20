@@ -55,6 +55,10 @@ class Window :
         
         self.screen.fill("black")
         self.dt = self.clock.tick(60) / 1000
+        
+    def optionsView(self) :
+        
+        self.screen.fill("black")
     
     def getScreenWidth(self) :
         
