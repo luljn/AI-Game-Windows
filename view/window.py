@@ -25,10 +25,12 @@ class Window :
         
     def welcomeView(self, buttons) :
         
+        pygame_logo = pygame.image.load("resources\img\pygame_logo.PNG").convert()
         menu = pygame.image.load("resources\img\menu.PNG").convert()
         
         self.screen.fill("white")
-        self.screen.blit(menu, (self.getScreenWidth() / 1.55, self.getScreenHeight() / 10))
+        self.screen.blit(pygame.transform.scale(pygame_logo, (self.getScreenWidth(), self.getScreenHeight())), (0, 0))
+        self.screen.blit(menu, (self.getScreenWidth() / 5.5, self.getScreenHeight() / 10))
         self.mouse_position = pygame.mouse.get_pos()
         
         for button in buttons :
