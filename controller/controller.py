@@ -26,6 +26,7 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
+        buttons = self.factory.buttonFactory(self.window)
         
         while self.running :
             
@@ -34,9 +35,19 @@ class Controller :
                 if event.type == pygame.QUIT :
                     
                     self.running = False
+                
+                for button in buttons :
+                    
+                    #Click event management 
+                    if(event.type == pygame.MOUSEBUTTONDOWN) :
+                        
+                        if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Quitter") :
+                        
+                            self.running == False
+                            pygame.quit()
             
             # self.window.gameView()
-            self.window.welcomeView(self.factory.buttonFactory(self.window))
+            self.window.welcomeView(buttons)
             self.square.move(self.window.dt)
             self.circle.move(self.window.dt)
             pygame.display.flip()

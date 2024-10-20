@@ -37,6 +37,16 @@ class Window :
             
             button.changeColor(self.mouse_position)
             button.update(self.screen)
+            
+        # for event in pygame.event.get() :
+            
+        #     #Click event management 
+        #     if(event.type == pygame.MOUSEBUTTONDOWN) : 
+                
+        #         if (button.checkPosition(self.mouse_position) and button.text_input == "Quitter") :
+                    
+        #             # self.running == False
+        #             pygame.quit()
     
     def gameView(self) :
         
