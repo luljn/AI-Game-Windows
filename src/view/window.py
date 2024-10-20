@@ -23,6 +23,9 @@ class Window :
         #Mouse
         self.mouse_position = 0
         
+        #A variable to know on with view we are
+        self.view = "welcome"
+        
     def welcomeView(self, buttons) :
         
         pygame_logo = pygame.image.load("resources\img\pygame_logo.PNG").convert()
@@ -65,6 +68,18 @@ class Window :
         
         return self.title
     
-    def getPath(self) :
+    def getView(self) :
         
-        return path.dirname(__file__)
+        return self.view
+    
+    def setView(self, view) :
+        
+        self.view = view
+        
+    def getDT(self) :
+        
+        return self.dt
+        
+    def setDT(self, dt) :
+        
+        self.dt = dt

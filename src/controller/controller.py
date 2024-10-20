@@ -46,15 +46,28 @@ class Controller :
                         if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Quitter") :
                         
                             self.running == False
-                            pygame.quit()
+                            self.quit()
                             exit()
+                            
+                        if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Jouer") :
+                            
+                            self.window.setView("game")
             
-            # self.window.gameView()
-            self.window.welcomeView(buttons)
-            self.square.move(self.window.dt)
-            self.circle.move(self.window.dt)
-            pygame.display.flip()
-            pygame.display.update()
+            if(self.window.getView() == "welcome") : 
+                
+                self.window.welcomeView(buttons)
+                pygame.display.flip()
+                pygame.display.update()
+            
+            if(self.window.getView() == "game") : 
+                
+                self.window.gameView()
+                self.square.drawSprite()
+                self.circle.drawSprite()
+                self.square.move(self.window.dt)
+                self.circle.move(self.window.dt)
+                pygame.display.flip()
+                pygame.display.update()
             
         self.quit()
     
