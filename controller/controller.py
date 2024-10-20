@@ -1,4 +1,5 @@
 import pygame
+from sys import exit
 from model.circle import *
 from model.square import *
 from model.factory import *
@@ -41,10 +42,12 @@ class Controller :
                     #Click event management 
                     if(event.type == pygame.MOUSEBUTTONDOWN) :
                         
+                        #Close the window and quit the game
                         if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Quitter") :
                         
                             self.running == False
                             pygame.quit()
+                            exit()
             
             # self.window.gameView()
             self.window.welcomeView(buttons)
