@@ -7,6 +7,7 @@ class Window :
     
     def __init__(self):
         
+        self.mouse_position = pygame.mouse.get_pos()
         #screen dimensions
         self.info = pygame.display.Info()
         self.screen_width = self.info.current_w
@@ -20,12 +21,17 @@ class Window :
         self.clock = pygame.time.Clock()
         self.dt = 0
         
-    def welcomeView(self) :
+    def welcomeView(self, buttons) :
         
         menu = pygame.image.load("resources\img\menu.PNG").convert()
         
         self.screen.fill("white")
         self.screen.blit(menu, (self.getScreenWidth() / 1.55, self.getScreenHeight() / 10))
+        
+        for button in buttons :
+            
+            button.changeColor(self.mouse_position)
+            button.update(self.screen)
     
     def gameView(self) :
         
