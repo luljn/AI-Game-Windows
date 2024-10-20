@@ -36,7 +36,7 @@ class Controller :
                     self.running = False
             
             # self.window.gameView()
-            self.window.welcomeView(self.factory.buttonFactory())
+            self.window.welcomeView(self.factory.buttonFactory(self.window))
             self.square.move(self.window.dt)
             self.circle.move(self.window.dt)
             pygame.display.flip()
