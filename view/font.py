@@ -6,4 +6,4 @@ class Font :
     
     def getFont(self, size) :
         
-        return pygame.font.Font("../resources/font.ttf", size)
+        return pygame.font.Font("resources\fonts\font.ttf", size)

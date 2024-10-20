@@ -1,4 +1,5 @@
 import pygame
+from os import path
 
 
 
@@ -21,7 +22,10 @@ class Window :
         
     def welcomeView(self) :
         
+        menu = pygame.image.load("resources\img\menu.PNG").convert()
+        
         self.screen.fill("white")
+        self.screen.blit(menu, (self.getScreenWidth() / 1.55, self.getScreenHeight() / 10))
     
     def gameView(self) :
         
@@ -39,3 +43,7 @@ class Window :
     def getTitle(self) :
         
         return self.title
+    
+    def getPath(self) :
+        
+        return path.dirname(__file__)
