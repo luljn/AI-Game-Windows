@@ -13,6 +13,7 @@ class Controller :
         
         #Pygame initailization
         pygame.init()
+        pygame.mixer.init()
         
         #Game loop variable
         self.running = True
@@ -27,6 +28,8 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
+        pygame.mixer.music.load("resources\sounds\map_music.wav")
+        pygame.mixer.music.play(-1)
         buttons = self.factory.buttonFactory(self.window)
         
         while self.running :
