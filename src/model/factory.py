@@ -17,7 +17,8 @@ class Factory :
         start_game_button = Button(pygame.image.load("resources\img\Rect.png"), (position_x, window.getScreenHeight() / 2.7), "Jouer", self.font.getFont(25), "White", "Blue")
         options_button = Button(pygame.image.load("resources\img\Rect.png"), (position_x, start_game_button.position_y + 120), "Options", self.font.getFont(25), "White", "Blue")
         quit_button = Button(pygame.image.load("resources\img\Rect.png"), (position_x, options_button.position_y + 120), "Quitter", self.font.getFont(25), "White", "Blue")
+        back_button = Button(pygame.image.load("resources\img\Rect.png"), (window.getScreenWidth() / 1.25, quit_button.position_y + 230), "Retour", self.font.getFont(25), "White", "Blue")
         
-        buttons = [start_game_button, options_button, quit_button]
+        buttons = [start_game_button, options_button, quit_button, back_button]
         
         return buttons

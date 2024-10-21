@@ -51,6 +51,11 @@ class Controller :
                         if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Options") :
                             
                             self.window.setView("options")
+                            
+                        #Launch the options view.
+                        if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Retour") :
+                            
+                            self.window.setView("welcome")
                         
                         #Close the window and quit the game
                         if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Quitter") :
@@ -67,7 +72,7 @@ class Controller :
             
             if(self.window.getView() == "game") : 
                 
-                self.window.gameView()
+                self.window.gameView(buttons)
                 self.square.drawSprite()
                 self.circle.drawSprite()
                 self.square.move(self.window.dt)
@@ -77,7 +82,7 @@ class Controller :
                 
             if(self.window.getView() == "options") : 
                 
-                self.window.optionsView()
+                self.window.optionsView(buttons)
                 pygame.display.flip()
                 pygame.display.update()
             

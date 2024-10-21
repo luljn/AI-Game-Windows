@@ -25,7 +25,7 @@ class Window :
         
         #A variable to know on with view we are
         self.view = "welcome"
-        
+    
     def welcomeView(self, buttons) :
         
         pygame_logo = pygame.image.load("resources\img\pygame_logo.PNG").convert()
@@ -38,27 +38,35 @@ class Window :
         
         for button in buttons :
             
-            button.changeColor(self.mouse_position)
-            button.update(self.screen)
-            
-        # for event in pygame.event.get() :
-            
-        #     #Click event management 
-        #     if(event.type == pygame.MOUSEBUTTONDOWN) : 
+            if (button.text_input != "Retour") :
                 
-        #         if (button.checkPosition(self.mouse_position) and button.text_input == "Quitter") :
-                    
-        #             # self.running == False
-        #             pygame.quit()
+                button.changeColor(self.mouse_position)
+                button.update(self.screen)
     
-    def gameView(self) :
+    def gameView(self, buttons) :
         
         self.screen.fill("black")
         self.dt = self.clock.tick(60) / 1000
+        self.mouse_position = pygame.mouse.get_pos()
         
-    def optionsView(self) :
+        for button in buttons :
+            
+            if(button.text_input == "Retour") :
+                
+                button.changeColor(self.mouse_position)
+                button.update(self.screen)
+    
+    def optionsView(self, buttons) :
         
         self.screen.fill("black")
+        self.mouse_position = pygame.mouse.get_pos()
+        
+        for button in buttons :
+            
+            if(button.text_input == "Retour") :
+                
+                button.changeColor(self.mouse_position)
+                button.update(self.screen)
     
     def getScreenWidth(self) :
         
