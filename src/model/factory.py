@@ -14,7 +14,7 @@ class Factory :
     
     def buttonFactory(self, window) : 
         
-        rect_img_path = "resources\img\Rect.png"
+        rect_img_path = "resources\img\\rect.png"
         position_x = window.getScreenWidth() / 3.05
         font = Font.getFont(25)
         
