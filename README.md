@@ -1,6 +1,6 @@
 # Description
 
-A simple UI test with Pygame.
+A two-player game powered by Artificial Initelligence (for Windows OS).
 
 # Tools used.
 
