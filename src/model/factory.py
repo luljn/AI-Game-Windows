@@ -2,7 +2,9 @@
 import pygame
 
 from model.button import *
+from model.circle import Circle
 from model.font import *
+from model.square import Square
 
 
 
@@ -28,3 +30,12 @@ class Factory :
         buttons = [start_game_button, options_button, credits_button, quit_button, save_button, back_button]
         
         return buttons
+    
+    def formFactory(self, window) :
+        
+        circle = Circle(window)
+        square = Square(window)
+        
+        forms = [square, circle]
+        
+        return forms
