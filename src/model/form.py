@@ -4,10 +4,10 @@ import pygame
 
 class Form :
     
-    def __init__(self, window):
+    def __init__(self, window, position):
         
         self.window = window
-        self.position = 0
+        self.position = position
         
         #Keyboard keys
         self.keys = 0

@@ -78,7 +78,7 @@ class Controller :
                         self.window.setView("options")
                         
                     #Launch the credits view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Credits") :
+                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == "Crédits") :
                         
                         self.window.setView("credits")
                     
