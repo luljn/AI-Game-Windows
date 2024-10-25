@@ -27,7 +27,7 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
-        Sound.getAndPlaySound("resources/sounds/map_music.wav")
+        Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
         buttons = self.factory.buttonFactory(self.window)
         forms = self.factory.formFactory(self.window)
         
