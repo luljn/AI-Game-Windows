@@ -62,6 +62,7 @@ class Controller :
             
         self.quit()
     
+    #Events management.
     def eventHandler(self, buttons) : 
         
         for event in pygame.event.get() :
