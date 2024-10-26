@@ -1,5 +1,9 @@
 import pygame
 
+from model.buttonAction import ButtonAction
+
+from view.view import View
+
 
 
 class Window :
@@ -22,8 +26,9 @@ class Window :
         #Mouse
         self.mouse_position = 0
         
-        #A variable to know on with view we are
-        self.view = "welcome"
+        #A variable to know on with view we are.
+        #The default view of the application is the welcome view.
+        self.view = View.WELCOME.value
     
     def welcomeView(self, buttons) :
         
@@ -36,7 +41,7 @@ class Window :
         
         for button in buttons :
             
-            if (button.text_input != "Retour" and button.text_input != "Enregistrer") :
+            if (button.text_input != ButtonAction.BACK.value and button.text_input != ButtonAction.SAVE.value) :
                 
                 button.changeColor(self.mouse_position)
                 button.update(self.screen)
@@ -49,7 +54,7 @@ class Window :
         
         for button in buttons :
             
-            if(button.text_input == "Retour") :
+            if(button.text_input == ButtonAction.BACK.value) :
                 
                 button.changeColor(self.mouse_position)
                 button.update(self.screen)
@@ -61,7 +66,7 @@ class Window :
         
         for button in buttons :
             
-            if(button.text_input == "Retour" or button.text_input == "Enregistrer") :
+            if(button.text_input == ButtonAction.BACK.value or button.text_input == ButtonAction.SAVE.value) :
                 
                 button.changeColor(self.mouse_position)
                 button.update(self.screen)
@@ -73,7 +78,7 @@ class Window :
         
         for button in buttons :
             
-            if(button.text_input == "Retour") :
+            if(button.text_input == ButtonAction.BACK.value) :
                 
                 button.changeColor(self.mouse_position)
                 button.update(self.screen)

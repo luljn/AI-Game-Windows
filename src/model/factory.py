@@ -2,9 +2,12 @@
 import pygame
 
 from model.button import *
+from model.buttonAction import ButtonAction
 from model.circle import Circle
 from model.font import *
 from model.square import Square
+
+from view.view import View
 
 
 
@@ -20,23 +23,23 @@ class Factory :
         position_x = window.getScreenWidth() / 3.05
         font = Font.getFont(25)
         
-        start_game_button = Button(pygame.image.load(rect_img_path), (position_x, window.getScreenHeight() / 2.7), "Jouer", font, "White", "Blue")
-        options_button = Button(pygame.image.load(rect_img_path), (position_x, start_game_button.position_y + 120), "Options", font, "White", "Blue")
-        credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), "Crédits", font, "White", "Blue")
-        quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), "Quitter", font, "White", "Blue")
-        save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), "Enregistrer", font, "White", "Blue")
-        back_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 1.25, credits_button.position_y + 230), "Retour", font, "White", "Blue")
+        start_game_button = Button(pygame.image.load(rect_img_path), (position_x, window.getScreenHeight() / 2.7), ButtonAction.PLAY.value, font, "White", "Blue")
+        options_button = Button(pygame.image.load(rect_img_path), (position_x, start_game_button.position_y + 120), ButtonAction.OPTIONS.value, font, "White", "Blue")
+        credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), ButtonAction.CREDITS.value, font, "White", "Blue")
+        quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), ButtonAction.QUIT.value, font, "White", "Blue")
+        save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.SAVE.value, font, "White", "Blue")
+        back_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 1.25, credits_button.position_y + 230), ButtonAction.BACK.value, font, "White", "Blue")
         
         #Return a specific list of buttons, depending on the view we want to display. 
-        if view == "welcome" :
+        if view == View.WELCOME.value :
             
             buttons = [start_game_button, options_button, credits_button, quit_button]
         
-        elif view == "options" :
+        elif view == View.OPTIONS.value :
             
             buttons = [save_button, back_button]
         
-        elif view == "game" or "credits" :
+        elif view == View.GAME.value or View.CREDITS.value :
             
             buttons = [back_button]
         
