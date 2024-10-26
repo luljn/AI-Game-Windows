@@ -81,6 +81,13 @@ class Window :
         self.displayTitleOfTheView(View.CREDITS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
+        concepteur = Font.getFont(25).render("Concepteur : Lula Jonathan (Luljn)", True, "White")
+        concepteur_rect = concepteur.get_rect(center = (self.screen_width / 2, self.screen_height / 3))
+        music = Font.getFont(25).render("Musique : Treachery (Bleach OST) - Shiro SAGISU", True, "White")
+        music_rect = music.get_rect(center = (self.screen_width / 2, self.screen_height / 2))
+        self.screen.blit(concepteur, concepteur_rect)
+        self.screen.blit(music, music_rect)
+        
         for button in buttons :
             
             if(button.text_input == ButtonAction.BACK.value) :
