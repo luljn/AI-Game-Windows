@@ -16,7 +16,7 @@ class Controller :
         
         #Pygame initilization
         pygame.init()
-        # pygame.mixer.init()
+        pygame.mixer.init()
         
         #Game loop variable
         self.running = True
@@ -32,48 +32,52 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
-        # Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
+        Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
         forms = self.factory.formFactory(self.window)
         
         #Game loop
         while self.running :
             
-            self.eventHandler(self.buttons)
-            
-            if(self.window.getView() == View.WELCOME.value) : 
-                
-                self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
-                self.welcome(self.buttons)
-            
-            elif(self.window.getView() == View.GAME.value) : 
-                
-                self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
-                self.game(forms, self.buttons)
-            
-            elif(self.window.getView() == View.OPTIONS.value) : 
-                
-                self.buttons = self.factory.buttonFactory(self.window, View.OPTIONS.value)
-                self.options(self.buttons)
-            
-            elif(self.window.getView() == View.CREDITS.value) : 
-                
-                self.buttons = self.factory.buttonFactory(self.window, View.CREDITS.value)
-                self.credits(self.buttons)
-            
+            self.clickEventHandler(self.buttons)
+            self.viewsManagement(forms)
+        
         self.quit()
     
-    #Events management.
-    def eventHandler(self, buttons) : 
+    def viewsManagement(self, forms) : 
+        
+        if(self.window.getView() == View.WELCOME.value) : 
+            
+            self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
+            self.welcome(self.buttons)
+        
+        elif(self.window.getView() == View.GAME.value) : 
+            
+            # forms = self.factory.formFactory(self.window)
+            self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
+            self.game(forms, self.buttons)
+        
+        elif(self.window.getView() == View.OPTIONS.value) : 
+            
+            self.buttons = self.factory.buttonFactory(self.window, View.OPTIONS.value)
+            self.options(self.buttons)
+        
+        elif(self.window.getView() == View.CREDITS.value) : 
+            
+            self.buttons = self.factory.buttonFactory(self.window, View.CREDITS.value)
+            self.credits(self.buttons)
+    
+    ''' Events management. '''
+    #Click events management.
+    def clickEventHandler(self, buttons) : 
         
         for event in pygame.event.get() :
             
             if event.type == pygame.QUIT :
                 
-                self.running = False
+                self.quit()
             
             for button in buttons :
                 
-                #Click event management.
                 if(event.type == pygame.MOUSEBUTTONDOWN) :
                     
                     #Launch the game view.
@@ -106,6 +110,11 @@ class Controller :
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
                         
                         self.quit()
+    
+    #Keys event management.
+    def KeyEventHandler(self) : 
+        
+        pass
     
     def welcome(self, buttons) :
         
