@@ -14,7 +14,7 @@ class Factory :
         
         super().__init__()
     
-    def buttonFactory(self, window) : 
+    def buttonFactory(self, window, view = "") : 
         
         rect_img_path = "resources\img\\rect.png"
         position_x = window.getScreenWidth() / 3.05
@@ -27,7 +27,18 @@ class Factory :
         save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), "Enregistrer", font, "White", "Blue")
         back_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 1.25, credits_button.position_y + 230), "Retour", font, "White", "Blue")
         
-        buttons = [start_game_button, options_button, credits_button, quit_button, save_button, back_button]
+        #Return a specific list of buttons, depending on the view we want to display. 
+        if view == "welcome" :
+            
+            buttons = [start_game_button, options_button, credits_button, quit_button]
+        
+        elif view == "options" :
+            
+            buttons = [save_button, back_button]
+        
+        elif view == "game" or "credits" :
+            
+            buttons = [back_button]
         
         return buttons
     

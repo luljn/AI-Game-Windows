@@ -22,35 +22,41 @@ class Controller :
         #
         self.window = Window()
         self.factory = Factory()
+        
+        #Buttons
+        self.buttons = self.factory.buttonFactory(self.window, "welcome")
     
     #main controller method
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
         Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
-        buttons = self.factory.buttonFactory(self.window)
         forms = self.factory.formFactory(self.window)
         
         #Game loop
         while self.running :
             
-            self.eventHandler(buttons)
+            self.eventHandler(self.buttons)
             
             if(self.window.getView() == "welcome") : 
                 
-                self.welcome(buttons)
+                self.buttons = self.factory.buttonFactory(self.window, "welcome")
+                self.welcome(self.buttons)
             
             elif(self.window.getView() == "game") : 
                 
-                self.game(buttons, forms)
+                self.buttons = self.factory.buttonFactory(self.window, "game")
+                self.game(forms, self.buttons)
             
             elif(self.window.getView() == "options") : 
                 
-                self.options(buttons)
+                self.buttons = self.factory.buttonFactory(self.window, "options")
+                self.options(self.buttons)
             
             elif(self.window.getView() == "credits") : 
                 
-                self.credits(buttons)
+                self.buttons = self.factory.buttonFactory(self.window, "credits")
+                self.credits(self.buttons)
             
         self.quit()
     
@@ -104,7 +110,7 @@ class Controller :
         pygame.display.flip()
         pygame.display.update()
     
-    def game(self, buttons, forms) :
+    def game(self, forms, buttons) :
         
         self.window.gameView(buttons)
         
