@@ -5,9 +5,10 @@ from model.form import Form
 
 class Circle(Form) :
     
-    def __init__(self, window, position, radius = 30) :
+    def __init__(self, window, position, color, radius = 30) :
         
         super().__init__(window, position)
+        self.color = color
         self.radius = radius
         # self.radius = 30
         # self.position = position
@@ -15,7 +16,7 @@ class Circle(Form) :
     
     def drawSprite(self) :
         
-        pygame.draw.circle(self.window.screen, "green", self.position, self.radius)
+        pygame.draw.circle(self.window.screen, self.color, self.position, self.radius)
     
     def getRadius(self) :
         

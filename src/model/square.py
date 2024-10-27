@@ -5,9 +5,10 @@ from model.form import Form
 
 class Square(Form) :
     
-    def __init__(self, window, width, height, position) :
+    def __init__(self, id, window, width, height, position) :
         
         super().__init__(window, position)
+        self.id = id
         self.width = width
         self.height = height
         # self.width = self.window.getScreenWidth() / 16
@@ -17,6 +18,10 @@ class Square(Form) :
     def drawSprite(self) :
         
         pygame.draw.rect(self.window.screen, "blue", (self.position.x, self.position.y, self.width, self.height))
+    
+    def getId(self) :
+        
+        return self.id
     
     def getWidth(self) :
         

@@ -47,10 +47,87 @@ class Factory :
     
     def formFactory(self, window) :
         
-        circle = Circle(window, pygame.Vector2(window.getScreenWidth() / 2, window.getScreenHeight() / 2))
-        square = Square(window, window.getScreenWidth() / 16, window.getScreenHeight() / 10,
-                        pygame.Vector2((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2 , (window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2))
+        forms = []
+        #squres dimensions
+        square_width = window.getScreenWidth() / 16
+        square_height = window.getScreenHeight() / 10
         
-        forms = [square, circle]
+        #Position of the 1st square(the central square) => square id 4.
+        square_id = 4
+        square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
+        square_position_y = (window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2
+        
+        #Construction of the middle(2nd) line square.
+        for i in range(3) : 
+            
+            square = Square(square_id, window, square_width, square_height,
+                        pygame.Vector2(square_position_x , square_position_y))
+            
+            forms.append(square)
+            
+            if i == 0 :
+                
+                #square id 3
+                square_id = 3
+                square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) - ((window.getScreenWidth() / 16) + 10)
+            
+            if i == 1 :
+                
+                #square id 5
+                square_id = 5
+                square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
+        
+        #Position of the 4th square(the central square of the 1st line) => square id 1.
+        square_id = 1
+        square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
+        square_position_y = ((window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2) - ((window.getScreenHeight() / 10) + 10)
+        
+        #Construction of the 1st line square.
+        for i in range(3) : 
+            
+            square = Square(square_id, window, square_width, square_height,
+                        pygame.Vector2(square_position_x , square_position_y))
+            
+            forms.append(square)
+            
+            if i == 0 :
+                
+                #square id 0
+                square_id = 0
+                square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) - ((window.getScreenWidth() / 16) + 10)
+            
+            if i == 1 :
+                
+                #square id 2
+                square_id = 2
+                square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
+        
+        #Position of the 7th square(the central square of the 1st line) => square id 1.
+        square_id = 7
+        square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
+        square_position_y = ((window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2) + ((window.getScreenHeight() / 10) + 10)
+        
+        #Construction of the 3rd line square.
+        for i in range(3) : 
+            
+            square = Square(square_id, window, square_width, square_height,
+                        pygame.Vector2(square_position_x , square_position_y))
+            
+            forms.append(square)
+            
+            if i == 0 :
+                
+                #square id 6
+                square_id = 6
+                square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) - ((window.getScreenWidth() / 16) + 10)
+            
+            if i == 1 :
+                
+                #square id 8
+                square_id = 8
+                square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
+        
+        circle = Circle(window, pygame.Vector2(window.getScreenWidth() / 2, window.getScreenHeight() / 2), "green")
+        forms.append(circle)
         
         return forms
