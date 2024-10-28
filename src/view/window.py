@@ -68,9 +68,9 @@ class Window :
         self.displayTitleOfTheView(View.OPTIONS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
-        player_name = Font.getFont(25).render("Votre nom : ", True, "White")
-        player_name_rect = player_name.get_rect(center = (self.screen_width / 2, self.screen_height / 3))
-        self.screen.blit(player_name, player_name_rect)
+        self.displayTextOnTheView("Votre nom : ", 25, (self.screen_width / 3, self.screen_height / 4))
+        self.displayTextOnTheView("Couleur des pions : ", 25, (self.screen_width / 3, self.screen_height / 2.7))
+        self.displayTextOnTheView("Mode : ", 25, (self.screen_width / 3, self.screen_height / 2))
         
         for button in buttons :
             
