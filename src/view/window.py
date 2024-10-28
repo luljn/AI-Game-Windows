@@ -68,6 +68,10 @@ class Window :
         self.displayTitleOfTheView(View.OPTIONS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
+        player_name = Font.getFont(25).render("Votre nom : ", True, "White")
+        player_name_rect = player_name.get_rect(center = (self.screen_width / 2, self.screen_height / 3))
+        self.screen.blit(player_name, player_name_rect)
+        
         for button in buttons :
             
             if(button.text_input == ButtonAction.BACK.value or button.text_input == ButtonAction.SAVE.value) :
@@ -81,12 +85,8 @@ class Window :
         self.displayTitleOfTheView(View.CREDITS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
-        concepteur = Font.getFont(25).render("Concepteur : Lula Jonathan (Luljn)", True, "White")
-        concepteur_rect = concepteur.get_rect(center = (self.screen_width / 2, self.screen_height / 3))
-        music = Font.getFont(25).render("Musique : Treachery (Bleach OST) - Shiro SAGISU", True, "White")
-        music_rect = music.get_rect(center = (self.screen_width / 2, self.screen_height / 2))
-        self.screen.blit(concepteur, concepteur_rect)
-        self.screen.blit(music, music_rect)
+        self.displayTextOnTheView("Concepteur : Lula Jonathan (Luljn)", 25, (self.screen_width / 2, self.screen_height / 3))
+        self.displayTextOnTheView("Musique : Treachery (Bleach OST) - Shiro SAGISU", 25, (self.screen_width / 2, self.screen_height / 2))
         
         for button in buttons :
             
@@ -100,6 +100,13 @@ class Window :
         title_ = Font.getFont(45).render(title.upper(), True, "White")
         title_rect = title_.get_rect(center = (self.screen_width / 2, self.screen_height / 15.2))
         self.screen.blit(title_, title_rect)
+    
+    #To display a text of the view.
+    def displayTextOnTheView(self, text, text_size, position) : 
+        
+        text = Font.getFont(text_size).render(text, True, "White")
+        text_rect = text.get_rect(center = (position[0], position[1]))
+        self.screen.blit(text, text_rect)
     
     #To update a button on a viaw.
     def updateButton(self, button) : 
