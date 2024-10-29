@@ -36,15 +36,15 @@ class Controller :
         # Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
         forms = self.factory.formFactory(self.window)
         
-        """"""
-        # Création d'un gestionnaire et d'un visualiseur de champ de texte
-        text_manager = TextInputManager()  # Gère le contenu du texte
-        text_input = TextInputVisualizer(manager=text_manager)  # Affiche le champ de texte
+        """Text input management"""
+        #Creation of the manager and the visualizer of the text input.
+        text_manager = TextInputManager()  #manage the text input.
+        text_input = TextInputVisualizer(manager=text_manager)  #display the text input.
 
-        # Position de la zone de texte
-        text_input.cursor_visible = True  # Rend le curseur visible
+        # Position of the text input
+        text_input.cursor_visible = True  #Set the cursor visible.
         text_input.cursor_color = (255, 255, 255)
-        text_input.font_color = (255, 255, 255)  # Définit la couleur du texte
+        text_input.font_color = (255, 255, 255)  #Set the colot of the text input.
         """"""
         
         #Game loop
@@ -128,26 +128,7 @@ class Controller :
     #Keys event management.
     def KeyEventHandler(self) : 
         
-        if self.window.getView() == View.OPTIONS.value :
-            
-            # Création d'un gestionnaire et d'un visualiseur de champ de texte
-            text_manager = TextInputManager()  # Gère le contenu du texte
-            text_input = TextInputVisualizer(manager=text_manager)  # Affiche le champ de texte
-
-            # Position de la zone de texte
-            text_input.cursor_visible = True  # Rend le curseur visible
-            text_input.cursor_color = (0, 0, 0)
-            text_input.font_color = (0, 0, 0)  # Définit la couleur du texte
-            
-            # Mise à jour du texte avec la liste d'événements
-            text_input.update(pygame.event.get())
-
-            # Affichage du champ de texte
-            self.window.screen.fill((255, 255, 255))
-            self.window.screen.blit(text_input.surface, ((self.window.getScreenWidth() / 3) + 100, self.window.getScreenHeight() / 4))  # Positionne le champ de texte
-
-            # Mise à jour de la fenêtre
-            pygame.display.flip()
+        pass
     
     def welcome(self, buttons) :
         

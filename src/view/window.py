@@ -1,7 +1,6 @@
 import pygame
 from pygame_textinput import TextInputVisualizer, TextInputManager
 
-from model.buttonAction import ButtonAction
 from model.font import Font
 
 from view.view import View
@@ -44,9 +43,7 @@ class Window :
         
         for button in buttons :
             
-            if (button.text_input != ButtonAction.BACK.value and button.text_input != ButtonAction.SAVE.value) :
-                
-                self.updateButton(button)
+            self.updateButton(button)
     
     #To display the game view.
     def gameView(self, buttons) :
@@ -58,31 +55,20 @@ class Window :
         
         for button in buttons :
             
-            if(button.text_input == ButtonAction.BACK.value) :
-                
-                self.updateButton(button)
+            self.updateButton(button)
     
     #To display the options(configurations) view.
     def optionsView(self, buttons, text_input) :
         
-        # # Création d'un gestionnaire et d'un visualiseur de champ de texte
-        # text_manager = TextInputManager()  # Gère le contenu du texte
-        # text_input = TextInputVisualizer(manager=text_manager)  # Affiche le champ de texte
-
-        # # Position de la zone de texte
-        # text_input.cursor_visible = True  # Rend le curseur visible
-        # text_input.cursor_color = (255, 255, 255)
-        # text_input.font_color = (255, 255, 255)  # Définit la couleur du texte
-        
-        # Mise à jour du texte avec la liste d'événements
+        #Update of the text with the events list.
         text_input.update(pygame.event.get())
 
-        # Affichage du champ de texte
+        #Display the text input.
         self.screen.fill("black")
         position_x = (self.screen_width / 3)
-        self.screen.blit(text_input.surface, (position_x + 150, (self.screen_height / 4) - 15))  # Positionne le champ de texte
+        #Set the position of the text input.
+        self.screen.blit(text_input.surface, (position_x + 150, (self.screen_height / 4) - 15))
         
-        # self.screen.fill("black")
         self.displayTitleOfTheView(View.OPTIONS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
@@ -113,9 +99,7 @@ class Window :
         
         for button in buttons :
             
-            if(button.text_input == ButtonAction.BACK.value) :
-                
-                self.updateButton(button)
+            self.updateButton(button)
     
     #To display the title of the view.
     def displayTitleOfTheView(self, title) :
