@@ -10,3 +10,7 @@ class ButtonAction(StrEnum) :
     SAVE = "Enregistrer"
     BACK = "Retour"
     QUIT = "Quitter"
+    GREEN = "Vert"
+    RED = "Rouge"
+    PLAYER_VS_CPU = "Player vs CPU"
+    CPU_VS_CPU = "CPU vs CPU"
