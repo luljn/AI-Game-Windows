@@ -72,16 +72,9 @@ class Window :
         self.displayTitleOfTheView(View.OPTIONS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
-        #
         self.displayTextOnTheView("Votre nom : ", 25, (position_x, self.screen_height / 4))
-        #
         self.displayTextOnTheView("Couleur des pions : ", 25, (position_x, self.screen_height / 2.7))
-        # self.displayTextOnTheView("Vert", 25, (position_x + 400, self.screen_height / 2.7))
-        # self.displayTextOnTheView("Rouge", 25, (position_x + 600, self.screen_height / 2.7))
-        #
         self.displayTextOnTheView("Mode : ", 25, (position_x, self.screen_height / 2))
-        # self.displayTextOnTheView("1 vs CPU", 25, (position_x + 250, self.screen_height / 2))
-        # self.displayTextOnTheView("CPU vs CPU", 25, (position_x + 600, self.screen_height / 2))
         
         for button in buttons :
             

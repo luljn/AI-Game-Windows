@@ -25,10 +25,10 @@ class Factory :
         
         start_game_button = Button(pygame.image.load(rect_img_path), (position_x, window.getScreenHeight() / 2.7), ButtonAction.PLAY.value, font, "White", "Blue")
         options_button = Button(pygame.image.load(rect_img_path), (position_x, start_game_button.position_y + 120), ButtonAction.OPTIONS.value, font, "White", "Blue")
-        green_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 400, window.getScreenHeight() / 2.7), text_input = ButtonAction.GREEN.value, background = font, color_background = "White", color_text = "Green")
-        # red_options_button = 
-        # player_vs_cpu_options_button =
-        # cpu_vs_cpu_options_button = 
+        green_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 300, window.getScreenHeight() / 2.7), text_input = ButtonAction.GREEN.value, background = font, color_background = "White", color_text = "Green")
+        red_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 600, window.getScreenHeight() / 2.7), text_input = ButtonAction.RED.value, background = font, color_background = "White", color_text = "Red")
+        player_vs_cpu_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 250, window.getScreenHeight() / 2), text_input = ButtonAction.PLAYER_VS_CPU.value, background = font, color_background = "White", color_text = "Blue")
+        cpu_vs_cpu_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 700, window.getScreenHeight() / 2), text_input = ButtonAction.CPU_VS_CPU.value, background = font, color_background = "White", color_text = "Blue")
         credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), ButtonAction.CREDITS.value, font, "White", "Blue")
         quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), ButtonAction.QUIT.value, font, "White", "Blue")
         save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.SAVE.value, font, "White", "Blue")
@@ -41,7 +41,8 @@ class Factory :
         
         elif view == View.OPTIONS.value :
             
-            buttons = [green_options_button, save_button, back_button]
+            buttons = [green_options_button, red_options_button, player_vs_cpu_options_button,
+                        cpu_vs_cpu_options_button, save_button, back_button]
         
         elif view == View.GAME.value or View.CREDITS.value :
             
