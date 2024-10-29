@@ -52,7 +52,7 @@ class Window :
     def gameView(self, buttons) :
         
         self.screen.fill("black")
-        self.displayTitleOfTheView("Player 1 vs CPU")
+        self.displayTitleOfTheView("Player vs CPU")
         self.dt = self.clock.tick(60) / 1000
         self.mouse_position = pygame.mouse.get_pos()
         
@@ -73,22 +73,29 @@ class Window :
         # text_input.cursor_visible = True  # Rend le curseur visible
         # text_input.cursor_color = (255, 255, 255)
         # text_input.font_color = (255, 255, 255)  # Définit la couleur du texte
-            
+        
         # Mise à jour du texte avec la liste d'événements
         text_input.update(pygame.event.get())
 
         # Affichage du champ de texte
         self.screen.fill("black")
-        # self.window.screen.fill((255, 255, 255))
-        self.screen.blit(text_input.surface, ((self.screen_width / 3) + 150, (self.screen_height / 4) - 15))  # Positionne le champ de texte
+        position_x = (self.screen_width / 3)
+        self.screen.blit(text_input.surface, (position_x + 150, (self.screen_height / 4) - 15))  # Positionne le champ de texte
         
         # self.screen.fill("black")
         self.displayTitleOfTheView(View.OPTIONS.value)
         self.mouse_position = pygame.mouse.get_pos()
         
-        self.displayTextOnTheView("Votre nom : ", 25, (self.screen_width / 3, self.screen_height / 4))
-        self.displayTextOnTheView("Couleur des pions : ", 25, (self.screen_width / 3, self.screen_height / 2.7))
-        self.displayTextOnTheView("Mode : ", 25, (self.screen_width / 3, self.screen_height / 2))
+        #
+        self.displayTextOnTheView("Votre nom : ", 25, (position_x, self.screen_height / 4))
+        #
+        self.displayTextOnTheView("Couleur des pions : ", 25, (position_x, self.screen_height / 2.7))
+        self.displayTextOnTheView("Vert", 25, (position_x + 400, self.screen_height / 2.7))
+        self.displayTextOnTheView("Rouge", 25, (position_x + 600, self.screen_height / 2.7))
+        #
+        self.displayTextOnTheView("Mode : ", 25, (position_x, self.screen_height / 2))
+        self.displayTextOnTheView("1 vs CPU", 25, (position_x + 250, self.screen_height / 2))
+        self.displayTextOnTheView("CPU vs CPU", 25, (position_x + 600, self.screen_height / 2))
         
         for button in buttons :
             
