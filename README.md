@@ -12,6 +12,14 @@ A two-player game powered by Artificial Initelligence (for Windows OS).
 1) Install Python and Pygame module, if you haven't already.
 2) Execute the main file (main.py) .
 
+# The application
+
+Home view
+<img src="resources/img/AI-GAME.png"/>
+
+Credits
+<img src="resources/img/credits.png"/>
+
 ## Author
 
 Luljn.
