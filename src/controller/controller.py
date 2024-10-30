@@ -4,6 +4,7 @@ from sys import exit
 
 from model.buttonAction import ButtonAction
 from model.factory import *
+from model.config import Config
 from model.sound import Sound
 
 from view.view import View
@@ -66,7 +67,8 @@ class Controller :
         
         elif(self.window.getView() == View.GAME.value) : 
             
-            # forms = self.factory.formFactory(self.window)
+            #To load the configs before starting the game.
+            Config.loadConfig()
             self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
             self.game(forms, self.buttons)
         
