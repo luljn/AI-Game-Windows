@@ -13,7 +13,7 @@ class Config :
             lines = config_file.readlines()
             for line in lines :
                 
-                print(line.strip())
+                # print(line.strip())
                 config = line.split('=')
                 configs.append(config[1].replace("\n", ""))
             

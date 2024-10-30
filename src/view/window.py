@@ -35,8 +35,8 @@ class Window :
     #To display the welcome view.
     def welcomeView(self, buttons) :
         
-        pygame_logo = pygame.image.load("resources\img\pygame_logo.png").convert()
-        menu = pygame.image.load("resources\img\menu.png").convert()
+        pygame_logo = pygame.image.load("resources/img/pygame_logo.png").convert()
+        menu = pygame.image.load("resources/img/menu.png").convert()
         
         self.screen.blit(pygame.transform.scale(pygame_logo, (self.getScreenWidth(), self.getScreenHeight())), (0, 0))
         self.screen.blit(menu, (self.getScreenWidth() / 5.5, self.getScreenHeight() / 10))

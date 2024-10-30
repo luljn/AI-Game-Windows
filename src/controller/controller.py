@@ -106,7 +106,7 @@ class Controller :
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAY.value) :
                         
                         #To load the configs before starting the game.
-                        Config.loadConfig()
+                        # Config.loadConfig()
                         self.window.setView(View.GAME.value)
                     
                     #Launch the options view.
