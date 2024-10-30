@@ -53,12 +53,13 @@ class Controller :
             
             self.clickEventHandler(self.buttons)
             # self.KeyEventHandler()
-            self.viewsManagement(forms, text_input)
+            self.viewsManager(forms, text_input)
             
         
         self.quit()
     
-    def viewsManagement(self, forms, text_input) :
+    #To display the rigth view.
+    def viewsManager(self, forms, text_input) :
         
         if(self.window.getView() == View.WELCOME.value) : 
             
@@ -102,28 +103,48 @@ class Controller :
                         self.window.setView(View.GAME.value)
                     
                     #Launch the options view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
                         
                         self.window.setView(View.OPTIONS.value)
                     
+                    #Change the color of the user's pawns to green.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.GREEN.value) :
+                        
+                        Config.changeColor("GREEN")
+                    
+                    #Change the color of the user's pawns to red.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RED.value) :
+                        
+                        Config.changeColor("RED")
+                    
+                    #Change the mode of the game to : PLAYER vs CPU.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAYER_VS_CPU.value) :
+                        
+                        Config.changeMode("1")
+                    
+                    #Change the mode of the game to : CPU vs CPU.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CPU_VS_CPU.value) :
+                        
+                        Config.changeMode("2")
+                    
                     #Launch the credits view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CREDITS.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CREDITS.value) :
                         
                         self.window.setView(View.CREDITS.value)
                     
                     #Save the options(in the options view).
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.SAVE.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.SAVE.value) :
                         
                         #action to save the options chose by the user (to define).
                         pass
                     
                     #Launch the options view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
                         self.window.setView(View.WELCOME.value)
                     
                     #Close the window and quit the game.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
                         
                         self.quit()
     
