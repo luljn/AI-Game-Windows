@@ -29,6 +29,8 @@ class Factory :
         red_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 600, window.getScreenHeight() / 2.7), text_input = ButtonAction.RED.value, background = font, color_background = "White", color_text = "Red")
         player_vs_cpu_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 250, window.getScreenHeight() / 2), text_input = ButtonAction.PLAYER_VS_CPU.value, background = font, color_background = "White", color_text = "Blue")
         cpu_vs_cpu_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 700, window.getScreenHeight() / 2), text_input = ButtonAction.CPU_VS_CPU.value, background = font, color_background = "White", color_text = "Blue")
+        music_on_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 150, window.getScreenHeight() / 1.5), text_input = ButtonAction.MUSIC_ON.value, background = font, color_background = "White", color_text = "Blue")
+        music_off_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 400, window.getScreenHeight() / 1.5), text_input = ButtonAction.MUSIC_OFF.value, background = font, color_background = "White", color_text = "Red")
         credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), ButtonAction.CREDITS.value, font, "White", "Blue")
         quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), ButtonAction.QUIT.value, font, "White", "Blue")
         save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.SAVE.value, font, "White", "Blue")
@@ -42,7 +44,7 @@ class Factory :
         elif view == View.OPTIONS.value :
             
             buttons = [green_options_button, red_options_button, player_vs_cpu_options_button,
-                        cpu_vs_cpu_options_button, save_button, back_button]
+                        cpu_vs_cpu_options_button, music_on_options_button, music_off_options_button, save_button, back_button]
         
         elif view == View.GAME.value or View.CREDITS.value :
             

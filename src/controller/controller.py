@@ -34,7 +34,7 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
-        # Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
+        Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
         forms = self.factory.formFactory(self.window)
         
         """Text input management"""
@@ -126,6 +126,18 @@ class Controller :
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CPU_VS_CPU.value) :
                         
                         Config.changeMode("2")
+                    
+                    #Change the music to ON.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.MUSIC_ON.value) :
+                        
+                        Config.stopOrEnableMusic("ON")
+                        Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
+                    
+                    #Change the music to OFF.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.MUSIC_OFF.value) :
+                        
+                        Config.stopOrEnableMusic("OFF")
+                        Sound.stopSound()
                     
                     #Launch the credits view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CREDITS.value) :

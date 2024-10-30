@@ -75,6 +75,7 @@ class Window :
         self.displayTextOnTheView("Votre nom : ", 25, (position_x, self.screen_height / 4))
         self.displayTextOnTheView("Couleur des pions : ", 25, (position_x, self.screen_height / 2.7))
         self.displayTextOnTheView("Mode : ", 25, (position_x, self.screen_height / 2))
+        self.displayTextOnTheView("Music : ", 25, (position_x, self.screen_height / 1.5))
         
         for button in buttons :
             

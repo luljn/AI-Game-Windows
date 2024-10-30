@@ -14,3 +14,5 @@ class ButtonAction(StrEnum) :
     RED = "Rouge"
     PLAYER_VS_CPU = "Player vs CPU"
     CPU_VS_CPU = "CPU vs CPU"
+    MUSIC_ON = "ON"
+    MUSIC_OFF = "OFF"
