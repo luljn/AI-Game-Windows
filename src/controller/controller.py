@@ -58,7 +58,7 @@ class Controller :
         #Game loop
         while self.running :
             
-            self.clickEventHandler(self.buttons)
+            self.clickEventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
             self.viewsManager(forms, text_input)
             
@@ -90,7 +90,7 @@ class Controller :
     
     ''' Events management. '''
     #Click events management.
-    def clickEventHandler(self, buttons) : 
+    def clickEventHandler(self, buttons, text_manager) : 
         
         for event in pygame.event.get() :
             
@@ -151,11 +151,15 @@ class Controller :
                         
                         self.window.setView(View.CREDITS.value)
                     
-                    #Save the options(in the options view).
+                    #Save the configurations (in the options view).
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.SAVE.value) :
                         
-                        #action to save the options chose by the user (to define).
-                        pass
+                        #action to save the options chose by the user.
+                        if(text_manager.value != "") :
+                            
+                            Config.changePlayerName(text_manager.value)
+                            
+                        Config.saveConfigs()
                     
                     #Launch the options view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :

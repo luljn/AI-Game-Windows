@@ -1,6 +1,7 @@
 import pygame
 from pygame_textinput import TextInputVisualizer, TextInputManager
 
+from model.config import Config
 from model.font import Font
 
 from view.view import View
@@ -48,8 +49,18 @@ class Window :
     #To display the game view.
     def gameView(self, buttons) :
         
+        configs = Config.loadConfig()
         self.screen.fill("black")
-        self.displayTitleOfTheView("Player vs CPU")
+        
+        #Check the mode of the game, to display the right text.
+        if(configs[2] == "1") :
+            
+            self.displayTitleOfTheView(f"{configs[0]} vs CPU")
+        
+        elif(configs[2] == "2") :
+            
+            self.displayTitleOfTheView("CPU vs CPU")
+        
         self.dt = self.clock.tick(60) / 1000
         self.mouse_position = pygame.mouse.get_pos()
         
