@@ -34,8 +34,15 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
-        Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
         forms = self.factory.formFactory(self.window)
+        
+        #Load previous configs.
+        configs = Config.loadConfig()
+        
+        #Check if the music must be enabled at the starting or not.
+        if(configs[3] == "ON") :
+            
+            Sound.getAndPlaySound(Sound.default_music)
         
         """Text input management"""
         #Creation of the manager and the visualizer of the text input.
@@ -131,7 +138,7 @@ class Controller :
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.MUSIC_ON.value) :
                         
                         Config.stopOrEnableMusic("ON")
-                        Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
+                        Sound.getAndPlaySound(Sound.default_music)
                     
                     #Change the music to OFF.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.MUSIC_OFF.value) :

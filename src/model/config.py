@@ -19,6 +19,8 @@ class Config :
             
             print(configs)
             print("\n")
+        
+        return configs
     
     @staticmethod
     def saveConfigs() :

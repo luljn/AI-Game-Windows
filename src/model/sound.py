@@ -5,6 +5,9 @@ import pygame
 
 class Sound :
     
+    #Static variable.
+    default_music = "resources/sounds/Treachery.mp3"
+    
     @staticmethod
     def getAndPlaySound(sound_path) :
         
