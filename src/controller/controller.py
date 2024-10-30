@@ -67,8 +67,6 @@ class Controller :
         
         elif(self.window.getView() == View.GAME.value) : 
             
-            #To load the configs before starting the game.
-            Config.loadConfig()
             self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
             self.game(forms, self.buttons)
         
@@ -99,6 +97,8 @@ class Controller :
                     #Launch the game view.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAY.value) :
                         
+                        #To load the configs before starting the game.
+                        Config.loadConfig()
                         self.window.setView(View.GAME.value)
                     
                     #Launch the options view.
