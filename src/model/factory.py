@@ -55,7 +55,7 @@ class Factory :
     def formFactory(self, window) :
         
         forms = []
-        #squres dimensions
+        #squares dimensions
         square_width = window.getScreenWidth() / 16
         square_height = window.getScreenHeight() / 10
         
@@ -134,7 +134,14 @@ class Factory :
                 square_id = 8
                 square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
         
-        circle = Circle(window, pygame.Vector2(window.getScreenWidth() / 2, window.getScreenHeight() / 2), "green")
-        forms.append(circle)
+        # circle = Circle(window, pygame.Vector2(window.getScreenWidth() / 2, window.getScreenHeight() / 2), "green")
+        # forms.append(circle)
+        
+        #Set the right color to the central square(the empty one at the beginning of the game).
+        for element in forms :
+            
+            if element.__class__ == Square and element.getId() == 4:
+                
+                element.setColor("White")
         
         return forms
