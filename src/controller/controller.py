@@ -158,8 +158,9 @@ class Controller :
                         if(text_manager.value != "") :
                             
                             Config.changePlayerName(text_manager.value)
-                            
-                        Config.saveConfigs()
+                        
+                        # Config.saveConfigs()
+                        self.window.setView(View.WELCOME.value)
                     
                     #Launch the options view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
