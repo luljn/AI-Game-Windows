@@ -17,8 +17,11 @@ A two-player game powered by Artificial Initelligence (for Windows OS).
 Home view
 <img src="resources/img/AI-GAME.png"/>
 
-Credits
+Credits View
 <img src="resources/img/credits.png"/>
+
+Configurations View
+<img src="resources/img/configs.png"/>
 
 ## Author
 
