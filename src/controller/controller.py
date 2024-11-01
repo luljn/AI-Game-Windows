@@ -27,6 +27,9 @@ class Controller :
         self.window = Window()
         self.factory = Factory()
         
+        #
+        self.forms = self.factory.formFactory(self.window)
+        
         #Buttons
         self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
     
@@ -34,7 +37,6 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
-        forms = self.factory.formFactory(self.window)
         
         #Load previous configs.
         configs = Config.loadConfig()
@@ -43,6 +45,8 @@ class Controller :
         if(configs[3] == "ON") :
             
             Sound.getAndPlaySound(Sound.default_music)
+        
+        # forms = self.factory.formFactory(self.window, configs)
         
         """Text input management"""
         #Creation of the manager and the visualizer of the text input.
@@ -60,7 +64,7 @@ class Controller :
             
             self.clickEventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
-            self.viewsManager(forms, text_input)
+            self.viewsManager(self.forms, text_input)
             
         
         self.quit()
@@ -160,6 +164,7 @@ class Controller :
                             Config.changePlayerName(text_manager.value)
                         
                         # Config.saveConfigs()
+                        self.forms = self.factory.formFactory(self.window)
                         self.window.setView(View.WELCOME.value)
                     
                     #Launch the options view.
