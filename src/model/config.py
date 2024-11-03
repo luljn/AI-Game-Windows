@@ -43,14 +43,19 @@ class Config :
         Config.changeConfiguration("COLOR", 1, color)
     
     @staticmethod
+    def changeCpuColor(color) :
+        
+        Config.changeConfiguration("CPU_COLOR", 2, color)
+    
+    @staticmethod
     def changeMode(mode) :
         
-        Config.changeConfiguration("MODE", 2, mode)
+        Config.changeConfiguration("MODE", 3, mode)
     
     @staticmethod
     def stopOrEnableMusic(action) : 
         
-        Config.changeConfiguration("MUSIC", 3, action)
+        Config.changeConfiguration("MUSIC", 4, action)
     
     @staticmethod
     def changeConfiguration(config, line_number, new_config) : 
