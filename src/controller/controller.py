@@ -42,7 +42,7 @@ class Controller :
         configs = Config.loadConfig()
         
         #Check if the music must be enabled at the starting or not.
-        if(configs[3] == "ON") :
+        if(configs[4] == "ON") :
             
             Sound.getAndPlaySound(Sound.default_music)
         
@@ -122,11 +122,13 @@ class Controller :
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.GREEN.value) :
                         
                         Config.changeColor("GREEN")
+                        Config.changeCpuColor("RED")
                     
                     #Change the color of the user's pawns to red.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RED.value) :
                         
                         Config.changeColor("RED")
+                        Config.changeCpuColor("GREEN")
                     
                     #Change the mode of the game to : PLAYER vs CPU.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAYER_VS_CPU.value) :
