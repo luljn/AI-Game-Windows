@@ -53,11 +53,11 @@ class Window :
         self.screen.fill("black")
         
         #Check the mode of the game, to display the right text.
-        if(configs[2] == "1") :
+        if(configs[3] == "1") :
             
             self.displayTitleOfTheView(f"{configs[0]} vs CPU")
         
-        elif(configs[2] == "2") :
+        elif(configs[3] == "2") :
             
             self.displayTitleOfTheView("CPU vs CPU")
         
