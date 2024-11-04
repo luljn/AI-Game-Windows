@@ -4,6 +4,7 @@ from sys import exit
 
 from model.buttonAction import ButtonAction
 from model.factory import *
+from model.config import Config
 from model.sound import Sound
 
 from view.view import View
@@ -26,6 +27,9 @@ class Controller :
         self.window = Window()
         self.factory = Factory()
         
+        #
+        self.forms = self.factory.formFactory(self.window)
+        
         #Buttons
         self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
     
@@ -33,8 +37,16 @@ class Controller :
     def run(self) :
         
         pygame.display.set_caption(self.window.getTitle())
-        # Sound.getAndPlaySound("resources/sounds/Treachery.mp3")
-        forms = self.factory.formFactory(self.window)
+        
+        #Load previous configs.
+        configs = Config.loadConfig()
+        
+        #Check if the music must be enabled at the starting or not.
+        if(configs[4] == "ON") :
+            
+            Sound.getAndPlaySound(Sound.default_music)
+        
+        # forms = self.factory.formFactory(self.window, configs)
         
         """Text input management"""
         #Creation of the manager and the visualizer of the text input.
@@ -50,14 +62,15 @@ class Controller :
         #Game loop
         while self.running :
             
-            self.clickEventHandler(self.buttons)
+            self.clickEventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
-            self.viewsManagement(forms, text_input)
+            self.viewsManager(self.forms, text_input)
             
         
         self.quit()
     
-    def viewsManagement(self, forms, text_input) :
+    #To display the rigth view.
+    def viewsManager(self, forms, text_input) :
         
         if(self.window.getView() == View.WELCOME.value) : 
             
@@ -66,7 +79,6 @@ class Controller :
         
         elif(self.window.getView() == View.GAME.value) : 
             
-            # forms = self.factory.formFactory(self.window)
             self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
             self.game(forms, self.buttons)
         
@@ -82,7 +94,7 @@ class Controller :
     
     ''' Events management. '''
     #Click events management.
-    def clickEventHandler(self, buttons) : 
+    def clickEventHandler(self, buttons, text_manager) : 
         
         for event in pygame.event.get() :
             
@@ -97,31 +109,73 @@ class Controller :
                     #Launch the game view.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAY.value) :
                         
+                        #To load the configs before starting the game.
+                        # Config.loadConfig()
                         self.window.setView(View.GAME.value)
                     
                     #Launch the options view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
                         
                         self.window.setView(View.OPTIONS.value)
                     
+                    #Change the color of the user's pawns to green.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.GREEN.value) :
+                        
+                        Config.changeColor("GREEN")
+                        Config.changeCpuColor("RED")
+                    
+                    #Change the color of the user's pawns to red.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RED.value) :
+                        
+                        Config.changeColor("RED")
+                        Config.changeCpuColor("GREEN")
+                    
+                    #Change the mode of the game to : PLAYER vs CPU.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAYER_VS_CPU.value) :
+                        
+                        Config.changeMode("1")
+                    
+                    #Change the mode of the game to : CPU vs CPU.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CPU_VS_CPU.value) :
+                        
+                        Config.changeMode("2")
+                    
+                    #Change the music to ON.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.MUSIC_ON.value) :
+                        
+                        Config.stopOrEnableMusic("ON")
+                        Sound.getAndPlaySound(Sound.default_music)
+                    
+                    #Change the music to OFF.
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.MUSIC_OFF.value) :
+                        
+                        Config.stopOrEnableMusic("OFF")
+                        Sound.stopSound()
+                    
                     #Launch the credits view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CREDITS.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.CREDITS.value) :
                         
                         self.window.setView(View.CREDITS.value)
                     
-                    #Save the options(in the options view).
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.SAVE.value) :
+                    #Save the configurations (in the options view).
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.SAVE.value) :
                         
-                        #action to save the options chose by the user (to define).
-                        pass
+                        #action to save the options chose by the user.
+                        if(text_manager.value != "") :
+                            
+                            Config.changePlayerName(text_manager.value)
+                        
+                        # Config.saveConfigs()
+                        self.forms = self.factory.formFactory(self.window)
+                        self.window.setView(View.WELCOME.value)
                     
                     #Launch the options view.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
                         self.window.setView(View.WELCOME.value)
                     
                     #Close the window and quit the game.
-                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
+                    elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
                         
                         self.quit()
     

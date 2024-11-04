@@ -3,6 +3,7 @@ import pygame
 
 from model.button import *
 from model.buttonAction import ButtonAction
+from model.config import Config
 from model.circle import Circle
 from model.font import *
 from model.square import Square
@@ -29,6 +30,8 @@ class Factory :
         red_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 600, window.getScreenHeight() / 2.7), text_input = ButtonAction.RED.value, background = font, color_background = "White", color_text = "Red")
         player_vs_cpu_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 250, window.getScreenHeight() / 2), text_input = ButtonAction.PLAYER_VS_CPU.value, background = font, color_background = "White", color_text = "Blue")
         cpu_vs_cpu_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 700, window.getScreenHeight() / 2), text_input = ButtonAction.CPU_VS_CPU.value, background = font, color_background = "White", color_text = "Blue")
+        music_on_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 150, window.getScreenHeight() / 1.5), text_input = ButtonAction.MUSIC_ON.value, background = font, color_background = "White", color_text = "Blue")
+        music_off_options_button = Button(image = None, position = ((window.getScreenWidth() / 3) + 400, window.getScreenHeight() / 1.5), text_input = ButtonAction.MUSIC_OFF.value, background = font, color_background = "White", color_text = "Red")
         credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), ButtonAction.CREDITS.value, font, "White", "Blue")
         quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), ButtonAction.QUIT.value, font, "White", "Blue")
         save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.SAVE.value, font, "White", "Blue")
@@ -42,7 +45,7 @@ class Factory :
         elif view == View.OPTIONS.value :
             
             buttons = [green_options_button, red_options_button, player_vs_cpu_options_button,
-                        cpu_vs_cpu_options_button, save_button, back_button]
+                        cpu_vs_cpu_options_button, music_on_options_button, music_off_options_button, save_button, back_button]
         
         elif view == View.GAME.value or View.CREDITS.value :
             
@@ -52,8 +55,9 @@ class Factory :
     
     def formFactory(self, window) :
         
+        configs = Config.loadConfig()
         forms = []
-        #squres dimensions
+        #squares dimensions
         square_width = window.getScreenWidth() / 16
         square_height = window.getScreenHeight() / 10
         
@@ -132,7 +136,45 @@ class Factory :
                 square_id = 8
                 square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
         
-        circle = Circle(window, pygame.Vector2(window.getScreenWidth() / 2, window.getScreenHeight() / 2), "green")
-        forms.append(circle)
+        #Set the right color to the central square(the empty one at the beginning of the game).
+        for element in forms :
+            
+            if element.__class__ == Square and element.getId() == 4:
+                
+                element.setColor("White")
+        
+        #Central square position.
+        square_ = Square(square_id, window, square_width, square_height,
+                        pygame.Vector2(square_position_x , square_position_y))
+        
+        #Player paws
+        for i in range(3) :
+            
+            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
+            
+            if i == 1 :
+                
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
+            
+            if i == 2 :
+                
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
+            
+            forms.append(circle)
+        
+        #CPU pawns.
+        for i in range(3) :
+            
+            circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
+            
+            if i == 1 :
+                
+                circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
+            
+            if i == 2 :
+                
+                circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
+            
+            forms.append(circle1)
         
         return forms

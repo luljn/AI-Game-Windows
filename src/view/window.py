@@ -1,6 +1,7 @@
 import pygame
 from pygame_textinput import TextInputVisualizer, TextInputManager
 
+from model.config import Config
 from model.font import Font
 
 from view.view import View
@@ -34,8 +35,8 @@ class Window :
     #To display the welcome view.
     def welcomeView(self, buttons) :
         
-        pygame_logo = pygame.image.load("resources\img\pygame_logo.png").convert()
-        menu = pygame.image.load("resources\img\menu.png").convert()
+        pygame_logo = pygame.image.load("resources/img/pygame_logo.png").convert()
+        menu = pygame.image.load("resources/img/menu.png").convert()
         
         self.screen.blit(pygame.transform.scale(pygame_logo, (self.getScreenWidth(), self.getScreenHeight())), (0, 0))
         self.screen.blit(menu, (self.getScreenWidth() / 5.5, self.getScreenHeight() / 10))
@@ -48,8 +49,18 @@ class Window :
     #To display the game view.
     def gameView(self, buttons) :
         
+        configs = Config.loadConfig()
         self.screen.fill("black")
-        self.displayTitleOfTheView("Player vs CPU")
+        
+        #Check the mode of the game, to display the right text.
+        if(configs[3] == "1") :
+            
+            self.displayTitleOfTheView(f"{configs[0]} vs CPU")
+        
+        elif(configs[3] == "2") :
+            
+            self.displayTitleOfTheView("CPU vs CPU")
+        
         self.dt = self.clock.tick(60) / 1000
         self.mouse_position = pygame.mouse.get_pos()
         
@@ -75,6 +86,7 @@ class Window :
         self.displayTextOnTheView("Votre nom : ", 25, (position_x, self.screen_height / 4))
         self.displayTextOnTheView("Couleur des pions : ", 25, (position_x, self.screen_height / 2.7))
         self.displayTextOnTheView("Mode : ", 25, (position_x, self.screen_height / 2))
+        self.displayTextOnTheView("Music : ", 25, (position_x, self.screen_height / 1.5))
         
         for button in buttons :
             

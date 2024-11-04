@@ -4,7 +4,7 @@
 
 class Button :
     
-    def __init__(self, image, position, text_input, background, color_background, color_text):
+    def __init__(self, image, position, text_input, background, color_background, color_text) :
         
         self.image = image
         self.position_x = position[0]
@@ -41,7 +41,7 @@ class Button :
 
     def changeColor(self, position) :
 
-        if (position[0] in range (self.rect.left, self.rect.right) and position[1] in range (self.rect.top, self.rect.bottom)):
+        if (position[0] in range (self.rect.left, self.rect.right) and position[1] in range (self.rect.top, self.rect.bottom)) :
 
             self.text = self.background.render(self.text_input, True, self.color_text)
 
