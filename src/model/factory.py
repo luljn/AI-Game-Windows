@@ -176,7 +176,5 @@ class Factory :
                 circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
             
             forms.append(circle1)
-        # circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-        # forms.append(circle1)
         
         return forms
