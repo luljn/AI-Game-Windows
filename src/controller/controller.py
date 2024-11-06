@@ -65,7 +65,7 @@ class Controller :
             self.clickEventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
-            
+            # self.window.clock.tick(60)
         
         self.quit()
     

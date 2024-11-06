@@ -148,33 +148,35 @@ class Factory :
                         pygame.Vector2(square_position_x , square_position_y))
         
         #Player paws
-        for i in range(3) :
+        # for i in range(3) :
             
-            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
+        #     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
             
-            if i == 1 :
+        #     if i == 1 :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
+        #         circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
             
-            if i == 2 :
+        #     if i == 2 :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
+        #         circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
             
-            forms.append(circle)
+        #     forms.append(circle)
+        circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1], 7)
+        forms.append(circle)
         
         #CPU pawns.
-        for i in range(3) :
+        # for i in range(3) :
             
-            circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
+        #     circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
             
-            if i == 1 :
+        #     if i == 1 :
                 
-                circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
+        #         circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
             
-            if i == 2 :
+        #     if i == 2 :
                 
-                circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
+        #         circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
             
-            forms.append(circle1)
+        #     forms.append(circle1)
         
         return forms
