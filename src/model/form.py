@@ -1,3 +1,4 @@
+#Base class of shapes used in the game.
 import pygame
 
 
@@ -14,25 +15,6 @@ class Form :
     
     def move(self) :
         
-        # self.keys = pygame.key.get_pressed()
-        
-        # if self.keys[pygame.K_UP] : 
-            
-        #     self.position.y -= 300 * dt
-        
-        # if self.keys[pygame.K_DOWN] : 
-            
-        #     self.position.y += 300 * dt
-        
-        # if self.keys[pygame.K_LEFT] : 
-            
-        #     self.position.x -= 300 * dt
-        
-        # if self.keys[pygame.K_RIGHT] : 
-            
-        #     self.position.x += 300 * dt
-        
-        # dt = self.window.clock.tick(60) / 1000
         pass
     
     def drawSprite(self) :

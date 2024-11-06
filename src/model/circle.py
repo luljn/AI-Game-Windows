@@ -62,5 +62,3 @@ class Circle(Form) :
             if self.square.id == 6 :
                 self.position.x = position_x
                 self.square.id = 7
-        
-        # dt = self.window.clock.tick(5000) / 100
