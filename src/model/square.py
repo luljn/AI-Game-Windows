@@ -36,6 +36,6 @@ class Square(Form) :
         
         self.color = color
     
-    def move(self, dt) :
+    def move(self) :
         
         pass

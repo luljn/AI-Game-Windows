@@ -23,7 +23,7 @@ class Circle(Form) :
         
         return self.radius
     
-    def move(self, dt) :
+    def move(self) :
         
         self.keys = pygame.key.get_pressed()
         #squares dimensions
@@ -59,4 +59,4 @@ class Circle(Form) :
                 self.position.x = position_x
                 self.square_id = 7
         
-        dt = self.window.clock.tick(5000) / 100
+        # dt = self.window.clock.tick(5000) / 100

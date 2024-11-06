@@ -12,7 +12,7 @@ class Form :
         #Keyboard keys
         self.keys = 0
     
-    # def move(self) :
+    def move(self) :
         
         # self.keys = pygame.key.get_pressed()
         
@@ -33,7 +33,7 @@ class Form :
         #     self.position.x += 300 * dt
         
         # dt = self.window.clock.tick(60) / 1000
-        # pass
+        pass
     
     def drawSprite(self) :
         

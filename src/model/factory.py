@@ -141,7 +141,7 @@ class Factory :
             
             if element.__class__ == Square and element.getId() == 4:
                 
-                element.setColor("White")
+                element.setColor("Black")
         
         #Central square position.
         square_ = Square(square_id, window, square_width, square_height,

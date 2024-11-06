@@ -52,7 +52,7 @@ class Controller :
         #Creation of the manager and the visualizer of the text input.
         text_manager = TextInputManager()  #manage the text input.
         text_input = TextInputVisualizer(manager=text_manager)  #display the text input.
-
+        
         # Position of the text input
         text_input.cursor_visible = True  #Set the cursor visible.
         text_input.cursor_color = (255, 255, 255)
@@ -65,7 +65,7 @@ class Controller :
             self.clickEventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
-            # self.window.clock.tick(60)
+            self.window.clock.tick(60)
         
         self.quit()
     
@@ -197,7 +197,7 @@ class Controller :
         for form in forms :
             
             form.drawSprite()
-            form.move(self.window.getDT())
+            form.move()
         
         pygame.display.flip()
     
