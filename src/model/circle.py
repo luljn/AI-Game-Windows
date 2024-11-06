@@ -5,11 +5,11 @@ from model.form import Form
 
 class Circle(Form) :
     
-    def __init__(self, window, position, color, square_id, radius = 30) :
+    def __init__(self, window, position, color, square, radius = 30) :
         
         super().__init__(window, position)
         self.color = color
-        self.square_id = square_id
+        self.square = square
         self.radius = radius
         # self.radius = 30
         # self.position = position
@@ -37,26 +37,30 @@ class Circle(Form) :
         
         if self.keys[pygame.K_UP] : 
             
-            if self.square_id == 7 :
+            if self.square.id == 7 :
                 self.position.y = position_y
-                self.square_id = 4
+                self.square.id = 4
+                self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
+                self.square.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
         
         if self.keys[pygame.K_DOWN] : 
             
-            if self.square_id == 4 :
+            if self.square.id == 4 :
                 self.position.y = position_y + square_width
-                self.square_id = 7
+                self.square.id = 7
+                self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
+                self.square.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
         
         if self.keys[pygame.K_LEFT] : 
             
-            if self.square_id == 7 :
+            if self.square.id == 7 :
                 self.position.x = position_x -  distance
-                self.square_id = 6
+                self.square.id = 6
         
         if self.keys[pygame.K_RIGHT] : 
             
-            if self.square_id == 6 :
+            if self.square.id == 6 :
                 self.position.x = position_x
-                self.square_id = 7
+                self.square.id = 7
         
         # dt = self.window.clock.tick(5000) / 100
