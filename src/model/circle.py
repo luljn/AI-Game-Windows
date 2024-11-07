@@ -46,15 +46,17 @@ class Circle(Form) :
         
         if self.keys[pygame.K_LEFT] : 
             
-            if self.square.id == 7 :
-                self.position.x = position_x -  distance
-                self.square.id = 6
+            # if self.square.id == 7 :
+            #     self.position.x = position_x -  distance
+            #     self.square.id = 6
+            self.moveLeft(position_x, distance)
         
         if self.keys[pygame.K_RIGHT] : 
             
-            if self.square.id == 6 :
-                self.position.x = position_x
-                self.square.id = 7
+            # if self.square.id == 6 :
+            #     self.position.x = position_x
+            #     self.square.id = 7
+            self.moveRight(position_x)
     
     def moveUP(self, position_y) : 
         
@@ -78,10 +80,24 @@ class Circle(Form) :
             self.square.id += 3
             Square.empty_square_id -= 3
     
-    def moveLeft(self) :
+    def moveLeft(self, position_x, distance) :
         
-        pass
+        #If the square is not on the 1st column, we can move left.
+        if (self.square.id != 0 and self.square.id != 3 and self.square.id != 6 
+            and Square.empty_square_id == self.square.id - 1) :
+            
+            self.position.x = position_x -  distance
+            self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) - ((self.window.getScreenWidth() / 16) + 10)
+            self.square.id -= 1
+            Square.empty_square_id += 1
     
-    def moveRight(self) :
+    def moveRight(self, position_x) :
         
-        pass
+        #If the square is not on the 3rd column, we can move right.
+        if (self.square.id != 2 and self.square.id != 5 and self.square.id != 7 
+            and Square.empty_square_id == self.square.id + 1) :
+            
+            self.position.x = position_x
+            self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
+            self.square.id += 1
+            Square.empty_square_id -= 1
