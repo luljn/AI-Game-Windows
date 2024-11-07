@@ -56,7 +56,7 @@ class Circle(Form) :
             # if self.square.id == 6 :
             #     self.position.x = position_x
             #     self.square.id = 7
-            self.moveRight(position_x)
+            self.moveRight(position_x, distance)
     
     def moveUP(self, position_y) : 
         
@@ -90,14 +90,30 @@ class Circle(Form) :
             self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) - ((self.window.getScreenWidth() / 16) + 10)
             self.square.id -= 1
             Square.empty_square_id += 1
+        
+        if (self.square.id == 2 or self.square.id == 5 or self.square.id == 8 
+            and Square.empty_square_id == self.square.id - 1) :
+            
+            self.position.x = position_x
+            self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
+            self.square.id -= 1
+            Square.empty_square_id += 1
     
-    def moveRight(self, position_x) :
+    def moveRight(self, position_x, distance) :
         
         #If the square is not on the 3rd column, we can move right.
-        if (self.square.id != 2 and self.square.id != 5 and self.square.id != 7 
+        if (self.square.id != 2 and self.square.id != 5 and self.square.id != 8 
             and Square.empty_square_id == self.square.id + 1) :
             
             self.position.x = position_x
-            self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
+            self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
+            self.square.id += 1
+            Square.empty_square_id -= 1
+        
+        if (self.square.id == 0 or self.square.id == 3 or self.square.id == 6 
+            and Square.empty_square_id == self.square.id - 1) :
+            
+            self.position.x = position_x + distance
+            self.square.position.x = (self.window.getScreenWidth() / 2) + (self.window.getScreenWidth() / 16) / 2
             self.square.id += 1
             Square.empty_square_id -= 1
