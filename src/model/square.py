@@ -5,6 +5,9 @@ from model.form import Form
 
 class Square(Form) :
     
+    #Empty square (the central at the beginning of the game).
+    empty_square_id = 4
+    
     def __init__(self, id, window, width, height, position, color = "Blue") :
         
         super().__init__(window, position)

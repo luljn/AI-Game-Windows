@@ -62,7 +62,7 @@ class Factory :
         square_height = window.getScreenHeight() / 10
         
         #Position of the 1st square(the central square) => square id 4.
-        square_id = 4
+        square_id = Square.empty_square_id
         square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
         square_position_y = (window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2
         
@@ -139,7 +139,7 @@ class Factory :
         #Set the right color to the central square(the empty one at the beginning of the game).
         for element in forms :
             
-            if element.__class__ == Square and element.getId() == 4:
+            if element.__class__ == Square and element.getId() == Square.empty_square_id :
                 
                 element.setColor("Black")
         

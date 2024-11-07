@@ -1,5 +1,6 @@
 import pygame
 from model.form import Form
+from model.square import Square
 
 
 
@@ -59,19 +60,30 @@ class Circle(Form) :
     
     def moveUP(self, positon_x, position_y) : 
         
-        if self.square.id == 7 :
-                self.position.y = position_y
-                self.square.id = 4
-                self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
-                self.square.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
+        if Square.empty_square_id == self.square.id - 3 :
+            
+            if self.square.id == 7 :
+                
+                pass
+            
+            if self.square.id == 7 :
+                
+                    self.position.y = position_y
+                    self.square.id -= 3
+                    Square.empty_square_id += 3
+                    self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
+                    self.square.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
     
     def moveDown(self, positon_x, position_y, distance, square_width) : 
         
-        if self.square.id == 4 :
-                self.position.y = position_y + square_width
-                self.square.id = 7
-                self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
-                self.square.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
+        if Square.empty_square_id == self.square.id + 3 :
+            
+            if self.square.id == 4 :
+                    self.position.y = position_y + square_width
+                    self.square.id += 3
+                    Square.empty_square_id -= 3
+                    self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
+                    self.square.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
     
     def moveLeft(self) :
         
