@@ -82,14 +82,14 @@ class Circle(Form) :
             
             self.position.x = position_x -  distance
             self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) - ((self.window.getScreenWidth() / 16) + 10)
-            self.square.id -= 1
-            Square.empty_square_id += 1
+            # self.square.id -= 1
+            # Square.empty_square_id += 1
         
-        if (self.square.id == 2 or self.square.id == 5 or self.square.id == 8 
-            and Square.empty_square_id == self.square.id - 1) :
-            
-            self.position.x = position_x
-            self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
+            if (self.square.id == 2 or self.square.id == 5 or self.square.id == 8 
+                and Square.empty_square_id == self.square.id - 1) :
+                
+                self.position.x = position_x
+                self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
             self.square.id -= 1
             Square.empty_square_id += 1
     
@@ -101,13 +101,13 @@ class Circle(Form) :
             
             self.position.x = position_x
             self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
-            self.square.id += 1
-            Square.empty_square_id -= 1
+            # self.square.id += 1
+            # Square.empty_square_id -= 1
         
-        if (self.square.id == 0 or self.square.id == 3 or self.square.id == 6 
-            and Square.empty_square_id == self.square.id - 1) :
-            
-            self.position.x = position_x + distance
-            self.square.position.x = (self.window.getScreenWidth() / 2) + (self.window.getScreenWidth() / 16) / 2
+            if (self.square.id == 1 or self.square.id == 4 or self.square.id == 7 
+                and Square.empty_square_id == self.square.id - 1) :
+                
+                self.position.x = position_x + distance
+                self.square.position.x = (self.window.getScreenWidth() / 2) + (self.window.getScreenWidth() / 16) / 2
             self.square.id += 1
             Square.empty_square_id -= 1
