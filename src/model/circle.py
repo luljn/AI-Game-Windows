@@ -46,16 +46,10 @@ class Circle(Form) :
         
         if self.keys[pygame.K_LEFT] : 
             
-            # if self.square.id == 7 :
-            #     self.position.x = position_x -  distance
-            #     self.square.id = 6
             self.moveLeft(position_x, distance)
         
         if self.keys[pygame.K_RIGHT] : 
             
-            # if self.square.id == 6 :
-            #     self.position.x = position_x
-            #     self.square.id = 7
             self.moveRight(position_x, distance)
     
     def moveUP(self, position_y) : 
