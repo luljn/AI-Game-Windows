@@ -38,7 +38,7 @@ class Circle(Form) :
         
         if self.keys[pygame.K_UP] : 
             
-            self.moveUP(position_y)
+            self.moveUP(position_y, square_width)
         
         if self.keys[pygame.K_DOWN] : 
             
@@ -52,7 +52,7 @@ class Circle(Form) :
             
             self.moveRight(position_x, distance)
     
-    def moveUP(self, position_y) : 
+    def moveUP(self, position_y, square_width) : 
         
         #If the square is not on the first line, we can move up.
         if (self.square.id != 0 and self.square.id != 1 and self.square.id != 2 
@@ -60,6 +60,13 @@ class Circle(Form) :
             
             self.position.y = position_y
             self.square.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
+            
+            if (self.square.id == 3 or self.square.id == 4 or self.square.id == 5 
+            and Square.empty_square_id == self.square.id - 3) :
+                
+                self.position.y = position_y - square_width
+                self.square.position.y = ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) - ((self.window.getScreenHeight() / 10) + 10)
+            
             self.square.id -= 3
             Square.empty_square_id += 3
     
@@ -71,6 +78,13 @@ class Circle(Form) :
             
             self.position.y = position_y + square_width
             self.square.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
+            
+            if (self.square.id == 0 or self.square.id == 1 or self.square.id == 2 
+            and Square.empty_square_id == self.square.id + 3) :
+                
+                self.position.y = position_y
+                self.square.position.y =  (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
+            
             self.square.id += 3
             Square.empty_square_id -= 3
     
@@ -82,14 +96,13 @@ class Circle(Form) :
             
             self.position.x = position_x -  distance
             self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) - ((self.window.getScreenWidth() / 16) + 10)
-            # self.square.id -= 1
-            # Square.empty_square_id += 1
-        
+            
             if (self.square.id == 2 or self.square.id == 5 or self.square.id == 8 
                 and Square.empty_square_id == self.square.id - 1) :
                 
                 self.position.x = position_x
                 self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
+                
             self.square.id -= 1
             Square.empty_square_id += 1
     
@@ -100,14 +113,13 @@ class Circle(Form) :
             and Square.empty_square_id == self.square.id + 1) :
             
             self.position.x = position_x
-            self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
-            # self.square.id += 1
-            # Square.empty_square_id -= 1
-        
+            self.square.position.x = (self.window.getScreenWidth() / 2) - ((self.window.getScreenWidth() / 16) / 2)
+            
             if (self.square.id == 1 or self.square.id == 4 or self.square.id == 7 
-                and Square.empty_square_id == self.square.id - 1) :
+                and Square.empty_square_id == self.square.id + 1) :
                 
                 self.position.x = position_x + distance
-                self.square.position.x = (self.window.getScreenWidth() / 2) + (self.window.getScreenWidth() / 16) / 2
+                self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) + ((self.window.getScreenWidth() / 16) + 10)
+                
             self.square.id += 1
             Square.empty_square_id -= 1

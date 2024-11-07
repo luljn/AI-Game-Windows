@@ -164,9 +164,9 @@ class Factory :
         
         for element in forms :
             
-            if element.__class__ == Square and element.getId() == 5 :
+            if element.__class__ == Square and element.getId() == 7 :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], element)
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1], element)
                 forms.append(circle)
         
         #CPU pawns.
