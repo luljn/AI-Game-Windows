@@ -38,13 +38,11 @@ class Circle(Form) :
         
         if self.keys[pygame.K_UP] : 
             
-            self.moveUP(position_x, position_y)
+            self.moveUP(position_y)
         
         if self.keys[pygame.K_DOWN] : 
             
-            if self.square.id == 4 :
-                
-                self.moveDown(position_x, position_y, distance, square_width)
+            self.moveDown(position_y, square_width)
         
         if self.keys[pygame.K_LEFT] : 
             
@@ -58,32 +56,27 @@ class Circle(Form) :
                 self.position.x = position_x
                 self.square.id = 7
     
-    def moveUP(self, positon_x, position_y) : 
+    def moveUP(self, position_y) : 
         
-        if Square.empty_square_id == self.square.id - 3 :
+        #If the square is not on the first line, we can move up.
+        if (self.square.id != 0 and self.square.id != 1 and self.square.id != 2 
+            and Square.empty_square_id == self.square.id - 3) :
             
-            if self.square.id == 7 :
-                
-                pass
-            
-            if self.square.id == 7 :
-                
-                    self.position.y = position_y
-                    self.square.id -= 3
-                    Square.empty_square_id += 3
-                    self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
-                    self.square.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
+            self.position.y = position_y
+            self.square.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
+            self.square.id -= 3
+            Square.empty_square_id += 3
     
-    def moveDown(self, positon_x, position_y, distance, square_width) : 
+    def moveDown(self, position_y, square_width) : 
         
-        if Square.empty_square_id == self.square.id + 3 :
+        #If the square is not on the 3rd line, we can move down.
+        if (self.square.id != 6 and self.square.id != 7 and self.square.id != 8 
+            and Square.empty_square_id == self.square.id + 3) :
             
-            if self.square.id == 4 :
-                    self.position.y = position_y + square_width
-                    self.square.id += 3
-                    Square.empty_square_id -= 3
-                    self.square.position.x = (self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2
-                    self.square.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
+            self.position.y = position_y + square_width
+            self.square.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
+            self.square.id += 3
+            Square.empty_square_id -= 3
     
     def moveLeft(self) :
         
