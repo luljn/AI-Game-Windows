@@ -64,5 +64,5 @@ class Config :
             
             lines = config_file.readlines()
             lines[line_number] = f"{config}={new_config}\n"
-
+        
         Config.saveConfigs(lines)
