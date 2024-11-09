@@ -14,6 +14,9 @@ from view.view import View
 
 class Factory :
     
+    #list of circles on the gameBoard.
+    circles = []
+    
     def __init__(self):
         
         super().__init__()
@@ -195,14 +198,16 @@ class Factory :
             if event.key == pygame.K_1 :
                 
                 circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
-                circle.drawSprite()
+                # circle.drawSprite()
                 print("1 - carré")
+                Factory.circles.append(circle)
             
             if event.key == pygame.K_2 :
             
                 circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
-                circle.drawSprite()
+                # circle.drawSprite()
                 print("2 - carré")
+                Factory.circles.append(circle)
             
             else :
             

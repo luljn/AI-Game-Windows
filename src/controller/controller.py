@@ -63,9 +63,10 @@ class Controller :
         while self.running :
             
             self.clickEventHandler(self.buttons, text_manager)
-            # self.KeyEventHandler(self.forms)
+            # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
+            pygame.display.flip()
         
         self.quit()
     
@@ -105,7 +106,6 @@ class Controller :
             if(event.type == pygame.KEYDOWN) :
                 
                 self.factory.circleFactory(self.window, event, self.forms)
-                pygame.display.flip()
             
             for button in buttons :
                 
@@ -185,35 +185,15 @@ class Controller :
                         self.quit()
     
     #Keys event management.
-    def KeyEventHandler(self, squares) : 
+    def KeyEventHandler(self) : 
         
-        for event in pygame.event.get() :
-            
-            if(event.type == pygame.KEYDOWN) :
-                
-                for square in squares :
-                    
-                    if event.key == pygame.K_1 :
-                        
-                        # circle = Circle(self.window, pygame.Vector2((self.window.getScreenWidth() / 2), (self.window.getScreenHeight() / 2) + (form.getHeigth() + 10)), configs[1], form)
-                        # circle.drawSprite()
-                        print("1 - carré")
-                    
-                    if event.key == pygame.K_2 :
-                        
-                        # circle = Circle(self.window, pygame.Vector2((self.window.getScreenWidth() / 2), (self.window.getScreenHeight() / 2) + (form.getHeigth() + 10)), configs[1], form)
-                        # circle.drawSprite()
-                        print("2 - carré")
-                        
-                    else :
-                        
-                        print("Une autre touche a été appuyée")
+        pass
     
     def welcome(self, buttons) :
         
         self.window.welcomeView(buttons)
-        pygame.display.flip()
-        pygame.display.update()
+        # pygame.display.flip()
+        # pygame.display.update()
     
     def game(self, forms, buttons) :
         
@@ -233,19 +213,24 @@ class Controller :
             #             # circle.drawSprite()
             #             print("cliqué")
         
-        pygame.display.flip()
+        for circle in Factory.circles :
+            
+            circle.drawSprite()
+            circle.move()
+        
+        # pygame.display.flip()
     
     def options(self, buttons, text_input) :
         
         self.window.optionsView(buttons, text_input)
-        pygame.display.flip()
-        pygame.display.update()
+        # pygame.display.flip()
+        # pygame.display.update()
     
     def credits(self, buttons) : 
         
         self.window.creditsView(buttons)
-        pygame.display.flip()
-        pygame.display.update()
+        # pygame.display.flip()
+        # pygame.display.update()
     
     #Close the window and quit the program
     def quit(self):
