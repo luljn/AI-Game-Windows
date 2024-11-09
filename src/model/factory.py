@@ -220,7 +220,7 @@ class Factory :
             
             elif event.key == pygame.K_3 and square.getId() == 3 :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
                 print(f"3 - PAWN {configs[1]}")
                 Factory.circles.append(circle)
             
