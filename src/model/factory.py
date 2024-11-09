@@ -20,7 +20,7 @@ class Factory :
     
     def buttonFactory(self, window, view = "") : 
         
-        rect_img_path = "resources\img\\rect.png"
+        rect_img_path = "resources/img/rect.png"
         position_x = window.getScreenWidth() / 3.05
         font = Font.getFont(25)
         
@@ -162,12 +162,12 @@ class Factory :
             
         #     forms.append(circle)
         
-        for element in forms :
+        # for element in forms :
             
-            if element.__class__ == Square and element.getId() == 7 :
+        #     if element.__class__ == Square and element.getId() == 7 :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1], element)
-                forms.append(circle)
+        #         circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1], element)
+        #         forms.append(circle)
         
         #CPU pawns.
         # for i in range(3) :
@@ -185,3 +185,25 @@ class Factory :
         #     forms.append(circle1)
         
         return forms
+    
+    def circleFactory(self, window, event, squares) :
+        
+        configs = Config.loadConfig()
+        
+        for square in squares :
+            
+            if event.key == pygame.K_1 :
+                
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                circle.drawSprite()
+                print("1 - carré")
+            
+            if event.key == pygame.K_2 :
+            
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                circle.drawSprite()
+                print("2 - carré")
+            
+            else :
+            
+                print("Une autre touche a été appuyée")

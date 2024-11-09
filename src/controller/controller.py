@@ -63,7 +63,7 @@ class Controller :
         while self.running :
             
             self.clickEventHandler(self.buttons, text_manager)
-            # self.KeyEventHandler()
+            # self.KeyEventHandler(self.forms)
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
         
@@ -101,6 +101,11 @@ class Controller :
             if event.type == pygame.QUIT :
                 
                 self.quit()
+            
+            if(event.type == pygame.KEYDOWN) :
+                
+                self.factory.circleFactory(self.window, event, self.forms)
+                pygame.display.flip()
             
             for button in buttons :
                 
@@ -180,9 +185,29 @@ class Controller :
                         self.quit()
     
     #Keys event management.
-    def KeyEventHandler(self) : 
+    def KeyEventHandler(self, squares) : 
         
-        pass
+        for event in pygame.event.get() :
+            
+            if(event.type == pygame.KEYDOWN) :
+                
+                for square in squares :
+                    
+                    if event.key == pygame.K_1 :
+                        
+                        # circle = Circle(self.window, pygame.Vector2((self.window.getScreenWidth() / 2), (self.window.getScreenHeight() / 2) + (form.getHeigth() + 10)), configs[1], form)
+                        # circle.drawSprite()
+                        print("1 - carré")
+                    
+                    if event.key == pygame.K_2 :
+                        
+                        # circle = Circle(self.window, pygame.Vector2((self.window.getScreenWidth() / 2), (self.window.getScreenHeight() / 2) + (form.getHeigth() + 10)), configs[1], form)
+                        # circle.drawSprite()
+                        print("2 - carré")
+                        
+                    else :
+                        
+                        print("Une autre touche a été appuyée")
     
     def welcome(self, buttons) :
         
@@ -197,7 +222,16 @@ class Controller :
         for form in forms :
             
             form.drawSprite()
-            form.move()
+            # form.move()
+            # for event in pygame.event.get() :
+                
+            #     if(event.type == pygame.MOUSEBUTTONDOWN) :
+                    
+            #         if (form.getImage().collidepoint(event.pos)) :
+                        
+            #             # circle = Circle(self.window, pygame.Vector2((self.window.getScreenWidth() / 2), (self.window.getScreenHeight() / 2) + (form.getHeigth() + 10)), configs[1], form)
+            #             # circle.drawSprite()
+            #             print("cliqué")
         
         pygame.display.flip()
     

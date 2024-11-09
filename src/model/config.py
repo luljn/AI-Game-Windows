@@ -19,8 +19,8 @@ class Config :
                 config = line.split('=')
                 configs.append(config[1].replace("\n", ""))
             
-            print(configs)
-            print("\n")
+            # print(configs)
+            # print("\n")
         
         return configs
     
