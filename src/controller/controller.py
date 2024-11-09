@@ -118,6 +118,12 @@ class Controller :
                         # Config.loadConfig()
                         self.window.setView(View.GAME.value)
                     
+                    #Restart the game.
+                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RESTART.value) :
+                        
+                        Factory.circles = []
+                        self.window.setView(View.GAME.value)
+                    
                     #Launch the options view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
                         

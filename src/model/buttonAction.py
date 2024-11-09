@@ -8,6 +8,7 @@ class ButtonAction(StrEnum) :
     OPTIONS = "Options"
     CREDITS = "Crédits"
     SAVE = "Enregistrer"
+    RESTART = "Recommencer"
     BACK = "Retour"
     QUIT = "Quitter"
     GREEN = "Vert"

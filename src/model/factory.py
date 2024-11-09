@@ -38,6 +38,7 @@ class Factory :
         credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), ButtonAction.CREDITS.value, font, "White", "Blue")
         quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), ButtonAction.QUIT.value, font, "White", "Blue")
         save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.SAVE.value, font, "White", "Blue")
+        restart_game_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.RESTART.value, font, "White", "Blue")
         back_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 1.25, credits_button.position_y + 230), ButtonAction.BACK.value, font, "White", "Blue")
         
         #Return a specific list of buttons, depending on the view we want to display. 
@@ -50,7 +51,11 @@ class Factory :
             buttons = [green_options_button, red_options_button, player_vs_cpu_options_button,
                         cpu_vs_cpu_options_button, music_on_options_button, music_off_options_button, save_button, back_button]
         
-        elif view == View.GAME.value or View.CREDITS.value :
+        elif view == View.GAME.value :
+            
+            buttons = [restart_game_button, back_button]
+        
+        elif view == View.CREDITS.value :
             
             buttons = [back_button]
         
