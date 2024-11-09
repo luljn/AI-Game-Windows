@@ -66,7 +66,7 @@ class Controller :
             # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
-            pygame.display.flip()
+            # pygame.display.flip()
         
         self.quit()
     
@@ -192,8 +192,8 @@ class Controller :
     def welcome(self, buttons) :
         
         self.window.welcomeView(buttons)
-        # pygame.display.flip()
-        # pygame.display.update()
+        pygame.display.flip()
+        pygame.display.update()
     
     def game(self, forms, buttons) :
         
@@ -202,35 +202,25 @@ class Controller :
         for form in forms :
             
             form.drawSprite()
-            # form.move()
-            # for event in pygame.event.get() :
-                
-            #     if(event.type == pygame.MOUSEBUTTONDOWN) :
-                    
-            #         if (form.getImage().collidepoint(event.pos)) :
-                        
-            #             # circle = Circle(self.window, pygame.Vector2((self.window.getScreenWidth() / 2), (self.window.getScreenHeight() / 2) + (form.getHeigth() + 10)), configs[1], form)
-            #             # circle.drawSprite()
-            #             print("cliqué")
         
         for circle in Factory.circles :
             
             circle.drawSprite()
             circle.move()
         
-        # pygame.display.flip()
+        pygame.display.flip()
     
     def options(self, buttons, text_input) :
         
         self.window.optionsView(buttons, text_input)
-        # pygame.display.flip()
-        # pygame.display.update()
+        pygame.display.flip()
+        pygame.display.update()
     
     def credits(self, buttons) : 
         
         self.window.creditsView(buttons)
-        # pygame.display.flip()
-        # pygame.display.update()
+        pygame.display.flip()
+        pygame.display.update()
     
     #Close the window and quit the program
     def quit(self):
