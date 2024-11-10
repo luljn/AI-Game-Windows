@@ -38,7 +38,7 @@ class Circle(Form) :
         
         if self.keys[pygame.K_UP] : 
             
-            self.moveUP(position_y, square_width)
+            self.moveUp(position_y, square_width)
         
         if self.keys[pygame.K_DOWN] : 
             
@@ -52,7 +52,7 @@ class Circle(Form) :
             
             self.moveRight(position_x, distance)
     
-    def moveUP(self, position_y, square_width) : 
+    def moveUp(self, position_y, square_width) : 
         
         #If the square is not on the first line, we can move up.
         if (self.square.id != 0 and self.square.id != 1 and self.square.id != 2 

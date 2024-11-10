@@ -208,7 +208,10 @@ class Controller :
         for form in forms :
             
             form.drawSprite()
-            # form.move()
+            
+            if Square.canMove :
+                
+                form.move()
         
         for circle in Factory.circles :
             
