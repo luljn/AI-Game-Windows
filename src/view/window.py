@@ -20,7 +20,7 @@ class Window :
         # self.screen_height = 720
         
         #screen configurations
-        self.title = "AI-GAME"
+        self.title = "FORCE-3"
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.clock = pygame.time.Clock()
         self.dt = 0

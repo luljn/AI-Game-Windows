@@ -63,7 +63,6 @@ class Factory :
     
     def formFactory(self, window) :
         
-        configs = Config.loadConfig()
         forms = []
         #squares dimensions
         square_width = window.getScreenWidth() / 16
@@ -151,99 +150,60 @@ class Factory :
                 
                 element.setColor("Black")
         
-        #Central square position.
-        square_ = Square(square_id, window, square_width, square_height,
-                        pygame.Vector2(square_position_x , square_position_y))
-        
-        #Player paws
-        # for i in range(3) :
-            
-        #     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
-            
-        #     if i == 1 :
-                
-        #         circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
-            
-        #     if i == 2 :
-                
-        #         circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
-            
-        #     forms.append(circle)
-        
-        # for element in forms :
-            
-        #     if element.__class__ == Square and element.getId() == 7 :
-                
-        #         circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1], element)
-        #         forms.append(circle)
-        
-        #CPU pawns.
-        # for i in range(3) :
-            
-        #     circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-            
-        #     if i == 1 :
-                
-        #         circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-            
-        #     if i == 2 :
-                
-        #         circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-            
-        #     forms.append(circle1)
-        
         return forms
     
     def circleFactory(self, window, event, squares) :
         
         configs = Config.loadConfig()
         
-        for square in squares :
+        if len(Factory.circles) < 3 :
             
-            if event.key == pygame.K_0 and square.getId() == 0 :
+            for square in squares :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
-                print(f"0 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_1 and square.getId() == 1 :
+                if event.key == pygame.K_0 and square.getId() == 0 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                    print(f"0 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
-                print(f"1 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_2 and square.getId() == 2 :
-            
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
-                print(f"2 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_3 and square.getId() == 3 :
+                elif event.key == pygame.K_1 and square.getId() == 1 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                    print(f"1 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
-                print(f"3 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_5 and square.getId() == 5 :
-            
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
-                print(f"5 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_6 and square.getId() == 6 :
+                elif event.key == pygame.K_2 and square.getId() == 2 :
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
-                print(f"6 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_7 and square.getId() == 7 :
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                    print(f"2 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
                 
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
-                print(f"7 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
-            
-            elif event.key == pygame.K_8 and square.getId() == 8 :
-            
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
-                print(f"8 - PAWN {configs[1]}")
-                Factory.circles.append(circle)
+                elif event.key == pygame.K_3 and square.getId() == 3 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
+                    print(f"3 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_5 and square.getId() == 5 :
+                
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
+                    print(f"5 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_6 and square.getId() == 6 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
+                    print(f"6 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_7 and square.getId() == 7 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
+                    print(f"7 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_8 and square.getId() == 8 :
+                
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
+                    print(f"8 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
