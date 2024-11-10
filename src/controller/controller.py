@@ -208,6 +208,7 @@ class Controller :
         for form in forms :
             
             form.drawSprite()
+            # form.move()
         
         for circle in Factory.circles :
             
