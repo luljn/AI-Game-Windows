@@ -111,7 +111,9 @@ class Controller :
                     
                     Square.canMove = True
                 
-                if event.key == pygame.K_q :
+            if(event.type == pygame.KEYUP) :
+                
+                if event.key == pygame.K_s :
                     
                     Square.canMove = False
             
