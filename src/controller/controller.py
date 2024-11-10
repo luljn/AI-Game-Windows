@@ -106,6 +106,14 @@ class Controller :
             if(event.type == pygame.KEYDOWN) :
                 
                 self.factory.circleFactory(self.window, event, self.forms)
+                
+                if event.key == pygame.K_s :
+                    
+                    Square.canMove = True
+                
+                if event.key == pygame.K_q :
+                    
+                    Square.canMove = False
             
             for button in buttons :
                 
