@@ -14,13 +14,16 @@ from view.view import View
 
 class Factory :
     
+    #list of circles on the gameBoard.
+    circles = []
+    
     def __init__(self):
         
         super().__init__()
     
     def buttonFactory(self, window, view = "") : 
         
-        rect_img_path = "resources\img\\rect.png"
+        rect_img_path = "resources/img/rect.png"
         position_x = window.getScreenWidth() / 3.05
         font = Font.getFont(25)
         
@@ -35,6 +38,7 @@ class Factory :
         credits_button = Button(pygame.image.load(rect_img_path), (position_x, options_button.position_y + 120), ButtonAction.CREDITS.value, font, "White", "Blue")
         quit_button = Button(pygame.image.load(rect_img_path), (position_x, credits_button.position_y + 120), ButtonAction.QUIT.value, font, "White", "Blue")
         save_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.SAVE.value, font, "White", "Blue")
+        restart_game_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.RESTART.value, font, "White", "Blue")
         back_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 1.25, credits_button.position_y + 230), ButtonAction.BACK.value, font, "White", "Blue")
         
         #Return a specific list of buttons, depending on the view we want to display. 
@@ -47,7 +51,11 @@ class Factory :
             buttons = [green_options_button, red_options_button, player_vs_cpu_options_button,
                         cpu_vs_cpu_options_button, music_on_options_button, music_off_options_button, save_button, back_button]
         
-        elif view == View.GAME.value or View.CREDITS.value :
+        elif view == View.GAME.value :
+            
+            buttons = [restart_game_button, back_button]
+        
+        elif view == View.CREDITS.value :
             
             buttons = [back_button]
         
@@ -55,14 +63,13 @@ class Factory :
     
     def formFactory(self, window) :
         
-        configs = Config.loadConfig()
         forms = []
         #squares dimensions
         square_width = window.getScreenWidth() / 16
         square_height = window.getScreenHeight() / 10
         
         #Position of the 1st square(the central square) => square id 4.
-        square_id = 4
+        square_id = Square.empty_square_id
         square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
         square_position_y = (window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2
         
@@ -139,42 +146,64 @@ class Factory :
         #Set the right color to the central square(the empty one at the beginning of the game).
         for element in forms :
             
-            if element.__class__ == Square and element.getId() == 4:
+            if element.__class__ == Square and element.getId() == Square.empty_square_id :
                 
-                element.setColor("White")
-        
-        #Central square position.
-        square_ = Square(square_id, window, square_width, square_height,
-                        pygame.Vector2(square_position_x , square_position_y))
-        
-        #Player paws
-        for i in range(3) :
-            
-            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
-            
-            if i == 1 :
-                
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
-            
-            if i == 2 :
-                
-                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) + (square_.getHeigth() + 10)), configs[1])
-            
-            forms.append(circle)
-        
-        #CPU pawns.
-        for i in range(3) :
-            
-            circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-            
-            if i == 1 :
-                
-                circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-            
-            if i == 2 :
-                
-                circle1 = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square_.getWidth() + 10), (window.getScreenHeight() / 2) - (square_.getHeigth() + 10)), configs[2])
-            
-            forms.append(circle1)
+                element.setColor("Black")
         
         return forms
+    
+    def circleFactory(self, window, event, squares) :
+        
+        configs = Config.loadConfig()
+        
+        if len(Factory.circles) < 3 :
+            
+            for square in squares :
+                
+                if event.key == pygame.K_0 and square.getId() == 0 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                    print(f"0 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_1 and square.getId() == 1 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                    print(f"1 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_2 and square.getId() == 2 :
+                
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), configs[1], square)
+                    print(f"2 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_3 and square.getId() == 3 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
+                    print(f"3 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_5 and square.getId() == 5 :
+                
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2)), configs[1], square)
+                    print(f"5 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_6 and square.getId() == 6 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
+                    print(f"6 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_7 and square.getId() == 7 :
+                    
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
+                    print(f"7 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)
+                
+                elif event.key == pygame.K_8 and square.getId() == 8 :
+                
+                    circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), configs[1], square)
+                    print(f"8 - PAWN {configs[1]}")
+                    Factory.circles.append(circle)

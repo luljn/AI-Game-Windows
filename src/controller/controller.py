@@ -52,7 +52,7 @@ class Controller :
         #Creation of the manager and the visualizer of the text input.
         text_manager = TextInputManager()  #manage the text input.
         text_input = TextInputVisualizer(manager=text_manager)  #display the text input.
-
+        
         # Position of the text input
         text_input.cursor_visible = True  #Set the cursor visible.
         text_input.cursor_color = (255, 255, 255)
@@ -65,7 +65,8 @@ class Controller :
             self.clickEventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
-            
+            self.window.clock.tick(60)
+            # pygame.display.flip()
         
         self.quit()
     
@@ -102,6 +103,20 @@ class Controller :
                 
                 self.quit()
             
+            if(event.type == pygame.KEYDOWN) :
+                
+                self.factory.circleFactory(self.window, event, self.forms)
+                
+                if event.key == pygame.K_s :
+                    
+                    Square.canMove = True
+                
+            if(event.type == pygame.KEYUP) :
+                
+                if event.key == pygame.K_s :
+                    
+                    Square.canMove = False
+            
             for button in buttons :
                 
                 if(event.type == pygame.MOUSEBUTTONDOWN) :
@@ -111,6 +126,12 @@ class Controller :
                         
                         #To load the configs before starting the game.
                         # Config.loadConfig()
+                        self.window.setView(View.GAME.value)
+                    
+                    #Restart the game.
+                    if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RESTART.value) :
+                        
+                        Factory.circles = []
                         self.window.setView(View.GAME.value)
                     
                     #Launch the options view.
@@ -197,7 +218,15 @@ class Controller :
         for form in forms :
             
             form.drawSprite()
-            form.move(self.window.getDT())
+            
+            if Square.canMove :
+                
+                form.move()
+        
+        for circle in Factory.circles :
+            
+            circle.drawSprite()
+            circle.move()
         
         pygame.display.flip()
     

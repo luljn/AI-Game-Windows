@@ -19,8 +19,8 @@ class Config :
                 config = line.split('=')
                 configs.append(config[1].replace("\n", ""))
             
-            print(configs)
-            print("\n")
+            # print(configs)
+            # print("\n")
         
         return configs
     
@@ -64,5 +64,5 @@ class Config :
             
             lines = config_file.readlines()
             lines[line_number] = f"{config}={new_config}\n"
-
+        
         Config.saveConfigs(lines)
