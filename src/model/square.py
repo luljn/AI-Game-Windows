@@ -25,14 +25,6 @@ class Square(Form) :
         
         self.image = pygame.draw.rect(self.window.screen, self.color, (self.position.x, self.position.y, self.width, self.height))
     
-    # def checkPosition(self, position) :
-        
-    #     if (position[0] in range (self.rect.left, self.rect.right) and position[1] in range (self.rect.top, self.rect.bottom)):
-            
-    #         return True
-        
-    #     return False
-    
     def getId(self) :
         
         return self.id
@@ -67,7 +59,7 @@ class Square(Form) :
         
         if self.keys[pygame.K_UP] : 
             
-            self.moveUP(position_y, square_width)
+            self.moveUp(position_y, square_width)
         
         if self.keys[pygame.K_DOWN] : 
             
@@ -81,7 +73,7 @@ class Square(Form) :
             
             self.moveRight(position_x, distance)
     
-    def moveUP(self, position_y, square_width) : 
+    def moveUp(self, position_y, square_width) : 
         
         #If the square is not on the first line, we can move up.
         if (self.id != 0 and self.id != 1 and self.id != 2 
