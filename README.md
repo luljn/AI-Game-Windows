@@ -9,8 +9,9 @@ A two-player game powered by Artificial Initelligence (for Windows OS).
 
 # Run the code.
 
-1) Install Python and Pygame module, if you haven't already.
-2) Execute the main file (main.py) .
+1) Install Python if you haven't already.
+2) Install pygame and pygame-textinput modules, if you haven't already.
+3) Execute the main file (main.py) .
 
 # The application
 
