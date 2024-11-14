@@ -12,6 +12,7 @@ class Circle(Form) :
         self.color = color
         self.square = square
         self.radius = radius
+        self.canMove = False
         # self.radius = 30
         # self.position = position
         # self.position = pygame.Vector2(self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
@@ -36,21 +37,26 @@ class Circle(Form) :
         position_x = self.window.getScreenWidth() / 2
         position_y = self.window.getScreenHeight() / 2
         
-        if self.keys[pygame.K_UP] : 
+        # if (Square.empty_square_id == self.square.id - 3 or Square.empty_square_id == self.square.id + 3 
+        #     or Square.empty_square_id == self.square.id - 1 or Square.empty_square_id == self.square.id + 1) :
             
-            self.moveUp(position_y, square_width)
-        
-        if self.keys[pygame.K_DOWN] : 
+        #     self.canMove = True
+        if self.canMove :
+            if self.keys[pygame.K_UP] : 
+                
+                self.moveUp(position_y, square_width)
             
-            self.moveDown(position_y, square_width)
-        
-        if self.keys[pygame.K_LEFT] : 
+            if self.keys[pygame.K_DOWN] : 
+                
+                self.moveDown(position_y, square_width)
             
-            self.moveLeft(position_x, distance)
-        
-        if self.keys[pygame.K_RIGHT] : 
+            if self.keys[pygame.K_LEFT] : 
+                
+                self.moveLeft(position_x, distance)
             
-            self.moveRight(position_x, distance)
+            if self.keys[pygame.K_RIGHT] : 
+                
+                self.moveRight(position_x, distance)
     
     def moveUp(self, position_y, square_width) : 
         

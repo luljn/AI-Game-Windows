@@ -1,6 +1,7 @@
 import pygame
 from pygame_textinput import TextInputVisualizer, TextInputManager
 from sys import exit
+from time import sleep
 
 from model.buttonAction import ButtonAction
 from model.factory import *
@@ -106,12 +107,24 @@ class Controller :
             if(event.type == pygame.KEYDOWN) :
                 
                 self.factory.circleFactory(self.window, event, self.forms)
+                for circle in Factory.circles :
+                    if event.key == (circle.square.id + 48) :
+                        circle.canMove = True
+                        print(circle.square.id + 48)
+                        # circle.move()
                 
                 if event.key == pygame.K_s :
                     
                     Square.canMove = True
-                
+            
             if(event.type == pygame.KEYUP) :
+                
+                for circle in Factory.circles :
+                    if event.key == circle.square.id + 48 :
+                        circle.canMove = False
+                        print(f"False - {circle.square.id + 48}")
+                    else :
+                        circle.canMove = False
                 
                 if event.key == pygame.K_s :
                     
@@ -226,7 +239,22 @@ class Controller :
         for circle in Factory.circles :
             
             circle.drawSprite()
+            # if circle.canMove :
             circle.move()
+        
+        # for event in pygame.event.get() :
+            
+        #     for circle in Factory.circles :
+            
+        #         # circle.move()
+        #         if event.type == pygame.MOUSEBUTTONDOWN:
+                    
+        #             mouse_pos = event.pos  # Position de la souris lors du clic
+        #             distance = ((mouse_pos[0] - circle.position.x) ** 2 + (mouse_pos[1] - circle.position.y) ** 2) ** 0.5
+        #             if distance <= circle.radius :
+        #                 circle.canMove = True
+        #                 circle.move()
+        #                 circle.canMove = False
         
         pygame.display.flip()
     
