@@ -106,19 +106,22 @@ class Controller :
             
             if(event.type == pygame.KEYDOWN) :
                 
+                #Add player pawns on the board.
                 self.factory.circleFactory(self.window, event, self.forms)
+                #If the key associated to the id of the pawn's square is pressed, we can move it.
                 for circle in Factory.circles :
                     if event.key == (circle.square.id + 48) :
                         circle.canMove = True
                         print(circle.square.id + 48)
-                        # circle.move()
                 
+                #If the key 's' is pressed we can move the squares which don't have a pawn.
                 if event.key == pygame.K_s :
                     
                     Square.canMove = True
             
             if(event.type == pygame.KEYUP) :
                 
+                #If the key associated to the id of the pawn's square is not pressed, we can't move it.
                 for circle in Factory.circles :
                     if event.key == circle.square.id + 48 :
                         circle.canMove = False
@@ -126,6 +129,7 @@ class Controller :
                     else :
                         circle.canMove = False
                 
+                #If the key 's' is not pressed we can't move the squares which don't have a pawn.
                 if event.key == pygame.K_s :
                     
                     Square.canMove = False
@@ -239,22 +243,7 @@ class Controller :
         for circle in Factory.circles :
             
             circle.drawSprite()
-            # if circle.canMove :
             circle.move()
-        
-        # for event in pygame.event.get() :
-            
-        #     for circle in Factory.circles :
-            
-        #         # circle.move()
-        #         if event.type == pygame.MOUSEBUTTONDOWN:
-                    
-        #             mouse_pos = event.pos  # Position de la souris lors du clic
-        #             distance = ((mouse_pos[0] - circle.position.x) ** 2 + (mouse_pos[1] - circle.position.y) ** 2) ** 0.5
-        #             if distance <= circle.radius :
-        #                 circle.canMove = True
-        #                 circle.move()
-        #                 circle.canMove = False
         
         pygame.display.flip()
     

@@ -37,10 +37,6 @@ class Circle(Form) :
         position_x = self.window.getScreenWidth() / 2
         position_y = self.window.getScreenHeight() / 2
         
-        # if (Square.empty_square_id == self.square.id - 3 or Square.empty_square_id == self.square.id + 3 
-        #     or Square.empty_square_id == self.square.id - 1 or Square.empty_square_id == self.square.id + 1) :
-            
-        #     self.canMove = True
         if self.canMove :
             if self.keys[pygame.K_UP] : 
                 
