@@ -17,6 +17,7 @@ class Square(Form) :
         self.height = height
         self.color = color
         self.image = None
+        self.canMove = False
         # self.width = self.window.getScreenWidth() / 16
         # self.height = self.window.getScreenHeight() / 10
         # self.position = pygame.Vector2((self.window.getScreenWidth() / 2) -  self.width / 2 , (self.window.getScreenHeight() / 2) - self.height /2)
@@ -49,21 +50,23 @@ class Square(Form) :
         
         self.keys = pygame.key.get_pressed()
         
-        if self.keys[pygame.K_UP] : 
+        if self.canMove :
             
-            self.moveUp()
-        
-        if self.keys[pygame.K_DOWN] : 
+            if self.keys[pygame.K_UP] : 
+                
+                self.moveUp()
             
-            self.moveDown()
-        
-        if self.keys[pygame.K_LEFT] : 
+            if self.keys[pygame.K_DOWN] : 
+                
+                self.moveDown()
             
-            self.moveLeft()
-        
-        if self.keys[pygame.K_RIGHT] : 
+            if self.keys[pygame.K_LEFT] : 
+                
+                self.moveLeft()
             
-            self.moveRight()
+            if self.keys[pygame.K_RIGHT] : 
+                
+                self.moveRight()
     
     def moveUp(self) : 
         

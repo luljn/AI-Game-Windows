@@ -97,6 +97,8 @@ class Controller :
     #Click events management.
     def clickEventHandler(self, buttons, text_manager) : 
         
+        keys = pygame.key.get_pressed()
+        
         for event in pygame.event.get() :
             
             if event.type == pygame.QUIT :
@@ -114,9 +116,12 @@ class Controller :
                         print(circle.square.id + 48)
                 
                 #If the key 's' is pressed we can move the squares which don't have a pawn.
-                if event.key == pygame.K_s :
-                    
-                    Square.canMove = True
+                for square in self.forms :
+                    if keys[pygame.K_s] and keys[square.id + 48]  :
+                        
+                        Square.canMove = True
+                        square.canMove = True
+                        print(square.id + 48)
             
             if(event.type == pygame.KEYUP) :
                 
@@ -129,9 +134,15 @@ class Controller :
                         circle.canMove = False
                 
                 #If the key 's' is not pressed we can't move the squares which don't have a pawn.
-                if event.key == pygame.K_s :
-                    
-                    Square.canMove = False
+                for square in self.forms :
+                    if keys[pygame.K_s] and keys[square.id + 48]  :
+                        
+                        Square.canMove = False
+                        square.canMove = False
+                        print(square.id + 48)
+                    else :
+                        Square.canMove = False
+                        square.canMove = False
             
             #Buttons click management
             for button in buttons :
