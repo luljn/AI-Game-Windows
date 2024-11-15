@@ -48,32 +48,24 @@ class Square(Form) :
     def move(self) :
         
         self.keys = pygame.key.get_pressed()
-        #squares dimensions
-        square_width = self.window.getScreenWidth() / 16
-        square_height = self.window.getScreenHeight() / 10
-        # distance between the center of squares on the same line/column.
-        distance = square_width + 10
-        #base position circle(the position of the central circle on the square id 4).
-        position_x = self.window.getScreenWidth() / 2
-        position_y = self.window.getScreenHeight() / 2
         
         if self.keys[pygame.K_UP] : 
             
-            self.moveUp(position_y, square_width)
+            self.moveUp()
         
         if self.keys[pygame.K_DOWN] : 
             
-            self.moveDown(position_y, square_width)
+            self.moveDown()
         
         if self.keys[pygame.K_LEFT] : 
             
-            self.moveLeft(position_x, distance)
+            self.moveLeft()
         
         if self.keys[pygame.K_RIGHT] : 
             
-            self.moveRight(position_x, distance)
+            self.moveRight()
     
-    def moveUp(self, position_y, square_width) : 
+    def moveUp(self) : 
         
         #If the square is not on the first line, we can move up.
         if (self.id != 0 and self.id != 1 and self.id != 2 
@@ -91,7 +83,7 @@ class Square(Form) :
             self.id -= 3
             Square.empty_square_id += 3
     
-    def moveDown(self, position_y, square_width) : 
+    def moveDown(self) : 
         
         #If the square is not on the 3rd line, we can move down.
         if (self.id != 6 and self.id != 7 and self.id != 8 
@@ -109,7 +101,7 @@ class Square(Form) :
             self.id += 3
             Square.empty_square_id -= 3
     
-    def moveLeft(self, position_x, distance) :
+    def moveLeft(self) :
         
         #If the square is not on the 1st column, we can move left.
         if (self.id != 0 and self.id != 3 and self.id != 6 
@@ -127,7 +119,7 @@ class Square(Form) :
             self.id -= 1
             Square.empty_square_id += 1
     
-    def moveRight(self, position_x, distance) :
+    def moveRight(self) :
         
         #If the square is not on the 3rd column, we can move right.
         if (self.id != 2 and self.id != 5 and self.id != 8 

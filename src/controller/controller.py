@@ -1,7 +1,6 @@
 import pygame
 from pygame_textinput import TextInputVisualizer, TextInputManager
 from sys import exit
-from time import sleep
 
 from model.buttonAction import ButtonAction
 from model.factory import *
@@ -28,7 +27,7 @@ class Controller :
         self.window = Window()
         self.factory = Factory()
         
-        #
+        #Set on squares, to construct the game board.
         self.forms = self.factory.formFactory(self.window)
         
         #Buttons
@@ -134,6 +133,7 @@ class Controller :
                     
                     Square.canMove = False
             
+            #Buttons click management
             for button in buttons :
                 
                 if(event.type == pygame.MOUSEBUTTONDOWN) :
