@@ -71,13 +71,11 @@ class Square(Form) :
         if (self.id != 0 and self.id != 1 and self.id != 2 
             and Square.empty_square_id == self.id - 3) :
             
-            # self.position.y = position_y
             self.position.y = (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
             
             if (self.id == 3 or self.id == 4 or self.id == 5 
             and Square.empty_square_id == self.id - 3) :
                 
-                # self.position.y = position_y - square_width
                 self.position.y = ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) - ((self.window.getScreenHeight() / 10) + 10)
             
             self.id -= 3
@@ -89,13 +87,11 @@ class Square(Form) :
         if (self.id != 6 and self.id != 7 and self.id != 8 
             and Square.empty_square_id == self.id + 3) :
             
-            # self.position.y = position_y + square_width
             self.position.y =  ((self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2) + ((self.window.getScreenHeight() / 10) + 10)
             
             if (self.id == 0 or self.id == 1 or self.id == 2 
             and Square.empty_square_id == self.id + 3) :
                 
-                # self.position.y = position_y
                 self.position.y =  (self.window.getScreenHeight() / 2) - (self.window.getScreenHeight() / 10) /2
             
             self.id += 3
@@ -107,15 +103,13 @@ class Square(Form) :
         if (self.id != 0 and self.id != 3 and self.id != 6 
             and Square.empty_square_id == self.id - 1) :
             
-            # self.position.x = position_x -  distance
             self.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) - ((self.window.getScreenWidth() / 16) + 10)
             
             if (self.id == 2 or self.id == 5 or self.id == 8 
                 and Square.empty_square_id == self.id - 1) :
                 
-                # self.position.x = position_x
                 self.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
-                
+            
             self.id -= 1
             Square.empty_square_id += 1
     
@@ -125,14 +119,12 @@ class Square(Form) :
         if (self.id != 2 and self.id != 5 and self.id != 8 
             and Square.empty_square_id == self.id + 1) :
             
-            # self.position.x = position_x
             self.position.x = (self.window.getScreenWidth() / 2) - ((self.window.getScreenWidth() / 16) / 2)
             
             if (self.id == 1 or self.id == 4 or self.id == 7 
                 and Square.empty_square_id == self.id + 1) :
                 
-                # self.position.x = position_x + distance
                 self.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) + ((self.window.getScreenWidth() / 16) + 10)
-                
+            
             self.id += 1
             Square.empty_square_id -= 1

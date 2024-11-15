@@ -104,7 +104,7 @@ class Circle(Form) :
                 
                 self.position.x = position_x
                 self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
-                
+            
             self.square.id -= 1
             Square.empty_square_id += 1
     
@@ -122,6 +122,6 @@ class Circle(Form) :
                 
                 self.position.x = position_x + distance
                 self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) + ((self.window.getScreenWidth() / 16) + 10)
-                
+            
             self.square.id += 1
             Square.empty_square_id -= 1
