@@ -1,5 +1,4 @@
 #Base class of shapes used in the game.
-import pygame
 
 
 

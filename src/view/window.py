@@ -1,5 +1,4 @@
 import pygame
-from pygame_textinput import TextInputVisualizer, TextInputManager
 
 from model.config import Config
 from model.font import Font
@@ -31,6 +30,9 @@ class Window :
         #A variable to know on with view we are.
         #The default view of the application is the welcome view.
         self.view = View.WELCOME.value
+        
+        #default cursor type.
+        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
     
     #To display the welcome view.
     def welcomeView(self, buttons) :
@@ -73,7 +75,7 @@ class Window :
         
         #Update of the text with the events list.
         text_input.update(pygame.event.get())
-
+        
         #Display the text input.
         self.screen.fill("black")
         position_x = (self.screen_width / 3)
@@ -146,11 +148,11 @@ class Window :
     def setView(self, view) :
         
         self.view = view
-        
+    
     def getDT(self) :
         
         return self.dt
-        
+    
     def setDT(self, dt) :
         
         self.dt = dt

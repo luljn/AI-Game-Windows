@@ -27,7 +27,7 @@ class Controller :
         self.window = Window()
         self.factory = Factory()
         
-        #
+        #Set on squares, to construct the game board.
         self.forms = self.factory.formFactory(self.window)
         
         #Buttons
@@ -62,7 +62,7 @@ class Controller :
         #Game loop
         while self.running :
             
-            self.clickEventHandler(self.buttons, text_manager)
+            self.eventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
@@ -94,8 +94,10 @@ class Controller :
             self.credits(self.buttons)
     
     ''' Events management. '''
-    #Click events management.
-    def clickEventHandler(self, buttons, text_manager) : 
+    #Events management.
+    def eventHandler(self, buttons, text_manager) : 
+        
+        keys = pygame.key.get_pressed()
         
         for event in pygame.event.get() :
             
@@ -105,18 +107,44 @@ class Controller :
             
             if(event.type == pygame.KEYDOWN) :
                 
+                #Add player pawns on the board.
                 self.factory.circleFactory(self.window, event, self.forms)
+                #If the key associated to the id of the pawn's square is pressed, we can move it.
+                for circle in Factory.circles :
+                    if event.key == (circle.square.id + 48) :
+                        circle.canMove = True
+                        print(circle.square.id + 48)
                 
-                if event.key == pygame.K_s :
-                    
-                    Square.canMove = True
-                
+                #If the key 's' is pressed we can move the squares which don't have a pawn.
+                for square in self.forms :
+                    if keys[pygame.K_s] and keys[square.id + 48]  :
+                        
+                        Square.canMove = True
+                        square.canMove = True
+                        print(square.id + 48)
+            
             if(event.type == pygame.KEYUP) :
                 
-                if event.key == pygame.K_s :
-                    
-                    Square.canMove = False
+                #If the key associated to the id of the pawn's square is not pressed, we can't move it.
+                for circle in Factory.circles :
+                    if event.key == circle.square.id + 48 :
+                        circle.canMove = False
+                        print(f"False - {circle.square.id + 48}")
+                    else :
+                        circle.canMove = False
+                
+                #If the key 's' is not pressed we can't move the squares which don't have a pawn.
+                for square in self.forms :
+                    if keys[pygame.K_s] and keys[square.id + 48]  :
+                        
+                        Square.canMove = False
+                        square.canMove = False
+                        print(square.id + 48)
+                    else :
+                        Square.canMove = False
+                        square.canMove = False
             
+            #Buttons click management
             for button in buttons :
                 
                 if(event.type == pygame.MOUSEBUTTONDOWN) :

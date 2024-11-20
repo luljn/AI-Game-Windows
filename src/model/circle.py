@@ -12,6 +12,7 @@ class Circle(Form) :
         self.color = color
         self.square = square
         self.radius = radius
+        self.canMove = False
         # self.radius = 30
         # self.position = position
         # self.position = pygame.Vector2(self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
@@ -36,21 +37,22 @@ class Circle(Form) :
         position_x = self.window.getScreenWidth() / 2
         position_y = self.window.getScreenHeight() / 2
         
-        if self.keys[pygame.K_UP] : 
+        if self.canMove :
+            if self.keys[pygame.K_UP] : 
+                
+                self.moveUp(position_y, square_width)
             
-            self.moveUp(position_y, square_width)
-        
-        if self.keys[pygame.K_DOWN] : 
+            if self.keys[pygame.K_DOWN] : 
+                
+                self.moveDown(position_y, square_width)
             
-            self.moveDown(position_y, square_width)
-        
-        if self.keys[pygame.K_LEFT] : 
+            if self.keys[pygame.K_LEFT] : 
+                
+                self.moveLeft(position_x, distance)
             
-            self.moveLeft(position_x, distance)
-        
-        if self.keys[pygame.K_RIGHT] : 
-            
-            self.moveRight(position_x, distance)
+            if self.keys[pygame.K_RIGHT] : 
+                
+                self.moveRight(position_x, distance)
     
     def moveUp(self, position_y, square_width) : 
         
@@ -102,7 +104,7 @@ class Circle(Form) :
                 
                 self.position.x = position_x
                 self.square.position.x = (self.window.getScreenWidth() / 2) - (self.window.getScreenWidth() / 16) / 2
-                
+            
             self.square.id -= 1
             Square.empty_square_id += 1
     
@@ -120,6 +122,6 @@ class Circle(Form) :
                 
                 self.position.x = position_x + distance
                 self.square.position.x = ((self.window.getScreenWidth() / 2) -  (self.window.getScreenWidth() / 16) / 2) + ((self.window.getScreenWidth() / 16) + 10)
-                
+            
             self.square.id += 1
             Square.empty_square_id -= 1
