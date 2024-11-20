@@ -62,7 +62,7 @@ class Controller :
         #Game loop
         while self.running :
             
-            self.clickEventHandler(self.buttons, text_manager)
+            self.eventHandler(self.buttons, text_manager)
             # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
@@ -94,8 +94,8 @@ class Controller :
             self.credits(self.buttons)
     
     ''' Events management. '''
-    #Click events management.
-    def clickEventHandler(self, buttons, text_manager) : 
+    #Events management.
+    def eventHandler(self, buttons, text_manager) : 
         
         keys = pygame.key.get_pressed()
         
