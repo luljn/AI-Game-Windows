@@ -23,6 +23,9 @@ class Controller :
         #Game loop variable
         self.running = True
         
+        #Game configurations
+        self.configs = Config.loadConfig()
+        
         #
         self.window = Window()
         self.factory = Factory()
@@ -38,11 +41,8 @@ class Controller :
         
         pygame.display.set_caption(self.window.getTitle())
         
-        #Load previous configs.
-        configs = Config.loadConfig()
-        
         #Check if the music must be enabled at the starting or not.
-        if(configs[4] == "ON") :
+        if(self.configs[4] == "ON") :
             
             Sound.getAndPlaySound(Sound.default_music)
         
@@ -227,6 +227,7 @@ class Controller :
                         # Config.saveConfigs()
                         self.forms = self.factory.formFactory(self.window)
                         self.window.setView(View.WELCOME.value)
+                        self.configs = Config.loadConfig()
                     
                     #Launch the options view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
