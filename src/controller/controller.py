@@ -94,7 +94,7 @@ class Controller :
             self.credits(self.buttons)
     
     ''' Events management. '''
-    #Events management.
+    #Events management handler.
     def eventHandler(self, buttons, text_manager) : 
         
         keys = pygame.key.get_pressed()
@@ -105,6 +105,7 @@ class Controller :
                 
                 self.quit()
             
+            #key(s) pressed
             if(event.type == pygame.KEYDOWN) :
                 
                 #Add player pawns on the board.
@@ -115,6 +116,12 @@ class Controller :
                         circle.canMove = True
                         print(circle.square.id + 48)
                 
+                #To move two pawns at the same time.
+                for circle in Factory.circles :
+                    if event.key == pygame.K_d :
+                        circle.canMove = True
+                        print(event.key)
+                
                 #If the key 's' is pressed we can move the squares which don't have a pawn.
                 for square in self.forms :
                     if keys[pygame.K_s] and keys[square.id + 48]  :
@@ -123,6 +130,7 @@ class Controller :
                         square.canMove = True
                         print(square.id + 48)
             
+            #key(s) released.
             if(event.type == pygame.KEYUP) :
                 
                 #If the key associated to the id of the pawn's square is not pressed, we can't move it.

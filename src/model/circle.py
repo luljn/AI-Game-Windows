@@ -38,6 +38,7 @@ class Circle(Form) :
         position_y = self.window.getScreenHeight() / 2
         
         if self.canMove :
+            
             if self.keys[pygame.K_UP] : 
                 
                 self.moveUp(position_y, square_width)
