@@ -158,6 +158,16 @@ class Factory :
     def circleFactory(self, window, event, squares) :
         
         self.configs = Config.loadConfig()
+        circles_id = [] # Id of players pawns.
+        circles_cpu_id = [] # Id of cpu pawns.
+        
+        for circle in Factory.circles :
+            
+            circles_id.append(circle.square.id)
+        
+        for circle_cpu in Factory.circles_cpu :
+            
+            circles_cpu_id.append(circle_cpu.square.id)
         
         # If the player has less than 3 pawns and it is turn.
         if len(Factory.circles) < 3 and self.configs[5] == "0" : 
@@ -241,9 +251,7 @@ class Factory :
         # If the cpu has less than 3 pawns and it is turn.
         if len(Factory.circles_cpu) < 3 and self.configs[5] == "1" : 
             
-            # for circle in Factory.circles :
-                
-                if position_to_put_pawn not in circles_id and position_to_put_pawn not in circles_cpu_id :
+            if position_to_put_pawn not in circles_id and position_to_put_pawn not in circles_cpu_id :
                     
                     for square in squares :
                         
@@ -309,7 +317,7 @@ class Factory :
                     
                     # After the cpu has put his pawn, the turn goes to player
                     Config.changeTurn(0)
+            
+            else : 
                 
-                else : 
-                    
-                    self.cpuCircleFactory(window, squares)
+                self.cpuCircleFactory(window, squares)
