@@ -1,4 +1,5 @@
 import pygame
+from os import system
 from pygame_textinput import TextInputVisualizer, TextInputManager
 from sys import exit
 from time import sleep
@@ -40,6 +41,7 @@ class Controller :
     #main controller method
     def run(self) :
         
+        # system("cls")
         pygame.display.set_caption(self.window.getTitle())
         
         #Check if the music must be enabled at the starting or not.
@@ -112,7 +114,8 @@ class Controller :
                 #Add player pawns on the board.
                 self.factory.circleFactory(self.window, event, self.forms)
                 #Add cpu pawns on the board.
-                self.factory.cpuCircleFactory(self.window, self.forms)
+                # self.factory.cpuCircleFactory(self.window, self.forms)
+                
                 #If the key associated to the id of the pawn's square is pressed, we can move it.
                 for circle in Factory.circles :
                     if event.key == (circle.square.id + 48) :
