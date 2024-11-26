@@ -222,19 +222,28 @@ class Factory :
             
             # After the player has put his pawn, the turn goes to cpu
             Config.changeTurn(1)
-            self.cpuCircleFactory(window, squares)
     
     def cpuCircleFactory(self, window, squares) :
         
         self.configs = Config.loadConfig()
         position_to_put_pawn = randint(0, 8)
+        circles_id = [] # Id of players pawns.
+        circles_cpu_id = [] # Id of cpu pawns.
+        
+        for circle in Factory.circles :
+            
+            circles_id.append(circle.square.id)
+        
+        for circle_cpu in Factory.circles_cpu :
+            
+            circles_cpu_id.append(circle_cpu.square.id)
         
         # If the cpu has less than 3 pawns and it is turn.
         if len(Factory.circles_cpu) < 3 and self.configs[5] == "1" : 
             
-            for circle in Factory.circles :
+            # for circle in Factory.circles :
                 
-                if position_to_put_pawn != circle.square.id :
+                if position_to_put_pawn not in circles_id and position_to_put_pawn not in circles_cpu_id :
                     
                     for square in squares :
                         
@@ -304,7 +313,3 @@ class Factory :
                 else : 
                     
                     self.cpuCircleFactory(window, squares)
-        
-        # elif len(Factory.circles_cpu) == len(Factory.circles) :
-            
-        #     pass

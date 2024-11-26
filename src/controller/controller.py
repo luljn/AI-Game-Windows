@@ -114,7 +114,7 @@ class Controller :
                 #Add player pawns on the board.
                 self.factory.circleFactory(self.window, event, self.forms)
                 #Add cpu pawns on the board.
-                # self.factory.cpuCircleFactory(self.window, self.forms)
+                self.factory.cpuCircleFactory(self.window, self.forms)
                 
                 #If the key associated to the id of the pawn's square is pressed, we can move it.
                 for circle in Factory.circles :
