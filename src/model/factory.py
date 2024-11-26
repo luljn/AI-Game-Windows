@@ -174,64 +174,72 @@ class Factory :
             
             for square in squares :
                 
-                if event.key == pygame.K_0 and square.getId() == 0 :
+                if event.key == pygame.K_0 and square.getId() == 0 and 0 not in circles_id and 0 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[1], square)
                     print(f"0 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_1 and square.getId() == 1 :
+                elif event.key == pygame.K_1 and square.getId() == 1 and 1 not in circles_id and 1 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[1], square)
                     print(f"1 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_2 and square.getId() == 2 :
+                elif event.key == pygame.K_2 and square.getId() == 2 and 2 not in circles_id and 2 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[1], square)
                     print(f"2 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_3 and square.getId() == 3 :
+                elif event.key == pygame.K_3 and square.getId() == 3 and 3 not in circles_id and 3 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), self.configs[1], square)
                     print(f"3 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_5 and square.getId() == 5 :
+                elif event.key == pygame.K_5 and square.getId() == 5 and 5 not in circles_id and 5 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2)), self.configs[1], square)
                     print(f"5 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_6 and square.getId() == 6 :
+                elif event.key == pygame.K_6 and square.getId() == 6 and 6 not in circles_id and 6 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[1], square)
                     print(f"6 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_7 and square.getId() == 7 :
+                elif event.key == pygame.K_7 and square.getId() == 7 and 7 not in circles_id and 7 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[1], square)
                     print(f"7 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
                 
-                elif event.key == pygame.K_8 and square.getId() == 8 :
+                elif event.key == pygame.K_8 and square.getId() == 8 and 8 not in circles_id and 8 not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[1], square)
                     print(f"8 - PAWN {self.configs[1]}")
                     Factory.circles.append(circle)
+                    Config.changeTurn(1)
                     break
-            
-            # After the player has put his pawn, the turn goes to cpu
-            Config.changeTurn(1)
+                
+                # After the player has put his pawn, the turn goes to cpu
+                # Config.changeTurn(1)
     
     def cpuCircleFactory(self, window, squares) :
         

@@ -41,7 +41,7 @@ class Controller :
     #main controller method
     def run(self) :
         
-        # system("cls")
+        system("cls")
         pygame.display.set_caption(self.window.getTitle())
         
         #Check if the music must be enabled at the starting or not.
