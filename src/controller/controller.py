@@ -171,6 +171,7 @@ class Controller :
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RESTART.value) :
                         
                         Factory.circles = []
+                        Factory.circles_cpu = []
                         self.window.setView(View.GAME.value)
                     
                     #Launch the options view.
