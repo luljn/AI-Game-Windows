@@ -1,6 +1,7 @@
 import pygame
 from pygame_textinput import TextInputVisualizer, TextInputManager
 from sys import exit
+from time import sleep
 
 from model.buttonAction import ButtonAction
 from model.factory import *
@@ -110,6 +111,8 @@ class Controller :
                 
                 #Add player pawns on the board.
                 self.factory.circleFactory(self.window, event, self.forms)
+                #Add cpu pawns on the board.
+                self.factory.cpuCircleFactory(self.window, self.forms)
                 #If the key associated to the id of the pawn's square is pressed, we can move it.
                 for circle in Factory.circles :
                     if event.key == (circle.square.id + 48) :
@@ -264,6 +267,13 @@ class Controller :
         
         for circle in Factory.circles :
             
+            circle.drawSprite()
+            circle.move()
+        
+        for circle in Factory.circles_cpu :
+            
+            # To make the cpu waits before playing.
+            # sleep(3)
             circle.drawSprite()
             circle.move()
         

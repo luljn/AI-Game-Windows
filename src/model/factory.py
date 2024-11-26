@@ -225,3 +225,16 @@ class Factory :
     def cpuCircleFactory(self, window, squares) :
         
         self.configs = Config.loadConfig()
+        
+        # If the cpu has less than 3 pawns and it is turn.
+        if len(Factory.circles_cpu) < 3 and self.configs[5] == "1" : 
+            
+            for square in squares :
+                
+                circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[2], square)
+                print(f"8 - PAWN {self.configs[2]}")
+                Factory.circles_cpu.append(circle)
+                break
+            
+            # After the cpu has put his pawn, the turn goes to player
+            Config.changeTurn(0)
