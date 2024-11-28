@@ -7,7 +7,7 @@ class CheckWinner :
         
         if len(player_pawns) == 3 and len(cpu_pawns) == 3 :
             
-            """ Player """
+            # Player
             # Horizontally
             if player_pawns[0].square.id == 0 and player_pawns[1].square.id == 1 and player_pawns[2].square.id == 2 :
                 
@@ -43,7 +43,7 @@ class CheckWinner :
                 
                 return "player"
             
-            """ CPU """
+            # CPU
             # Horizontally
             if cpu_pawns[0].square.id == 0 and cpu_pawns[1].square.id == 1 and cpu_pawns[2].square.id == 2 :
                 
