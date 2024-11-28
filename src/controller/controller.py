@@ -4,6 +4,8 @@ from pygame_textinput import TextInputVisualizer, TextInputManager
 from sys import exit
 from time import sleep
 
+from controller.checkWinner import *
+
 from model.buttonAction import ButtonAction
 from model.factory import *
 from model.config import Config
@@ -281,8 +283,11 @@ class Controller :
             circle.drawSprite()
             circle.move()
         
-        # self.window.displayTextOnTheView(f"{self.configs[0]} a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
-        # self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
+        winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)
+        if winner == "player" :
+            self.window.displayTextOnTheView(f"{self.configs[0]} a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+        elif winner == "cpu" :
+            self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
         
         pygame.display.flip()
     
