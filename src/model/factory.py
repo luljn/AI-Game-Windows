@@ -238,6 +238,12 @@ class Factory :
                     Config.changeTurn(1)
                     break
                 
+                # To prevent the player to put two pawns on the same squares.
+                elif (event.key - 48) in circles_id and (event.key - 48) in circles_cpu_id :
+                    
+                    pass
+                    break
+                
                 # After the player has put his pawn, the turn goes to cpu
                 # Config.changeTurn(1)
     
