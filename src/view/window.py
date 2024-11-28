@@ -61,7 +61,7 @@ class Window :
         
         elif(configs[3] == "2") :
             
-            self.displayTitleOfTheView("CPU vs CPU")
+            self.displayTitleOfTheView("CPU_1 vs CPU_2")
         
         self.dt = self.clock.tick(60) / 1000
         self.mouse_position = pygame.mouse.get_pos()

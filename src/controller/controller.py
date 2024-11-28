@@ -187,14 +187,14 @@ class Controller :
                         
                         Config.changeColor("GREEN")
                         Config.changeCpuColor("RED")
-                        Config.changeTurn(0)
+                        # Config.changeTurn(0)
                     
                     #Change the color of the user's pawns to red.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RED.value) :
                         
                         Config.changeColor("RED")
                         Config.changeCpuColor("GREEN")
-                        Config.changeTurn(1)
+                        # Config.changeTurn(1)
                     
                     #Change the mode of the game to : PLAYER vs CPU.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAYER_VS_CPU.value) :
@@ -280,6 +280,9 @@ class Controller :
             # sleep(3)
             circle.drawSprite()
             circle.move()
+        
+        # self.window.displayTextOnTheView(f"{self.configs[0]} a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+        # self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
         
         pygame.display.flip()
     
