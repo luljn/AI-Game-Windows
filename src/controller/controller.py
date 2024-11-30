@@ -283,6 +283,7 @@ class Controller :
             circle.drawSprite()
             circle.move()
         
+        # Check the winner of the game.
         winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)
         if winner == "player" :
             self.window.displayTextOnTheView(f"{self.configs[0]} a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))

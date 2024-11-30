@@ -1,4 +1,5 @@
 # check winner controller.
+import numpy as np
 
 class CheckWinner :
     
@@ -7,9 +8,21 @@ class CheckWinner :
         
         if len(player_pawns) == 3 and len(cpu_pawns) == 3 :
             
+            circles_id = [] # Id of players pawns.
+            circles_cpu_id = [] # Id of cpu pawns.
+            
+            for circle in player_pawns :
+                
+                circles_id.append(circle.square.id)
+            
+            for circle_cpu in cpu_pawns :
+            
+                circles_cpu_id.append(circle_cpu.square.id)
+            
             # Player
             # Horizontally
-            if player_pawns[0].square.id == 0 and player_pawns[1].square.id == 1 and player_pawns[2].square.id == 2 :
+            if (np.array_equal(circles_id, [0, 1, 2]) or np.array_equal(circles_id, [0, 2, 1]) or np.array_equal(circles_id, [1, 0, 2]) 
+                or np.array_equal(circles_id, [1, 2, 0]) or np.array_equal(circles_id, [2, 0, 1]) or np.array_equal(circles_id, [2, 1, 0])):
                 
                 return "player"
             
