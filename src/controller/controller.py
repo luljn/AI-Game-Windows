@@ -117,6 +117,8 @@ class Controller :
                 self.factory.circleFactory(self.window, event, self.forms)
                 # Add cpu pawns on the board.
                 self.factory.cpuCircleFactory(self.window, self.forms)
+                #
+                self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
                 
                 # If the key associated to the id of the pawn's square is pressed, we can move it.
                 for circle in Factory.circles :
@@ -125,6 +127,14 @@ class Controller :
                         
                         circle.canMove = True
                         print(circle.square.id + 48)
+                
+                # move squares without pawns.
+                # for circle in Factory.squares_without_circle :
+                    
+                #     if event.key == (circle.square.id + 48) :
+                        
+                #         circle.canMove = True
+                #         print(circle.square.id + 48)
                 
                 # To move two pawns at the same time.
                 for circle in Factory.circles :
@@ -157,6 +167,18 @@ class Controller :
                     else :
                         
                         circle.canMove = False
+                
+                # can't move squares without pawns.
+                # for circle in Factory.squares_without_circle :
+                    
+                #     if event.key == circle.square.id + 48 :
+                        
+                #         circle.canMove = False
+                #         print(f"False - {circle.square.id + 48}")
+                    
+                #     else :
+                        
+                #         circle.canMove = False
                 
                 # If the key 's' is not pressed we can't move the squares which don't have a pawn.
                 for square in self.forms :
@@ -300,6 +322,11 @@ class Controller :
             for circle in Factory.circles_cpu :
                 
                 circle.drawSprite()
+                circle.move()
+            
+            for circle in Factory.squares_without_circle :
+                
+                # circle.drawSprite()
                 circle.move()
             
             # Check the winner of the game.

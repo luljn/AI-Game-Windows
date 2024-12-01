@@ -18,6 +18,7 @@ class Factory :
     #list of circles on the gameBoard.
     circles = []
     circles_cpu = []
+    squares_without_circle = []
     
     def __init__(self):
         
@@ -335,3 +336,25 @@ class Factory :
             else : 
                 
                 self.cpuCircleFactory(window, squares)
+    
+    def transparentCircles(self, player_pawns, cpu_pawns, squares, window) :
+        
+        circles_id = [] # Id of players pawns.
+        circles_cpu_id = [] # Id of cpu pawns.
+        
+        if (len(player_pawns) == 3 and len(cpu_pawns) == 3) :
+            
+            for circle in player_pawns :
+                
+                circles_id.append(circle.square.id)
+            
+            for circle_cpu in cpu_pawns :
+                
+                circles_cpu_id.append(circle_cpu.square.id)
+        
+            for square in squares : 
+                
+                if square.id not in circles_id and square.id not in circles_cpu_id :
+                    
+                    circle = Circle(window, pygame.Vector2(0,0), square.color, square)
+                    Factory.squares_without_circle.append(circle)
