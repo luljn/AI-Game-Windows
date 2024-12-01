@@ -16,7 +16,7 @@ class CheckWinner :
                 circles_id.append(circle.square.id)
             
             for circle_cpu in cpu_pawns :
-            
+                
                 circles_cpu_id.append(circle_cpu.square.id)
             
             # Player
@@ -26,69 +26,84 @@ class CheckWinner :
                 
                 return "player"
             
-            elif player_pawns[0].square.id == 3 and player_pawns[1].square.id == 4 and player_pawns[2].square.id == 5 :
+            elif (np.array_equal(circles_id, [3, 4, 5]) or np.array_equal(circles_id, [3, 5, 4]) or np.array_equal(circles_id, [4, 3, 5]) 
+                or np.array_equal(circles_id, [4, 5, 3]) or np.array_equal(circles_id, [5, 3, 4]) or np.array_equal(circles_id, [5, 4, 3])):
                 
                 return "player"
             
-            elif player_pawns[0].square.id == 6 and player_pawns[1].square.id == 7 and player_pawns[2].square.id == 8 :
+            elif (np.array_equal(circles_id, [6, 7, 8]) or np.array_equal(circles_id, [6, 8, 7]) or np.array_equal(circles_id, [7, 6, 8]) 
+                or np.array_equal(circles_id, [7, 8, 6]) or np.array_equal(circles_id, [8, 6, 7]) or np.array_equal(circles_id, [8, 7, 6])):
                 
                 return "player"
             
             # Vertically
-            elif player_pawns[0].square.id == 0 and player_pawns[1].square.id == 3 and player_pawns[2].square.id == 6 :
+            elif (np.array_equal(circles_id, [0, 3, 6]) or np.array_equal(circles_id, [0, 6, 3]) or np.array_equal(circles_id, [3, 0, 6]) 
+                or np.array_equal(circles_id, [3, 6, 0]) or np.array_equal(circles_id, [6, 0, 3]) or np.array_equal(circles_id, [6, 3, 0])):
                 
                 return "player"
             
-            elif player_pawns[0].square.id == 1 and player_pawns[1].square.id == 4 and player_pawns[2].square.id == 7 :
+            elif (np.array_equal(circles_id, [1, 4, 7]) or np.array_equal(circles_id, [1, 7, 4]) or np.array_equal(circles_id, [4, 1, 7]) 
+                or np.array_equal(circles_id, [4, 7, 1]) or np.array_equal(circles_id, [7, 1, 4]) or np.array_equal(circles_id, [7, 4, 1])):
                 
                 return "player"
             
-            elif player_pawns[0].square.id == 2 and player_pawns[1].square.id == 5 and player_pawns[2].square.id == 8 :
+            elif (np.array_equal(circles_id, [2, 5, 8]) or np.array_equal(circles_id, [2, 8, 5]) or np.array_equal(circles_id, [5, 2, 8]) 
+                or np.array_equal(circles_id, [5, 8, 2]) or np.array_equal(circles_id, [8, 2, 5]) or np.array_equal(circles_id, [8, 5, 2])):
                 
                 return "player"
             
             # Diagonally
-            elif player_pawns[0].square.id == 0 and player_pawns[1].square.id == 4 and player_pawns[2].square.id == 8 :
+            elif (np.array_equal(circles_id, [0, 4, 8]) or np.array_equal(circles_id, [0, 8, 4]) or np.array_equal(circles_id, [4, 0, 8]) 
+                or np.array_equal(circles_id, [4, 8, 0]) or np.array_equal(circles_id, [8, 0, 4]) or np.array_equal(circles_id, [8, 4, 0])):
                 
                 return "player"
             
-            elif player_pawns[0].square.id == 2 and player_pawns[1].square.id == 4 and player_pawns[2].square.id == 6 :
+            elif (np.array_equal(circles_id, [2, 4, 6]) or np.array_equal(circles_id, [2, 6, 4]) or np.array_equal(circles_id, [4, 2, 6]) 
+                or np.array_equal(circles_id, [4, 6, 2]) or np.array_equal(circles_id, [6, 2, 4]) or np.array_equal(circles_id, [6, 4, 2])):
                 
                 return "player"
             
             # CPU
             # Horizontally
-            if cpu_pawns[0].square.id == 0 and cpu_pawns[1].square.id == 1 and cpu_pawns[2].square.id == 2 :
+            if (np.array_equal(circles_cpu_id, [0, 1, 2]) or np.array_equal(circles_cpu_id, [0, 2, 1]) or np.array_equal(circles_cpu_id, [1, 0, 2]) 
+                or np.array_equal(circles_cpu_id, [1, 2, 0]) or np.array_equal(circles_cpu_id, [2, 0, 1]) or np.array_equal(circles_cpu_id, [2, 1, 0])):
                 
                 return "cpu"
             
-            elif cpu_pawns[0].square.id == 3 and cpu_pawns[1].square.id == 4 and cpu_pawns[2].square.id == 5 :
+            elif (np.array_equal(circles_cpu_id, [3, 4, 5]) or np.array_equal(circles_cpu_id, [3, 5, 4]) or np.array_equal(circles_cpu_id, [4, 3, 5]) 
+                or np.array_equal(circles_cpu_id, [4, 5, 3]) or np.array_equal(circles_cpu_id, [5, 3, 4]) or np.array_equal(circles_cpu_id, [5, 4, 3])):
                 
                 return "cpu"
             
-            elif cpu_pawns[0].square.id == 6 and cpu_pawns[1].square.id == 7 and cpu_pawns[2].square.id == 8 :
+            elif (np.array_equal(circles_cpu_id, [6, 7, 8]) or np.array_equal(circles_cpu_id, [6, 8, 7]) or np.array_equal(circles_cpu_id, [7, 6, 8]) 
+                or np.array_equal(circles_cpu_id, [7, 8, 6]) or np.array_equal(circles_cpu_id, [8, 6, 7]) or np.array_equal(circles_cpu_id, [8, 7, 6])):
                 
                 return "cpu"
             
             # Vertically
-            elif cpu_pawns[0].square.id == 0 and cpu_pawns[1].square.id == 3 and cpu_pawns[2].square.id == 6 :
+            elif (np.array_equal(circles_cpu_id, [0, 3, 6]) or np.array_equal(circles_cpu_id, [0, 6, 3]) or np.array_equal(circles_cpu_id, [3, 0, 6]) 
+                or np.array_equal(circles_cpu_id, [3, 6, 0]) or np.array_equal(circles_cpu_id, [6, 0, 3]) or np.array_equal(circles_cpu_id, [6, 3, 0])):
                 
                 return "cpu"
             
-            elif cpu_pawns[0].square.id == 1 and cpu_pawns[1].square.id == 4 and cpu_pawns[2].square.id == 7 :
+            elif (np.array_equal(circles_cpu_id, [1, 4, 7]) or np.array_equal(circles_cpu_id, [1, 7, 4]) or np.array_equal(circles_cpu_id, [4, 1, 7]) 
+                or np.array_equal(circles_cpu_id, [4, 7, 1]) or np.array_equal(circles_cpu_id, [7, 1, 4]) or np.array_equal(circles_cpu_id, [7, 4, 1])):
                 
                 return "cpu"
             
-            elif cpu_pawns[0].square.id == 2 and cpu_pawns[1].square.id == 5 and cpu_pawns[2].square.id == 8 :
+            elif (np.array_equal(circles_cpu_id, [2, 5, 8]) or np.array_equal(circles_cpu_id, [2, 8, 5]) or np.array_equal(circles_cpu_id, [5, 2, 8]) 
+                or np.array_equal(circles_cpu_id, [5, 8, 2]) or np.array_equal(circles_cpu_id, [8, 2, 5]) or np.array_equal(circles_cpu_id, [8, 5, 2])):
                 
                 return "cpu"
             
             # Diagonally
-            elif cpu_pawns[0].square.id == 0 and cpu_pawns[1].square.id == 4 and cpu_pawns[2].square.id == 8 :
+            elif (np.array_equal(circles_cpu_id, [0, 4, 8]) or np.array_equal(circles_cpu_id, [0, 8, 4]) or np.array_equal(circles_cpu_id, [4, 0, 8]) 
+                or np.array_equal(circles_cpu_id, [4, 8, 0]) or np.array_equal(circles_cpu_id, [8, 0, 4]) or np.array_equal(circles_cpu_id, [8, 4, 0])):
                 
                 return "cpu"
             
-            elif cpu_pawns[0].square.id == 2 and cpu_pawns[1].square.id == 4 and cpu_pawns[2].square.id == 6 :
+            elif (np.array_equal(circles_cpu_id, [2, 4, 6]) or np.array_equal(circles_cpu_id, [2, 6, 4]) or np.array_equal(circles_cpu_id, [4, 2, 6]) 
+                or np.array_equal(circles_cpu_id, [4, 6, 2]) or np.array_equal(circles_cpu_id, [6, 2, 4]) or np.array_equal(circles_cpu_id, [6, 4, 2])):
                 
                 return "cpu"
     
