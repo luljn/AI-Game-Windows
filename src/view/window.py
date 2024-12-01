@@ -1,3 +1,4 @@
+# View management.
 import pygame
 
 from model.config import Config

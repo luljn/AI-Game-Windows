@@ -1,4 +1,4 @@
-#Sound management
+# Sound management class.
 import pygame
 
 

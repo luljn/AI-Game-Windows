@@ -1,4 +1,4 @@
-#Font management class
+# Font management class.
 import pygame
 
 

@@ -1,4 +1,4 @@
-#Base class of shapes used in the game.
+# Base class of shapes used in the game.
 
 
 

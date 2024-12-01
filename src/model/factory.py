@@ -1,4 +1,4 @@
-#The factory of the programm
+# The factory of the program.
 import pygame
 from random import randint
 

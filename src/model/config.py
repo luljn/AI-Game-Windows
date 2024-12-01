@@ -1,4 +1,4 @@
-#Configurations management class.
+# Configurations management class.
 
 
 

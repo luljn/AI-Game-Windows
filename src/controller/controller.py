@@ -1,4 +1,4 @@
-# Main Controller
+# Main Controller.
 import pygame
 from os import system
 from pygame_textinput import TextInputVisualizer, TextInputManager

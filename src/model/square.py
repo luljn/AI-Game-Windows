@@ -1,4 +1,6 @@
+# Class for square pawns management.
 import pygame
+
 from model.form import Form
 
 

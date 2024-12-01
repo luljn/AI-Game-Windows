@@ -1,4 +1,4 @@
-# Class Button management
+# Class Button management.
 
 
 
