@@ -1,6 +1,6 @@
 # Description
 
-A two-player game powered by Artificial Initelligence (for Windows OS).
+A two-player game (Force 3) powered by Artificial Initelligence (for Windows OS).
 
 # Tools used.
 
