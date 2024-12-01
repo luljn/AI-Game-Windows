@@ -139,7 +139,7 @@ class Controller :
                     
                     if keys[pygame.K_s] and keys[square.id + 48]  :
                         
-                        Square.canMove = True
+                        # Square.canMove = True
                         square.canMove = True
                         print(square.id + 48)
             
@@ -163,13 +163,13 @@ class Controller :
                     
                     if keys[pygame.K_s] and keys[square.id + 48]  :
                         
-                        Square.canMove = False
+                        # Square.canMove = False
                         square.canMove = False
                         print(square.id + 48)
                     
                     else :
                         
-                        Square.canMove = False
+                        # Square.canMove = False
                         square.canMove = False
             
             # Buttons click management
@@ -285,10 +285,11 @@ class Controller :
             for form in forms :
                 
                 form.drawSprite()
+                form.move()
                 
-                if Square.canMove :
+                # if Square.canMove :
                     
-                    form.move()
+                #     form.move()
             
             # Put pawns on the board.
             for circle in Factory.circles :

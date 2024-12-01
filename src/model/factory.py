@@ -121,7 +121,7 @@ class Factory :
                 square_id = 2
                 square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
         
-        #Position of the 7th square(the central square of the 1st line) => square id 1.
+        #Position of the 7th square(the central square of the 1st line) => square id 7.
         square_id = 7
         square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
         square_position_y = ((window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2) + ((window.getScreenHeight() / 10) + 10)
