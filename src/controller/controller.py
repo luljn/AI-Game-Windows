@@ -143,6 +143,13 @@ class Controller :
                         
                         circle.canMove = True
                         print(event.key)
+                #
+                for circle in Factory.squares_without_circle :
+                    
+                    if event.key == pygame.K_d :
+                        
+                        circle.canMove = True
+                        print(event.key)
                 
                 # If the key 's' is pressed we can move the squares which don't have a pawn.
                 for square in self.forms :
