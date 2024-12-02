@@ -128,3 +128,12 @@ class Circle(Form) :
             
             self.square.id += 1
             Square.empty_square_id -= 1
+    
+    def changeSquare(self, squares, new_square_id) :
+        
+        for pawn in squares : 
+            
+            if self.square.id == pawn.square.id and new_square_id == pawn.square.id :
+                
+                self.square = pawn.square
+                squares.remove(pawn)
