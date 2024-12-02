@@ -6,6 +6,10 @@ class CheckWinner :
     @staticmethod
     def checkPlayerVsAiWinner(player_pawns, cpu_pawns) :
         
+        # Extract first three elements.
+        player_pawns = player_pawns[:3]
+        cpu_pawns = cpu_pawns[:3]
+        
         if len(player_pawns) == 3 and len(cpu_pawns) == 3 :
             
             circles_id = [] # Id of players pawns.

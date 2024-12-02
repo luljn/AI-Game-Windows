@@ -324,10 +324,10 @@ class Controller :
                 circle.drawSprite()
                 circle.move()
             
-            for circle in Factory.squares_without_circle :
+            # for circle in Factory.squares_without_circle :
                 
-                # circle.drawSprite()
-                circle.move()
+            #     # circle.drawSprite()
+            #     circle.move()
             
             # Check the winner of the game.
             winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)

@@ -357,4 +357,4 @@ class Factory :
                 if square.id not in circles_id and square.id not in circles_cpu_id :
                     
                     circle = Circle(window, pygame.Vector2(0,0), square.color, square)
-                    Factory.squares_without_circle.append(circle)
+                    Factory.circles.append(circle)
