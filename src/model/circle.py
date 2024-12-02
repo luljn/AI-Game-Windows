@@ -137,3 +137,5 @@ class Circle(Form) :
                 
                 self.square = pawn.square
                 squares.remove(pawn)
+                self.position.x = self.square.position.x + (self.square.getWidth() / 2)
+                self.position.y = self.square.position.y + (self.square.getHeigth() / 2)
