@@ -1,4 +1,6 @@
+# Class for circle pawns management.
 import pygame
+
 from model.form import Form
 from model.square import Square
 
@@ -38,6 +40,7 @@ class Circle(Form) :
         position_y = self.window.getScreenHeight() / 2
         
         if self.canMove :
+            
             if self.keys[pygame.K_UP] : 
                 
                 self.moveUp(position_y, square_width)

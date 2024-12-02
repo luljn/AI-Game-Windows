@@ -1,4 +1,4 @@
-#Configurations management class.
+# Configurations management class.
 
 
 
@@ -56,6 +56,11 @@ class Config :
     def stopOrEnableMusic(action) : 
         
         Config.changeConfiguration("MUSIC", 4, action)
+    
+    @staticmethod
+    def changeTurn(turn) :
+        
+        Config.changeConfiguration("TURN", 5, turn)
     
     @staticmethod
     def changeConfiguration(config, line_number, new_config) : 

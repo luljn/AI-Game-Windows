@@ -1,13 +1,15 @@
+# Class for square pawns management.
 import pygame
+
 from model.form import Form
 
 
 
 class Square(Form) :
     
-    #Empty square (the central at the beginning of the game).
+    # Empty square (the central at the beginning of the game).
     empty_square_id = 4
-    canMove = False
+    # canMove = False
     
     def __init__(self, id, window, width, height, position, color = "Blue") :
         
@@ -67,10 +69,12 @@ class Square(Form) :
             if self.keys[pygame.K_RIGHT] : 
                 
                 self.moveRight()
+            
+            pygame.display.update()
     
     def moveUp(self) : 
         
-        #If the square is not on the first line, we can move up.
+        # If the square is not on the first line, we can move up.
         if (self.id != 0 and self.id != 1 and self.id != 2 
             and Square.empty_square_id == self.id - 3) :
             
@@ -86,7 +90,7 @@ class Square(Form) :
     
     def moveDown(self) : 
         
-        #If the square is not on the 3rd line, we can move down.
+        # If the square is not on the 3rd line, we can move down.
         if (self.id != 6 and self.id != 7 and self.id != 8 
             and Square.empty_square_id == self.id + 3) :
             
@@ -102,7 +106,7 @@ class Square(Form) :
     
     def moveLeft(self) :
         
-        #If the square is not on the 1st column, we can move left.
+        # If the square is not on the 1st column, we can move left.
         if (self.id != 0 and self.id != 3 and self.id != 6 
             and Square.empty_square_id == self.id - 1) :
             
@@ -118,7 +122,7 @@ class Square(Form) :
     
     def moveRight(self) :
         
-        #If the square is not on the 3rd column, we can move right.
+        # If the square is not on the 3rd column, we can move right.
         if (self.id != 2 and self.id != 5 and self.id != 8 
             and Square.empty_square_id == self.id + 1) :
             
