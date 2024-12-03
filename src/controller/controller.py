@@ -152,21 +152,24 @@ class Controller :
                         print(event.key)
                 
                 # If the key 's' is pressed we can move the squares which don't have a pawn.
-                for square in self.forms :
+                # for square in self.forms :
                     
-                    if keys[pygame.K_s] and keys[square.id + 48]  :
+                #     if keys[pygame.K_s] and keys[square.id + 48]  :
                         
-                        # Square.canMove = True
-                        square.canMove = True
-                        print(square.id + 48)
+                #         # Square.canMove = True
+                #         square.canMove = True
+                #         print(square.id + 48)
                 
                 # If the key 'm' is pressed we can move a pawn to an another square.
                 for circle in Factory.circles :
                     
-                    if keys[pygame.K_m] and keys[circle.square.id + 48]  :
+                    if keys[pygame.K_m] and keys[circle.square.id + 48] and keys[pygame.K_0] : 
                         
-                        circle.changeSquare(Factory.squares_without_circle, event.key - 48)
+                        print(keys[pygame.K_m])
+                        circle.changeSquare(Factory.squares_without_circle, 0)
+                        # print(f"{circle.square.id}, {pygame.K_0}")
                         self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                        pygame.display.flip()
             
             # key(s) released.
             if(event.type == pygame.KEYUP) :
@@ -196,18 +199,18 @@ class Controller :
                         circle.canMove = False
                 
                 # If the key 's' is not pressed we can't move the squares which don't have a pawn.
-                for square in self.forms :
+                # for square in self.forms :
                     
-                    if keys[pygame.K_s] and keys[square.id + 48]  :
+                #     if keys[pygame.K_s] and keys[square.id + 48]  :
                         
-                        # Square.canMove = False
-                        square.canMove = False
-                        print(square.id + 48)
+                #         # Square.canMove = False
+                #         square.canMove = False
+                #         print(square.id + 48)
                     
-                    else :
+                #     else :
                         
-                        # Square.canMove = False
-                        square.canMove = False
+                #         # Square.canMove = False
+                #         square.canMove = False
             
             # Buttons click management
             for button in buttons :

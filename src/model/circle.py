@@ -133,9 +133,9 @@ class Circle(Form) :
         
         for pawn in squares : 
             
-            if self.square.id == pawn.square.id and new_square_id == pawn.square.id :
+            if pawn.square.id == new_square_id  :
                 
                 self.square = pawn.square
+                self.position.x = pawn.square.position.x + (self.square.getWidth() / 2)
+                self.position.y = pawn.square.position.y + (self.square.getHeigth() / 2)
                 squares.remove(pawn)
-                self.position.x = self.square.position.x + (self.square.getWidth() / 2)
-                self.position.y = self.square.position.y + (self.square.getHeigth() / 2)
