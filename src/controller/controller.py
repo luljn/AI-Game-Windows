@@ -162,11 +162,10 @@ class Controller :
                 # If the key 'm' is pressed we can move a pawn to an another square.
                 for circle in Factory.circles :
                     
-                    if keys[pygame.K_m] and keys[circle.square.id + 48]  :
+                    if keys_1[pygame.K_m] and keys_1[circle.square.id + 48]  :
                         
                         circle.changeSquare(Factory.squares_without_circle, event.key - 48)
                         self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
-                        pygame.display.flip()
             
             # key(s) released.
             if(event.type == pygame.KEYUP) :

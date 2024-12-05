@@ -341,6 +341,7 @@ class Factory :
         
         circles_id = [] # Id of players pawns.
         circles_cpu_id = [] # Id of cpu pawns.
+        squares_without_circles_id = [] # Id of squares without pawns.
         
         if (len(player_pawns) == 3 and len(cpu_pawns) == 3) :
             
@@ -351,10 +352,17 @@ class Factory :
             for circle_cpu in cpu_pawns :
                 
                 circles_cpu_id.append(circle_cpu.square.id)
+            
+            if len(Factory.squares_without_circle) != 0 :
+                
+                for circle in Factory.squares_without_circle :
+                    
+                    squares_without_circles_id.append(circle.square.id)
         
             for square in squares : 
                 
-                if square.id not in circles_id and square.id not in circles_cpu_id and square.id != Square.empty_square_id :
+                if (square.id not in circles_id and square.id not in circles_cpu_id 
+                    and square.id not in squares_without_circles_id and square.id != Square.empty_square_id) :
                     
                     circle = Circle(window, pygame.Vector2(0,0), "Black", square)
                     Factory.squares_without_circle.append(circle)
