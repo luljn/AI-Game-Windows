@@ -15,7 +15,7 @@ from view.view import View
 
 class Factory :
     
-    #list of circles on the gameBoard.
+    # List of circles on the gameBoard.
     circles = []
     circles_cpu = []
     squares_without_circle = []
@@ -45,7 +45,7 @@ class Factory :
         restart_game_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 4.75, credits_button.position_y + 230), ButtonAction.RESTART.value, font, "White", "Blue")
         back_button = Button(pygame.image.load(rect_img_path), (window.getScreenWidth() / 1.25, credits_button.position_y + 230), ButtonAction.BACK.value, font, "White", "Blue")
         
-        #Return a specific list of buttons, depending on the view we want to display. 
+        # Return a specific list of buttons, depending on the view we want to display. 
         if view == View.WELCOME.value :
             
             buttons = [start_game_button, options_button, credits_button, quit_button]
@@ -72,12 +72,12 @@ class Factory :
         square_width = window.getScreenWidth() / 16
         square_height = window.getScreenHeight() / 10
         
-        #Position of the 1st square(the central square) => square id 4.
+        # Position of the 1st square(the central square) => square id 4.
         square_id = Square.empty_square_id
         square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
         square_position_y = (window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2
         
-        #Construction of the middle(2nd) line square.
+        # Construction of the middle(2nd) line square.
         for i in range(3) : 
             
             square = Square(square_id, window, square_width, square_height,
@@ -97,12 +97,12 @@ class Factory :
                 square_id = 5
                 square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
         
-        #Position of the 4th square(the central square of the 1st line) => square id 1.
+        # Position of the 4th square(the central square of the 1st line) => square id 1.
         square_id = 1
         square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
         square_position_y = ((window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2) - ((window.getScreenHeight() / 10) + 10)
         
-        #Construction of the 1st line square.
+        # Construction of the 1st line square.
         for i in range(3) : 
             
             square = Square(square_id, window, square_width, square_height,
@@ -122,12 +122,12 @@ class Factory :
                 square_id = 2
                 square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
         
-        #Position of the 7th square(the central square of the 1st line) => square id 7.
+        # Position of the 7th square(the central square of the 1st line) => square id 7.
         square_id = 7
         square_position_x = (window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2
         square_position_y = ((window.getScreenHeight() / 2) - (window.getScreenHeight() / 10) /2) + ((window.getScreenHeight() / 10) + 10)
         
-        #Construction of the 3rd line square.
+        # Construction of the 3rd line square.
         for i in range(3) : 
             
             square = Square(square_id, window, square_width, square_height,
@@ -147,7 +147,7 @@ class Factory :
                 square_id = 8
                 square_position_x = ((window.getScreenWidth() / 2) -  (window.getScreenWidth() / 16) / 2) + ((window.getScreenWidth() / 16) + 10)
         
-        #Set the right color to the central square(the empty one at the beginning of the game).
+        # Set the right color to the central square(the empty one at the beginning of the game).
         for element in forms :
             
             if element.__class__ == Square and element.getId() == Square.empty_square_id :

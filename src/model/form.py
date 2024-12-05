@@ -9,7 +9,7 @@ class Form :
         self.window = window
         self.position = position
         
-        #Keyboard keys
+        # Keyboard keys
         self.keys = 0
     
     def move(self) :

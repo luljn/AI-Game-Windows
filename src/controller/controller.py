@@ -51,8 +51,6 @@ class Controller :
             
             Sound.getAndPlaySound(Sound.default_music)
         
-        # forms = self.factory.formFactory(self.window, configs)
-        
         """Text input management"""
         # Creation of the manager and the visualizer of the text input.
         text_manager = TextInputManager()  # manage the text input.
@@ -302,11 +300,6 @@ class Controller :
                         
                         self.quit()
     
-    #Keys event management.
-    def KeyEventHandler(self) : 
-        
-        pass
-    
     def welcome(self, buttons) :
         
         self.window.welcomeView(buttons)
@@ -325,10 +318,6 @@ class Controller :
                 
                 form.drawSprite()
                 form.move()
-                
-                # if Square.canMove :
-                    
-                #     form.move()
             
             # Put pawns on the board.
             for circle in Factory.circles :
@@ -343,7 +332,6 @@ class Controller :
             
             for circle in Factory.squares_without_circle :
                 
-                # circle.drawSprite()
                 circle.move()
             
             # Check the winner of the game.
