@@ -102,7 +102,8 @@ class Controller :
     # Events management handler.
     def eventHandler(self, buttons, text_manager) : 
         
-        keys = pygame.key.get_pressed()
+        keys = pygame.key.get_pressed() # Move pawns with squares.
+        keys_1 = pygame.key.get_pressed() # Move pawn on another square.
         
         for event in pygame.event.get() :
             
@@ -163,12 +164,9 @@ class Controller :
                 # If the key 'm' is pressed we can move a pawn to an another square.
                 for circle in Factory.circles :
                     
-                    # if keys[pygame.K_m] and keys[circle.square.id + 48] and keys[pygame.K_0] :
-                    if event.key == pygame.K_m : 
+                    if keys[pygame.K_m] and keys[circle.square.id + 48]  :
                         
-                        print(keys[pygame.K_m])
-                        circle.changeSquare(Factory.squares_without_circle, 0)
-                        # print(f"{circle.square.id}, {pygame.K_0}")
+                        circle.changeSquare(Factory.squares_without_circle, event.key - 48)
                         self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
                         pygame.display.flip()
             
