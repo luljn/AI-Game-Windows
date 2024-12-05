@@ -1,5 +1,5 @@
-# main file.
-from controller.controller import *
+# Main file.
+from controller.controller import Controller
 
 class Force_3:
     
