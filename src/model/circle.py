@@ -131,6 +131,7 @@ class Circle(Form) :
     
     def changeSquare(self, squares, new_square_id) :
         
+        print("Le nouvel id est ", new_square_id)
         for pawn in squares : 
             
             if pawn.square.id == new_square_id  :
