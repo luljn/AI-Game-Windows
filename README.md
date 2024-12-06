@@ -11,7 +11,7 @@ A two-player game (Force 3) powered by Artificial Initelligence (for Windows OS)
 
 1) Install Python if you haven't already.
 2) Install pygame and pygame-textinput modules, if you haven't already.
-3) Execute the main file (force_3.py).
+3) Execute the main file (force_3.py), or execute run.bat file.
 
 # The application
 
