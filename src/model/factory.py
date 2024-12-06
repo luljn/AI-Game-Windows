@@ -364,6 +364,6 @@ class Factory :
                 if (square.id not in circles_id and square.id not in circles_cpu_id 
                     and square.id not in squares_without_circles_id and square.id != Square.empty_square_id) :
                     
-                    circle = Circle(window, pygame.Vector2(0,0), "Black", square)
+                    circle = Circle(window, pygame.Vector2((square.position.x + (square.getWidth() / 2)), (square.position.y + (square.getHeigth() / 2))), "Black", square)
                     Factory.squares_without_circle.append(circle)
                     print(f"{square.id} - Square without pawn !")
