@@ -134,6 +134,14 @@ class Controller :
                         
                         circle.canMove = True
                         print(circle.square.id + 48)
+                        
+                # move cpu pawns.
+                for circle in Factory.circles_cpu :
+                    
+                    if event.key == (circle.square.id + 48) :
+                        
+                        circle.canMove = True
+                        print(circle.square.id + 48)
                 
                 # To move two pawns at the same time.
                 for circle in Factory.circles :
@@ -144,6 +152,13 @@ class Controller :
                         print(event.key)
                 #
                 for circle in Factory.squares_without_circle :
+                    
+                    if event.key == pygame.K_d :
+                        
+                        circle.canMove = True
+                        print(event.key)
+                #
+                for circle in Factory.circles_cpu :
                     
                     if event.key == pygame.K_d :
                         
@@ -184,6 +199,18 @@ class Controller :
                 
                 # can't move squares without pawns.
                 for circle in Factory.squares_without_circle :
+                    
+                    if event.key == circle.square.id + 48 :
+                        
+                        circle.canMove = False
+                        print(f"False - {circle.square.id + 48}")
+                    
+                    else :
+                        
+                        circle.canMove = False
+                
+                # can't move cpu pawns.
+                for circle in Factory.circles_cpu :
                     
                     if event.key == circle.square.id + 48 :
                         
