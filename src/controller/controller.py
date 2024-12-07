@@ -106,117 +106,120 @@ class Controller :
                 
                 self.quit()
             
-            # key(s) pressed
-            if(event.type == pygame.KEYDOWN) :
+            # Mode 1 : Player vs CPU.
+            if self.configs[3] == "1" :
                 
-                # Add player pawns on the board.
-                self.factory.circleFactory(self.window, event, self.forms)
-                # Add cpu pawns on the board.
-                self.factory.cpuCircleFactory(self.window, self.forms)
-                # Add transparent paws on squares without pawns to move them.
-                self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                # key(s) pressed
+                if(event.type == pygame.KEYDOWN) :
+                    
+                    # Add player pawns on the board.
+                    self.factory.circleFactory(self.window, event, self.forms)
+                    # Add cpu pawns on the board.
+                    self.factory.cpuCircleFactory(self.window, self.forms)
+                    # Add transparent paws on squares without pawns to move them.
+                    self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                    
+                    # If the key associated to the id of the pawn's square is pressed, we can move it.
+                    for circle in Factory.circles :
+                        
+                        if event.key == (circle.square.id + 48) :
+                            
+                            circle.canMove = True
+                            print(circle.square.id + 48)
+                    
+                    # move squares without pawns.
+                    for circle in Factory.squares_without_circle :
+                        
+                        if event.key == (circle.square.id + 48) :
+                            
+                            circle.canMove = True
+                            print(circle.square.id + 48)
+                            
+                    # move cpu pawns.
+                    for circle in Factory.circles_cpu :
+                        
+                        if event.key == (circle.square.id + 48) :
+                            
+                            circle.canMove = True
+                            print(circle.square.id + 48)
+                    
+                    # To move two pawns at the same time.
+                    for circle in Factory.circles :
+                        
+                        if event.key == pygame.K_d :
+                            
+                            circle.canMove = True
+                            print(event.key)
+                    #
+                    for circle in Factory.squares_without_circle :
+                        
+                        if event.key == pygame.K_d :
+                            
+                            circle.canMove = True
+                            print(event.key)
+                    #
+                    for circle in Factory.circles_cpu :
+                        
+                        if event.key == pygame.K_d :
+                            
+                            circle.canMove = True
+                            print(event.key)
+                    
+                    # If the key 'm' is pressed we can move a pawn to an another square.
+                    # User pawns
+                    for circle in Factory.circles :
+                        
+                        if keys[pygame.K_m] and keys[circle.square.id + 48]  :
+                            
+                            circle.changeSquare(Factory.squares_without_circle, event.key - 48)
+                            self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                    
+                    # Cpu pawns
+                    for circle in Factory.circles_cpu :
+                        
+                        if keys[pygame.K_m] and keys[circle.square.id + 48]  :
+                            
+                            circle.changeSquare(Factory.squares_without_circle, event.key - 48)
+                            self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
                 
-                # If the key associated to the id of the pawn's square is pressed, we can move it.
-                for circle in Factory.circles :
+                # key(s) released.
+                if(event.type == pygame.KEYUP) :
                     
-                    if event.key == (circle.square.id + 48) :
+                    # If the key associated to the id of the pawn's square is not pressed, we can't move it.
+                    for circle in Factory.circles :
                         
-                        circle.canMove = True
-                        print(circle.square.id + 48)
-                
-                # move squares without pawns.
-                for circle in Factory.squares_without_circle :
+                        if event.key == circle.square.id + 48 :
+                            
+                            circle.canMove = False
+                            print(f"False - {circle.square.id + 48}")
+                        
+                        else :
+                            
+                            circle.canMove = False
                     
-                    if event.key == (circle.square.id + 48) :
+                    # can't move squares without pawns.
+                    for circle in Factory.squares_without_circle :
                         
-                        circle.canMove = True
-                        print(circle.square.id + 48)
+                        if event.key == circle.square.id + 48 :
+                            
+                            circle.canMove = False
+                            print(f"False - {circle.square.id + 48}")
                         
-                # move cpu pawns.
-                for circle in Factory.circles_cpu :
+                        else :
+                            
+                            circle.canMove = False
                     
-                    if event.key == (circle.square.id + 48) :
+                    # can't move cpu pawns.
+                    for circle in Factory.circles_cpu :
                         
-                        circle.canMove = True
-                        print(circle.square.id + 48)
-                
-                # To move two pawns at the same time.
-                for circle in Factory.circles :
-                    
-                    if event.key == pygame.K_d :
+                        if event.key == circle.square.id + 48 :
+                            
+                            circle.canMove = False
+                            print(f"False - {circle.square.id + 48}")
                         
-                        circle.canMove = True
-                        print(event.key)
-                #
-                for circle in Factory.squares_without_circle :
-                    
-                    if event.key == pygame.K_d :
-                        
-                        circle.canMove = True
-                        print(event.key)
-                #
-                for circle in Factory.circles_cpu :
-                    
-                    if event.key == pygame.K_d :
-                        
-                        circle.canMove = True
-                        print(event.key)
-                
-                # If the key 'm' is pressed we can move a pawn to an another square.
-                # User pawns
-                for circle in Factory.circles :
-                    
-                    if keys[pygame.K_m] and keys[circle.square.id + 48]  :
-                        
-                        circle.changeSquare(Factory.squares_without_circle, event.key - 48)
-                        self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
-                
-                # Cpu pawns
-                for circle in Factory.circles_cpu :
-                    
-                    if keys[pygame.K_m] and keys[circle.square.id + 48]  :
-                        
-                        circle.changeSquare(Factory.squares_without_circle, event.key - 48)
-                        self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
-            
-            # key(s) released.
-            if(event.type == pygame.KEYUP) :
-                
-                # If the key associated to the id of the pawn's square is not pressed, we can't move it.
-                for circle in Factory.circles :
-                    
-                    if event.key == circle.square.id + 48 :
-                        
-                        circle.canMove = False
-                        print(f"False - {circle.square.id + 48}")
-                    
-                    else :
-                        
-                        circle.canMove = False
-                
-                # can't move squares without pawns.
-                for circle in Factory.squares_without_circle :
-                    
-                    if event.key == circle.square.id + 48 :
-                        
-                        circle.canMove = False
-                        print(f"False - {circle.square.id + 48}")
-                    
-                    else :
-                        
-                        circle.canMove = False
-                
-                # can't move cpu pawns.
-                for circle in Factory.circles_cpu :
-                    
-                    if event.key == circle.square.id + 48 :
-                        
-                        circle.canMove = False
-                        print(f"False - {circle.square.id + 48}")
-                    
-                    else :
-                        
-                        circle.canMove = False
+                        else :
+                            
+                            circle.canMove = False
             
             # Buttons click management
             for button in buttons :
@@ -319,7 +322,7 @@ class Controller :
         
         self.window.gameView(buttons)
         
-        # Player vs CPU mode.
+        # Mode 1 : Player vs CPU.
         if self.configs[3] == "1" :
             
             # Draw the board.
@@ -354,10 +357,14 @@ class Controller :
                 
                 self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
         
-        # CPU_1 vs CPU_2 mode.
+        # Mode 2 : CPU_1 vs CPU_2.
         elif self.configs[3] == "2" :
             
-            pass
+            # Draw the board.
+            for form in forms :
+                
+                form.drawSprite()
+                form.move()
         
         pygame.display.flip()
     
