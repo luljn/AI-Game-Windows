@@ -66,10 +66,8 @@ class Controller :
         while self.running :
             
             self.eventHandler(self.buttons, text_manager)
-            # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
-            # pygame.display.flip()
         
         self.quit()
     
@@ -115,7 +113,7 @@ class Controller :
                 self.factory.circleFactory(self.window, event, self.forms)
                 # Add cpu pawns on the board.
                 self.factory.cpuCircleFactory(self.window, self.forms)
-                #
+                # Add transparent paws on squares without pawns to move them.
                 self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
                 
                 # If the key associated to the id of the pawn's square is pressed, we can move it.
@@ -163,15 +161,6 @@ class Controller :
                         
                         circle.canMove = True
                         print(event.key)
-                
-                # If the key 's' is pressed we can move the squares which don't have a pawn.
-                # for square in self.forms :
-                    
-                #     if keys[pygame.K_s] and keys[square.id + 48]  :
-                        
-                #         # Square.canMove = True
-                #         square.canMove = True
-                #         print(square.id + 48)
                 
                 # If the key 'm' is pressed we can move a pawn to an another square.
                 # User pawns
@@ -228,20 +217,6 @@ class Controller :
                     else :
                         
                         circle.canMove = False
-                
-                # If the key 's' is not pressed we can't move the squares which don't have a pawn.
-                # for square in self.forms :
-                    
-                #     if keys[pygame.K_s] and keys[square.id + 48]  :
-                        
-                #         # Square.canMove = False
-                #         square.canMove = False
-                #         print(square.id + 48)
-                    
-                #     else :
-                        
-                #         # Square.canMove = False
-                #         square.canMove = False
             
             # Buttons click management
             for button in buttons :
