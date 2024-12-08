@@ -328,6 +328,16 @@ class Controller :
     def welcome(self, buttons) :
         
         self.window.welcomeView(buttons)
+        self.window.displayTextOnTheView("Infos ", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 20))
+        
+        if self.configs[3] == "1" :
+            
+            self.window.displayTextOnTheView("Mode actuel : Player vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+        
+        elif self.configs[3] == "2" :
+            
+            self.window.displayTextOnTheView("Mode actuel : CPU_1 vs CPU_2", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+        
         pygame.display.flip()
         pygame.display.update()
     
