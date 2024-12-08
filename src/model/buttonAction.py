@@ -1,3 +1,4 @@
+# Button action enum.
 from enum import StrEnum
 
 

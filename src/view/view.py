@@ -1,3 +1,4 @@
+# View management enum.
 from enum import StrEnum
 
 

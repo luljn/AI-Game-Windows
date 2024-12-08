@@ -51,8 +51,6 @@ class Controller :
             
             Sound.getAndPlaySound(Sound.default_music)
         
-        # forms = self.factory.formFactory(self.window, configs)
-        
         """Text input management"""
         # Creation of the manager and the visualizer of the text input.
         text_manager = TextInputManager()  # manage the text input.
@@ -68,10 +66,8 @@ class Controller :
         while self.running :
             
             self.eventHandler(self.buttons, text_manager)
-            # self.KeyEventHandler()
             self.viewsManager(self.forms, text_input)
             self.window.clock.tick(60)
-            # pygame.display.flip()
         
         self.quit()
     
@@ -110,96 +106,127 @@ class Controller :
                 
                 self.quit()
             
-            # key(s) pressed
-            if(event.type == pygame.KEYDOWN) :
+            # Mode 1 : Player vs CPU.
+            if self.configs[3] == "1" and self.window.getView() == View.GAME.value :
                 
-                # Add player pawns on the board.
-                self.factory.circleFactory(self.window, event, self.forms)
-                # Add cpu pawns on the board.
-                self.factory.cpuCircleFactory(self.window, self.forms)
-                #
-                self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                # key(s) pressed
+                if(event.type == pygame.KEYDOWN) :
+                    
+                    # Add player pawns on the board.
+                    self.factory.circleFactory(self.window, event, self.forms)
+                    # Add cpu pawns on the board.
+                    self.factory.cpuCircleFactory(self.window, self.forms)
+                    # Add transparent paws on squares without pawns to move them.
+                    self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                    
+                    # If the key associated to the id of the pawn's square is pressed, we can move it.
+                    for circle in Factory.circles :
+                        
+                        if event.key == (circle.square.id + 48) :
+                            
+                            circle.canMove = True
+                            print(circle.square.id + 48)
+                    
+                    # move squares without pawns.
+                    for circle in Factory.squares_without_circle :
+                        
+                        if event.key == (circle.square.id + 48) :
+                            
+                            circle.canMove = True
+                            print(circle.square.id + 48)
+                            
+                    # move cpu pawns.
+                    for circle in Factory.circles_cpu :
+                        
+                        if event.key == (circle.square.id + 48) :
+                            
+                            circle.canMove = True
+                            print(circle.square.id + 48)
+                    
+                    # To move two pawns at the same time.
+                    for circle in Factory.circles :
+                        
+                        if event.key == pygame.K_d :
+                            
+                            circle.canMove = True
+                            print(event.key)
+                    #
+                    for circle in Factory.squares_without_circle :
+                        
+                        if event.key == pygame.K_d :
+                            
+                            circle.canMove = True
+                            print(event.key)
+                    #
+                    for circle in Factory.circles_cpu :
+                        
+                        if event.key == pygame.K_d :
+                            
+                            circle.canMove = True
+                            print(event.key)
+                    
+                    # If the key 'm' is pressed we can move a pawn to an another square.
+                    # User pawns
+                    for circle in Factory.circles :
+                        
+                        if keys[pygame.K_m] and keys[circle.square.id + 48]  :
+                            
+                            circle.changeSquare(Factory.squares_without_circle, event.key - 48)
+                            self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                    
+                    # Cpu pawns
+                    for circle in Factory.circles_cpu :
+                        
+                        if keys[pygame.K_m] and keys[circle.square.id + 48]  :
+                            
+                            circle.changeSquare(Factory.squares_without_circle, event.key - 48)
+                            self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
                 
-                # If the key associated to the id of the pawn's square is pressed, we can move it.
-                for circle in Factory.circles :
+                # key(s) released.
+                if(event.type == pygame.KEYUP) :
                     
-                    if event.key == (circle.square.id + 48) :
+                    # If the key associated to the id of the pawn's square is not pressed, we can't move it.
+                    for circle in Factory.circles :
                         
-                        circle.canMove = True
-                        print(circle.square.id + 48)
-                
-                # move squares without pawns.
-                for circle in Factory.squares_without_circle :
+                        if event.key == circle.square.id + 48 :
+                            
+                            circle.canMove = False
+                            print(f"False - {circle.square.id + 48}")
+                        
+                        else :
+                            
+                            circle.canMove = False
                     
-                    if event.key == (circle.square.id + 48) :
+                    # can't move squares without pawns.
+                    for circle in Factory.squares_without_circle :
                         
-                        circle.canMove = True
-                        print(circle.square.id + 48)
-                
-                # To move two pawns at the same time.
-                for circle in Factory.circles :
+                        if event.key == circle.square.id + 48 :
+                            
+                            circle.canMove = False
+                            print(f"False - {circle.square.id + 48}")
+                        
+                        else :
+                            
+                            circle.canMove = False
                     
-                    if event.key == pygame.K_d :
+                    # can't move cpu pawns.
+                    for circle in Factory.circles_cpu :
                         
-                        circle.canMove = True
-                        print(event.key)
-                #
-                for circle in Factory.squares_without_circle :
-                    
-                    if event.key == pygame.K_d :
+                        if event.key == circle.square.id + 48 :
+                            
+                            circle.canMove = False
+                            print(f"False - {circle.square.id + 48}")
                         
-                        circle.canMove = True
-                        print(event.key)
-                
-                # If the key 's' is pressed we can move the squares which don't have a pawn.
-                for square in self.forms :
-                    
-                    if keys[pygame.K_s] and keys[square.id + 48]  :
-                        
-                        # Square.canMove = True
-                        square.canMove = True
-                        print(square.id + 48)
+                        else :
+                            
+                            circle.canMove = False
             
-            # key(s) released.
-            if(event.type == pygame.KEYUP) :
+            # Mode 2 : CPU_1 vs CPU_2.
+            elif self.configs[3] == "2" and self.window.getView() == View.GAME.value :
                 
-                # If the key associated to the id of the pawn's square is not pressed, we can't move it.
-                for circle in Factory.circles :
-                    
-                    if event.key == circle.square.id + 48 :
-                        
-                        circle.canMove = False
-                        print(f"False - {circle.square.id + 48}")
-                    
-                    else :
-                        
-                        circle.canMove = False
-                
-                # can't move squares without pawns.
-                for circle in Factory.squares_without_circle :
-                    
-                    if event.key == circle.square.id + 48 :
-                        
-                        circle.canMove = False
-                        print(f"False - {circle.square.id + 48}")
-                    
-                    else :
-                        
-                        circle.canMove = False
-                
-                # If the key 's' is not pressed we can't move the squares which don't have a pawn.
-                for square in self.forms :
-                    
-                    if keys[pygame.K_s] and keys[square.id + 48]  :
-                        
-                        # Square.canMove = False
-                        square.canMove = False
-                        print(square.id + 48)
-                    
-                    else :
-                        
-                        # Square.canMove = False
-                        square.canMove = False
+                self.factory.cpu1CircleFactory(self.window, self.forms)
+                self.factory.cpu2CircleFactory(self.window, self.forms)
+                self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
             
             # Buttons click management
             for button in buttons :
@@ -211,6 +238,8 @@ class Controller :
                         
                         # To load the configs before starting the game.
                         # Config.loadConfig()
+                        Factory.circles = []
+                        Factory.circles_cpu = []
                         self.window.setView(View.GAME.value)
                     
                     # Restart the game.
@@ -220,6 +249,7 @@ class Controller :
                         Factory.circles_cpu = []
                         self.forms = []
                         self.forms = self.factory.formFactory(self.window)
+                        self.window.setView(View.GAME.value)
                         self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
                         self.game(self.forms, self.buttons)
                     
@@ -282,24 +312,44 @@ class Controller :
                         self.window.setView(View.WELCOME.value)
                         self.configs = Config.loadConfig()
                     
-                    # Launch the options view.
+                    # Back to the welcome view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
                         self.window.setView(View.WELCOME.value)
+                        # self.forms = self.factory.formFactory(self.window)
+                        # Factory.circles = []
+                        # Factory.circles_cpu = []
                     
                     # Close the window and quit the game.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
                         
                         self.quit()
     
-    #Keys event management.
-    def KeyEventHandler(self) : 
-        
-        pass
-    
     def welcome(self, buttons) :
         
         self.window.welcomeView(buttons)
+        self.window.displayTextOnTheView("Infos ", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 20))
+        
+        if self.configs[3] == "1" :
+            
+            self.window.displayTextOnTheView("Mode actuel : Player vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+            self.window.displayTextOnTheView(f"Couleur {self.configs[0]} : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+        
+        elif self.configs[3] == "2" :
+            
+            self.window.displayTextOnTheView("Mode actuel : CPU_1 vs CPU_2", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+            self.window.displayTextOnTheView(f"Couleur CPU_1 : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU_2 : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+        
+        if self.configs[4] == "ON" :
+            
+            self.window.displayTextOnTheView(f"Musique : activé", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 150))
+        
+        elif self.configs[4] == "OFF" :
+            
+            self.window.displayTextOnTheView(f"Musique : désactivé", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 150))
+        
         pygame.display.flip()
         pygame.display.update()
     
@@ -307,7 +357,7 @@ class Controller :
         
         self.window.gameView(buttons)
         
-        # Player vs CPU mode.
+        # Mode 1 : Player vs CPU.
         if self.configs[3] == "1" :
             
             # Draw the board.
@@ -315,10 +365,6 @@ class Controller :
                 
                 form.drawSprite()
                 form.move()
-                
-                # if Square.canMove :
-                    
-                #     form.move()
             
             # Put pawns on the board.
             for circle in Factory.circles :
@@ -333,7 +379,6 @@ class Controller :
             
             for circle in Factory.squares_without_circle :
                 
-                # circle.drawSprite()
                 circle.move()
             
             # Check the winner of the game.
@@ -347,10 +392,40 @@ class Controller :
                 
                 self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
         
-        # CPU_1 vs CPU_2 mode.
+        # Mode 2 : CPU_1 vs CPU_2.
         elif self.configs[3] == "2" :
             
-            pass
+            # Draw the board.
+            for form in forms :
+                
+                form.drawSprite()
+                form.move()
+            
+            # Put pawns on the board.
+            for circle in Factory.circles :
+                
+                circle.drawSprite()
+                circle.move()
+            
+            for circle in Factory.circles_cpu :
+                
+                circle.drawSprite()
+                circle.move()
+            
+            for circle in Factory.squares_without_circle :
+                
+                circle.move()
+            
+            # Check the winner of the game.
+            winner = CheckWinner.checkAiVsAiWinner(Factory.circles, Factory.circles_cpu)
+            
+            if winner == "cpu_1" :
+                
+                self.window.displayTextOnTheView("CPU_1 a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+            
+            elif winner == "cpu_2" :
+                
+                self.window.displayTextOnTheView("CPU_2 a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
         
         pygame.display.flip()
     

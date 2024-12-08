@@ -27,7 +27,6 @@ class Config :
     @staticmethod
     def saveConfigs(lines) :
         
-        # pass
         with open(Config.configuration_file_path, "w") as config_file :
             
             config_file.writelines(lines)

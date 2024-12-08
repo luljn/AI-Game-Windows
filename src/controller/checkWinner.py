@@ -1,5 +1,7 @@
-# check winner controller.
+# Check Winner Controller.
 import numpy as np
+
+
 
 class CheckWinner :
     
