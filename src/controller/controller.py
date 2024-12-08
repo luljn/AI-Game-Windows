@@ -238,6 +238,8 @@ class Controller :
                         
                         # To load the configs before starting the game.
                         # Config.loadConfig()
+                        Factory.circles = []
+                        Factory.circles_cpu = []
                         self.window.setView(View.GAME.value)
                     
                     # Restart the game.
@@ -310,10 +312,13 @@ class Controller :
                         self.window.setView(View.WELCOME.value)
                         self.configs = Config.loadConfig()
                     
-                    # Launch the options view.
+                    # Back to the welcome view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
                         self.window.setView(View.WELCOME.value)
+                        # self.forms = self.factory.formFactory(self.window)
+                        # Factory.circles = []
+                        # Factory.circles_cpu = []
                     
                     # Close the window and quit the game.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
@@ -390,7 +395,7 @@ class Controller :
                 circle.move()
             
             # Check the winner of the game.
-            winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)
+            winner = CheckWinner.checkAiVsAiWinner(Factory.circles, Factory.circles_cpu)
             
             if winner == "cpu_1" :
                 
