@@ -367,3 +367,181 @@ class Factory :
                     circle = Circle(window, pygame.Vector2((square.position.x + (square.getWidth() / 2)), (square.position.y + (square.getHeigth() / 2))), "Black", square)
                     Factory.squares_without_circle.append(circle)
                     print(f"{square.id} - Square without pawn !")
+    
+    def cpu1CircleFactory(self, window, squares) :
+        
+        self.configs = Config.loadConfig()
+        position_to_put_pawn = randint(0, 8)
+        circles_cpu1_id = [] # Id of cpu1 pawns.
+        circles_cpu2_id = [] # Id of cpu2 pawns.
+        
+        for circle in Factory.circles :
+            
+            circles_cpu1_id.append(circle.square.id)
+        
+        for circle_cpu in Factory.circles_cpu :
+            
+            circles_cpu2_id.append(circle_cpu.square.id)
+        
+        # If the cpu_1 has less than 3 pawns and it is turn.
+        if len(Factory.circles_cpu) < 3 and self.configs[5] == "0" : 
+            
+            if position_to_put_pawn not in circles_cpu1_id and position_to_put_pawn not in circles_cpu2_id :
+                    
+                    for square in squares :
+                        
+                        if (position_to_put_pawn == 0 and square.getId() == 0) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[1], square)
+                            print(f"0 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 1 and square.getId() == 1) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[1], square)
+                            print(f"1 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 2 and square.getId() == 2) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[1], square)
+                            print(f"2 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 3 and square.getId() == 3) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), self.configs[1], square)
+                            print(f"3 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 4 and square.getId() == 4) :
+                            
+                            self.cpu1CircleFactory(window, squares)
+                        
+                        elif (position_to_put_pawn == 5 and square.getId() == 5) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2)), self.configs[1], square)
+                            print(f"5 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 6 and square.getId() == 6) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[1], square)
+                            print(f"6 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 7 and square.getId() == 7) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[1], square)
+                            print(f"7 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 8 and square.getId() == 8) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[1], square)
+                            print(f"8 - CPU_1_PAWN {self.configs[1]}")
+                            Factory.circles.append(circle)
+                            break
+                    
+                    # After the cpu_1 has put his pawn, the turn goes to player
+                    Config.changeTurn(1)
+            
+            else : 
+                
+                self.cpu1CircleFactory(window, squares)
+    
+    def cpu2CircleFactory(self, window, squares) :
+        
+        self.configs = Config.loadConfig()
+        position_to_put_pawn = randint(0, 8)
+        circles_cpu1_id = [] # Id of cpu1 pawns.
+        circles_cpu2_id = [] # Id of cpu2 pawns.
+        
+        for circle in Factory.circles :
+            
+            circles_cpu1_id.append(circle.square.id)
+        
+        for circle_cpu in Factory.circles_cpu :
+            
+            circles_cpu2_id.append(circle_cpu.square.id)
+        
+        # If the cpu_2 has less than 3 pawns and it is turn.
+        if len(Factory.circles_cpu) < 3 and self.configs[5] == "1" : 
+            
+            if position_to_put_pawn not in circles_cpu1_id and position_to_put_pawn not in circles_cpu2_id :
+                    
+                    for square in squares :
+                        
+                        if (position_to_put_pawn == 0 and square.getId() == 0) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[2], square)
+                            print(f"0 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 1 and square.getId() == 1) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[2], square)
+                            print(f"1 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 2 and square.getId() == 2) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) - (square.getHeigth() + 10)), self.configs[2], square)
+                            print(f"2 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 3 and square.getId() == 3) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2)), self.configs[2], square)
+                            print(f"3 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 4 and square.getId() == 4) :
+                            
+                            self.cpu2CircleFactory(window, squares)
+                        
+                        elif (position_to_put_pawn == 5 and square.getId() == 5) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2)), self.configs[2], square)
+                            print(f"5 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 6 and square.getId() == 6) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) - (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[2], square)
+                            print(f"6 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 7 and square.getId() == 7) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[2], square)
+                            print(f"7 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                        
+                        elif (position_to_put_pawn == 8 and square.getId() == 8) :
+                            
+                            circle = Circle(window, pygame.Vector2((window.getScreenWidth() / 2) + (square.getWidth() + 10), (window.getScreenHeight() / 2) + (square.getHeigth() + 10)), self.configs[2], square)
+                            print(f"8 - CPU_2_PAWN {self.configs[2]}")
+                            Factory.circles_cpu.append(circle)
+                            break
+                    
+                    # After the cpu_2 has put his pawn, the turn goes to player
+                    Config.changeTurn(0)
+            
+            else : 
+                
+                self.cpu2CircleFactory(window, squares)

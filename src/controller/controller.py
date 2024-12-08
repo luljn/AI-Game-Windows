@@ -221,6 +221,13 @@ class Controller :
                             
                             circle.canMove = False
             
+            # Mode 2 : CPU_1 vs CPU_2.
+            elif self.configs[3] == "2" :
+                
+                self.factory.cpu1CircleFactory(self.window, self.forms)
+                self.factory.cpu2CircleFactory(self.window, self.forms)
+                self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+            
             # Buttons click management
             for button in buttons :
                 
@@ -240,6 +247,7 @@ class Controller :
                         Factory.circles_cpu = []
                         self.forms = []
                         self.forms = self.factory.formFactory(self.window)
+                        self.window.setView(View.GAME.value)
                         self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
                         self.game(self.forms, self.buttons)
                     
@@ -365,6 +373,32 @@ class Controller :
                 
                 form.drawSprite()
                 form.move()
+            
+            # Put pawns on the board.
+            for circle in Factory.circles :
+                
+                circle.drawSprite()
+                circle.move()
+            
+            for circle in Factory.circles_cpu :
+                
+                circle.drawSprite()
+                circle.move()
+            
+            for circle in Factory.squares_without_circle :
+                
+                circle.move()
+            
+            # Check the winner of the game.
+            winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)
+            
+            if winner == "cpu_1" :
+                
+                self.window.displayTextOnTheView("CPU_1 a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+            
+            elif winner == "cpu_2" :
+                
+                self.window.displayTextOnTheView("CPU_2 a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
         
         pygame.display.flip()
     
