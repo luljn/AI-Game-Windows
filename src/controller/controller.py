@@ -107,7 +107,7 @@ class Controller :
                 self.quit()
             
             # Mode 1 : Player vs CPU.
-            if self.configs[3] == "1" :
+            if self.configs[3] == "1" and self.window.getView() == View.GAME.value :
                 
                 # key(s) pressed
                 if(event.type == pygame.KEYDOWN) :
@@ -222,7 +222,7 @@ class Controller :
                             circle.canMove = False
             
             # Mode 2 : CPU_1 vs CPU_2.
-            elif self.configs[3] == "2" :
+            elif self.configs[3] == "2" and self.window.getView() == View.GAME.value :
                 
                 self.factory.cpu1CircleFactory(self.window, self.forms)
                 self.factory.cpu2CircleFactory(self.window, self.forms)
@@ -333,10 +333,22 @@ class Controller :
         if self.configs[3] == "1" :
             
             self.window.displayTextOnTheView("Mode actuel : Player vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+            self.window.displayTextOnTheView(f"Couleur {self.configs[0]} : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
         
         elif self.configs[3] == "2" :
             
             self.window.displayTextOnTheView("Mode actuel : CPU_1 vs CPU_2", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+            self.window.displayTextOnTheView(f"Couleur CPU_1 : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU_2 : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+        
+        if self.configs[4] == "ON" :
+            
+            self.window.displayTextOnTheView(f"Musique : activé", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 150))
+        
+        elif self.configs[4] == "OFF" :
+            
+            self.window.displayTextOnTheView(f"Musique : désactivé", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 150))
         
         pygame.display.flip()
         pygame.display.update()
