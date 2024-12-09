@@ -245,6 +245,7 @@ class Controller :
                     # Restart the game.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RESTART.value) :
                         
+                        Square.empty_square_id = 4
                         Factory.circles = []
                         Factory.circles_cpu = []
                         self.forms = []
