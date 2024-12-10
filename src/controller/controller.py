@@ -324,6 +324,8 @@ class Controller :
                     # Close the window and quit the game.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
                         
+                        # Reset the turn.
+                        Config.changeTurn(0)
                         self.quit()
     
     def welcome(self, buttons) :

@@ -3,6 +3,12 @@
 class MinMax : 
     
     @staticmethod
-    def minmax() :
+    def minmax(cpu_pawns) :
         
-        pass
+        circles_cpu_id = [] # Id of cpu pawns.
+        
+        for circle_cpu in cpu_pawns :
+            
+            circles_cpu_id.append(circle_cpu.square.id)
+        
+        
