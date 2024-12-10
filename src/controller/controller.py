@@ -134,7 +134,7 @@ class Controller :
                             
                             circle.canMove = True
                             print(circle.square.id + 48)
-                            
+                    
                     # move cpu pawns.
                     for circle in Factory.circles_cpu :
                         
