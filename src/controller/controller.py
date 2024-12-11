@@ -316,10 +316,14 @@ class Controller :
                     # Back to the welcome view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
+                        Square.empty_square_id = 4
+                        Factory.circles = []
+                        Factory.circles_cpu = []
+                        self.forms = []
+                        self.forms = self.factory.formFactory(self.window)
                         self.window.setView(View.WELCOME.value)
-                        # self.forms = self.factory.formFactory(self.window)
-                        # Factory.circles = []
-                        # Factory.circles_cpu = []
+                        self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
+                        self.game(self.forms, self.buttons)
                     
                     # Close the window and quit the game.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
@@ -402,18 +406,15 @@ class Controller :
             for form in forms :
                 
                 form.drawSprite()
-                form.move()
             
             # Put pawns on the board.
             for circle in Factory.circles :
                 
                 circle.drawSprite()
-                circle.move()
             
             for circle in Factory.circles_cpu :
                 
                 circle.drawSprite()
-                circle.move()
             
             for circle in Factory.squares_without_circle :
                 
