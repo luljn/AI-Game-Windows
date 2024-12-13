@@ -53,5 +53,5 @@ class MinMax :
                         pawn.moveRight(position_x, pawn.square.getWidth() + 10)
                         pawn.canMove = False
                         break
-                    
-                    Config.changeTurn(0)
+            
+            Config.changeTurn(0)
