@@ -30,6 +30,8 @@ class Circle(Form) :
     
     def move(self) :
         
+        configs = Config.loadConfig()
+        
         self.keys = pygame.key.get_pressed()
         #squares dimensions
         square_width = self.window.getScreenWidth() / 16
@@ -145,3 +147,4 @@ class Circle(Form) :
                     self.square = pawn.square
                     self.position.x = pawn.square.position.x + (self.square.getWidth() / 2)
                     self.position.y = pawn.square.position.y + (self.square.getHeigth() / 2)
+                    Config.changeTurn(1)
