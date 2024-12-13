@@ -1,6 +1,7 @@
 # Class for circle pawns management.
 import pygame
 
+from model.config import Config
 from model.form import Form
 from model.square import Square
 
@@ -56,6 +57,8 @@ class Circle(Form) :
             if self.keys[pygame.K_RIGHT] : 
                 
                 self.moveRight(position_x, distance)
+            
+            Config.changeTurn(1)
     
     def moveUp(self, position_y, square_width) : 
         
