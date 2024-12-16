@@ -30,6 +30,9 @@ class Controller :
         # Game loop variable
         self.running = True
         
+        # To determine if someone (player or cpu) has won the game.
+        self.getAwinner = False
+        
         # Game configurations
         self.configs = Config.loadConfig()
         
@@ -279,6 +282,7 @@ class Controller :
                         self.window.setView(View.GAME.value)
                         self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
                         self.game_status = GameStatus.phase_1.value
+                        self.getAwinner = False
                         Turn.setTurn(0)
                         self.game(self.forms, self.buttons)
                     
@@ -353,6 +357,7 @@ class Controller :
                         self.window.setView(View.WELCOME.value)
                         self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
                         self.game_status = GameStatus.phase_1.value
+                        self.getAwinner = False
                         Turn.setTurn(0)
                         self.game(self.forms, self.buttons)
                     
@@ -408,20 +413,20 @@ class Controller :
             for circle in Factory.circles :
                 
                 circle.drawSprite()
-                if self.game_status == GameStatus.phase_2.value and circle.canMove :
+                if self.game_status == GameStatus.phase_2.value and circle.canMove and not self.getAwinner :
                     
                     circle.move()
             
             for circle in Factory.circles_cpu :
                 
                 circle.drawSprite()
-                if self.game_status == GameStatus.phase_2.value :
+                if self.game_status == GameStatus.phase_2.value and not self.getAwinner :
                     
                     circle.move()
             
             for circle in Factory.squares_without_circle :
                 
-                if self.game_status == GameStatus.phase_2.value and circle.canMove :
+                if self.game_status == GameStatus.phase_2.value and circle.canMove and not self.getAwinner :
                     
                     circle.move()
             
@@ -431,10 +436,12 @@ class Controller :
             if winner == "player" :
                 
                 self.window.displayTextOnTheView(f"{self.configs[0]} a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+                self.stopGame()
             
             elif winner == "cpu" :
                 
                 self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
+                self.stopGame()
         
         # Mode 2 : CPU_1 vs CPU_2.
         elif self.configs[3] == "2" :
@@ -459,8 +466,17 @@ class Controller :
             
             if(self.game_status == GameStatus.phase_2.value) :
                 
-                MinMax.minmax1(Factory.circles, Factory.circles_cpu, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
-                MinMax.minmax2(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
+                self.window.clock.tick(10)
+                
+                if Turn.getTurn() == 0 :
+                    
+                    MinMax.minmax1(Factory.circles, Factory.circles_cpu, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner)
+                    Turn.setTurn(1)
+                
+                if Turn.getTurn() == 1 :
+                    
+                    MinMax.minmax2(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner)
+                    Turn.setTurn(0)
             
             # Check the winner of the game.
             winner = CheckWinner.checkAiVsAiWinner(Factory.circles, Factory.circles_cpu)
@@ -468,10 +484,12 @@ class Controller :
             if winner == "cpu_1" :
                 
                 self.window.displayTextOnTheView("CPU_1 a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+                self.stopGame()
             
             elif winner == "cpu_2" :
                 
                 self.window.displayTextOnTheView("CPU_2 a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
+                self.stopGame()
         
         pygame.display.flip()
     
@@ -486,6 +504,23 @@ class Controller :
         self.window.creditsView(buttons)
         pygame.display.flip()
         pygame.display.update()
+    
+    def stopGame(self) :
+        
+        for circle in Factory.circles :
+            
+            circle.canMove = False
+        
+        for circle in Factory.circles_cpu :
+            
+            circle.canMove = False
+        
+        for circle in Factory.squares_without_circle :
+            
+            circle.canMove = False
+        
+        self.getAwinner = True
+        self.window.clock.tick(60)
     
     # Close the window and quit the program
     def quit(self):

@@ -1,7 +1,6 @@
 # Class for circle pawns management.
 import pygame
 
-from model.config import Config
 from model.form import Form
 from model.square import Square
 from model.turn import Turn

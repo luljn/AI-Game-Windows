@@ -1,7 +1,6 @@
 # MinMax management class.
 from random import randint
 
-from model.config import Config
 from model.square import Square
 from model.turn import Turn
 
@@ -65,7 +64,7 @@ class MinMax :
             # return None
     
     @staticmethod
-    def minmax1(cpu_pawns, player_pawns, position_x, position_y) :
+    def minmax1(cpu_pawns, player_pawns, position_x, position_y, getAwinner) :
         
         # configs = Config.loadConfig()
         
@@ -84,15 +83,15 @@ class MinMax :
             
             for pawn in cpu_pawns :
                 
-                if Turn.getTurn() == 0 :
+                if Turn.getTurn() == 0 and not getAwinner :
                     
                     if (pawn.square.id == Square.empty_square_id - 3):
                         
                         pawn.canMove = True
                         pawn.moveDown(position_y, pawn.square.getWidth())
                         pawn.canMove = False
-                        Turn.setTurn(1)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(1)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
                     
                     elif (pawn.square.id == Square.empty_square_id + 3):
@@ -100,8 +99,8 @@ class MinMax :
                         pawn.canMove = True
                         pawn.moveUp(position_y, pawn.square.getWidth())
                         pawn.canMove = False
-                        Turn.setTurn(1)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(1)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
                     
                     elif (pawn.square.id == Square.empty_square_id + 1):
@@ -109,8 +108,8 @@ class MinMax :
                         pawn.canMove = True
                         pawn.moveLeft(position_x, pawn.square.getWidth() + 10)
                         pawn.canMove = False
-                        Turn.setTurn(1)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(1)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
                     
                     elif (pawn.square.id == Square.empty_square_id - 1):
@@ -118,8 +117,8 @@ class MinMax :
                         pawn.canMove = True
                         pawn.moveRight(position_x, pawn.square.getWidth() + 10)
                         pawn.canMove = False
-                        Turn.setTurn(1)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(1)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
             
             # Config.changeTurn(0)
@@ -128,7 +127,7 @@ class MinMax :
             # return None
     
     @staticmethod
-    def minmax2(cpu_pawns, player_pawns, position_x, position_y) :
+    def minmax2(cpu_pawns, player_pawns, position_x, position_y, getAwinner) :
         
         # configs = Config.loadConfig()
         
@@ -148,15 +147,15 @@ class MinMax :
             
             for pawn in cpu_pawns :
                 
-                if Turn.getTurn() == 1 :
+                if Turn.getTurn() == 1 and not getAwinner :
                     
                     if (pawn.square.id == Square.empty_square_id - 3):
                         
                         pawn.canMove = True
                         pawn.moveDown(position_y, pawn.square.getWidth())
                         pawn.canMove = False
-                        Turn.setTurn(0)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(0)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
                     
                     elif (pawn.square.id == Square.empty_square_id + 3):
@@ -164,8 +163,8 @@ class MinMax :
                         pawn.canMove = True
                         pawn.moveUp(position_y, pawn.square.getWidth())
                         pawn.canMove = False
-                        Turn.setTurn(0)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(0)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
                     
                     elif (pawn.square.id == Square.empty_square_id + 1):
@@ -173,8 +172,8 @@ class MinMax :
                         pawn.canMove = True
                         pawn.moveLeft(position_x, pawn.square.getWidth() + 10)
                         pawn.canMove = False
-                        Turn.setTurn(0)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(0)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
                     
                     elif (pawn.square.id == Square.empty_square_id - 1):
@@ -182,8 +181,8 @@ class MinMax :
                         pawn.canMove = True
                         pawn.moveRight(position_x, pawn.square.getWidth() + 10)
                         pawn.canMove = False
-                        Turn.setTurn(0)
-                        print("nouveau tour : ", Turn.getTurn())
+                        # Turn.setTurn(0)
+                        # print("nouveau tour : ", Turn.getTurn())
                         return None
             
             # Config.changeTurn(0)
