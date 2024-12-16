@@ -33,7 +33,7 @@ class Controller :
         # Game configurations
         self.configs = Config.loadConfig()
         
-        #
+        # View and model
         self.window = Window()
         self.factory = Factory()
         
@@ -43,7 +43,7 @@ class Controller :
         # Buttons
         self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
         
-        #
+        # Game status
         self.game_status = GameStatus.phase_1.value
     
     # main controller method
@@ -125,7 +125,9 @@ class Controller :
                         self.factory.cpuCircleFactory(self.window, self.forms)
                         # Add transparent paws on squares without pawns to move them.
                         self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                        # Change the phase of the game.
                         if(len(Factory.circles) == 3 and len(Factory.circles_cpu) == 3) :
+                            
                             self.game_status = GameStatus.phase_2.value
                     
                     # If the key associated to the id of the pawn's square is pressed, we can move it.
@@ -196,9 +198,6 @@ class Controller :
                         
                         Turn.setTurn(1)
                         MinMax.minmax(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
-                        # Turn.setTurn(0)
-                        print("nouveau tour : ", Turn.getTurn())
-                        # print("Le nouveau tour : ", Turn.getTurn())
                 
                 # key(s) released.
                 if(event.type == pygame.KEYUP) :
@@ -244,10 +243,6 @@ class Controller :
                         
                         Turn.setTurn(0)
                         print("nouveau tour : ", Turn.getTurn())
-                
-                # if(self.game_status == GameStatus.phase_2.value) :
-                    
-                #     MinMax.minmax(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
             
             # Mode 2 : CPU_1 vs CPU_2.
             elif self.configs[3] == "2" and self.window.getView() == View.GAME.value :
@@ -255,7 +250,9 @@ class Controller :
                 self.factory.cpu1CircleFactory(self.window, self.forms)
                 self.factory.cpu2CircleFactory(self.window, self.forms)
                 self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                
                 if(len(Factory.circles) == 3 and len(Factory.circles_cpu) == 3) :
+                    
                     self.game_status = GameStatus.phase_2.value
             
             # Buttons click management
@@ -266,8 +263,6 @@ class Controller :
                     # Launch the game view.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAY.value) :
                         
-                        # To load the configs before starting the game.
-                        # Config.loadConfig()
                         Factory.circles = []
                         Factory.circles_cpu = []
                         self.window.setView(View.GAME.value)
@@ -413,33 +408,22 @@ class Controller :
             for circle in Factory.circles :
                 
                 circle.drawSprite()
-                # if self.game_status == GameStatus.phase_2.value and circle.canMove :
-                #     circle.move()
-            
-            for circle in Factory.circles :
-                
-                # circle.drawSprite()
                 if self.game_status == GameStatus.phase_2.value and circle.canMove :
+                    
                     circle.move()
-                    # Turn.setTurn(1)
-                    # print("nouveau tour : ", Turn.getTurn())
-                    # break
             
             for circle in Factory.circles_cpu :
                 
                 circle.drawSprite()
                 if self.game_status == GameStatus.phase_2.value :
+                    
                     circle.move()
             
             for circle in Factory.squares_without_circle :
                 
                 if self.game_status == GameStatus.phase_2.value and circle.canMove :
+                    
                     circle.move()
-            
-            # if(self.game_status == GameStatus.phase_2.value and Turn.getTurn() == 1) :
-                
-            #     MinMax.minmax(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
-            #     Turn.setTurn(0)
             
             # Check the winner of the game.
             winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)

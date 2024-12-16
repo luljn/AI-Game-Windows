@@ -1,3 +1,4 @@
+# Game status enum.
 from enum import StrEnum
 
 
