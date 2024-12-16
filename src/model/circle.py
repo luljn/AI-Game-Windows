@@ -4,6 +4,7 @@ import pygame
 from model.config import Config
 from model.form import Form
 from model.square import Square
+from model.turn import Turn
 
 
 
@@ -30,7 +31,7 @@ class Circle(Form) :
     
     def move(self) :
         
-        configs = Config.loadConfig()
+        # configs = Config.loadConfig()
         
         self.keys = pygame.key.get_pressed()
         #squares dimensions
@@ -60,7 +61,10 @@ class Circle(Form) :
                 
                 self.moveRight(position_x, distance)
             
-            Config.changeTurn(1)
+            # Config.changeTurn(1)
+            # Turn.setTurn(1)
+            # print("nouveau tour : ", Turn.getTurn())
+            return None
     
     def moveUp(self, position_y, square_width) : 
         
@@ -147,4 +151,8 @@ class Circle(Form) :
                     self.square = pawn.square
                     self.position.x = pawn.square.position.x + (self.square.getWidth() / 2)
                     self.position.y = pawn.square.position.y + (self.square.getHeigth() / 2)
-                    Config.changeTurn(1)
+                    # Config.changeTurn(1)
+                    # Turn.setTurn(1)
+                    # print("nouveau tour : ", Turn.getTurn())
+        
+        return None
