@@ -200,7 +200,7 @@ class Controller :
                     if(self.game_status == GameStatus.phase_2.value and event.key == pygame.K_RETURN) :
                         
                         Turn.setTurn(1)
-                        MinMax.minmax(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
+                        MinMax.minmax(Factory.circles_cpu, Factory.circles, Factory.squares_without_circle, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.factory, self.forms, self.window)
                 
                 # key(s) released.
                 if(event.type == pygame.KEYUP) :
@@ -273,18 +273,7 @@ class Controller :
                     # Restart the game.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RESTART.value) :
                         
-                        system("cls")
-                        Square.empty_square_id = 4
-                        Factory.circles = []
-                        Factory.circles_cpu = []
-                        self.forms = []
-                        self.forms = self.factory.formFactory(self.window)
-                        self.window.setView(View.GAME.value)
-                        self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
-                        self.game_status = GameStatus.phase_1.value
-                        self.getAwinner = False
-                        Turn.setTurn(0)
-                        self.game(self.forms, self.buttons)
+                        self.restartGame(View.GAME.value)
                     
                     # Launch the options view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
@@ -348,18 +337,7 @@ class Controller :
                     # Back to the welcome view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
-                        system("cls")
-                        Square.empty_square_id = 4
-                        Factory.circles = []
-                        Factory.circles_cpu = []
-                        self.forms = []
-                        self.forms = self.factory.formFactory(self.window)
-                        self.window.setView(View.WELCOME.value)
-                        self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
-                        self.game_status = GameStatus.phase_1.value
-                        self.getAwinner = False
-                        Turn.setTurn(0)
-                        self.game(self.forms, self.buttons)
+                        self.restartGame(View.WELCOME.value)
                     
                     # Close the window and quit the game.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
@@ -504,6 +482,22 @@ class Controller :
         self.window.creditsView(buttons)
         pygame.display.flip()
         pygame.display.update()
+    
+    def restartGame(self, view:View) :
+        
+        system("cls")
+        Square.empty_square_id = 4
+        Factory.circles = []
+        Factory.circles_cpu = []
+        Factory.squares_without_circle = []
+        self.forms = []
+        self.forms = self.factory.formFactory(self.window)
+        self.window.setView(view)
+        self.buttons = self.factory.buttonFactory(self.window, view)
+        self.game_status = GameStatus.phase_1.value
+        self.getAwinner = False
+        Turn.setTurn(0)
+        self.game(self.forms, self.buttons)
     
     def stopGame(self) :
         
