@@ -353,15 +353,19 @@ class Controller :
         
         if self.configs[3] == "1" :
             
-            self.window.displayTextOnTheView("Mode actuel : Player vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
-            self.window.displayTextOnTheView(f"Couleur {self.configs[0]} : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
-            self.window.displayTextOnTheView(f"Couleur CPU : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+            color_player = "VERT" if self.configs[1] == "GREEN" else "ROUGE"
+            color_cpu = "ROUGE" if self.configs[2] == "RED" else "VERT"
+            self.window.displayTextOnTheView("Mode actuel : Joueur vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+            self.window.displayTextOnTheView(f"Couleur {self.configs[0]} : {color_player}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU : {color_cpu}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
         
         elif self.configs[3] == "2" :
             
+            color_cpu_1 = "VERT" if self.configs[1] == "GREEN" else "ROUGE"
+            color_cpu_2 = "ROUGE" if self.configs[2] == "RED" else "VERT"
             self.window.displayTextOnTheView("Mode actuel : CPU_1 vs CPU_2", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
-            self.window.displayTextOnTheView(f"Couleur CPU_1 : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
-            self.window.displayTextOnTheView(f"Couleur CPU_2 : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+            self.window.displayTextOnTheView(f"Couleur CPU_1 : {color_cpu_1}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU_2 : {color_cpu_2}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
         
         if self.configs[4] == "ON" :
             
@@ -444,7 +448,7 @@ class Controller :
             
             if(self.game_status == GameStatus.phase_2.value) :
                 
-                self.window.clock.tick(5)
+                self.window.clock.tick(10)
                 
                 if Turn.getTurn() == 0 :
                     
