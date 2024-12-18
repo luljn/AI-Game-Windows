@@ -20,9 +20,6 @@ class Square(Form) :
         self.color = color
         self.image = None
         self.canMove = False
-        # self.width = self.window.getScreenWidth() / 16
-        # self.height = self.window.getScreenHeight() / 10
-        # self.position = pygame.Vector2((self.window.getScreenWidth() / 2) -  self.width / 2 , (self.window.getScreenHeight() / 2) - self.height /2)
     
     def drawSprite(self) :
         

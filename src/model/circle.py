@@ -15,9 +15,6 @@ class Circle(Form) :
         self.square = square
         self.radius = radius
         self.canMove = False
-        # self.radius = 30
-        # self.position = position
-        # self.position = pygame.Vector2(self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2)
     
     def drawSprite(self) :
         
@@ -28,6 +25,8 @@ class Circle(Form) :
         return self.radius
     
     def move(self) :
+        
+        # configs = Config.loadConfig()
         
         self.keys = pygame.key.get_pressed()
         #squares dimensions
@@ -56,10 +55,12 @@ class Circle(Form) :
             if self.keys[pygame.K_RIGHT] : 
                 
                 self.moveRight(position_x, distance)
+            
+            return None
     
     def moveUp(self, position_y, square_width) : 
         
-        #If the square is not on the first line, we can move up.
+        # If the square is not on the first line, we can move up.
         if (self.square.id != 0 and self.square.id != 1 and self.square.id != 2 
             and Square.empty_square_id == self.square.id - 3) :
             
@@ -77,7 +78,7 @@ class Circle(Form) :
     
     def moveDown(self, position_y, square_width) : 
         
-        #If the square is not on the 3rd line, we can move down.
+        # If the square is not on the 3rd line, we can move down.
         if (self.square.id != 6 and self.square.id != 7 and self.square.id != 8 
             and Square.empty_square_id == self.square.id + 3) :
             
@@ -95,7 +96,7 @@ class Circle(Form) :
     
     def moveLeft(self, position_x, distance) :
         
-        #If the square is not on the 1st column, we can move left.
+        # If the square is not on the 1st column, we can move left.
         if (self.square.id != 0 and self.square.id != 3 and self.square.id != 6 
             and Square.empty_square_id == self.square.id - 1) :
             
@@ -113,7 +114,7 @@ class Circle(Form) :
     
     def moveRight(self, position_x, distance) :
         
-        #If the square is not on the 3rd column, we can move right.
+        # If the square is not on the 3rd column, we can move right.
         if (self.square.id != 2 and self.square.id != 5 and self.square.id != 8 
             and Square.empty_square_id == self.square.id + 1) :
             
@@ -131,7 +132,13 @@ class Circle(Form) :
     
     def changeSquare(self, squares, new_square_id) :
         
-        if new_square_id != Square.empty_square_id :
+        circles_id = [] # List of circles id (circle on squares without pawn).
+            
+        for circle in squares :
+            
+            circles_id.append(circle.square.id)
+        
+        if new_square_id != Square.empty_square_id and new_square_id in circles_id :
             
             print("Le nouvel id est ", new_square_id)
             for pawn in squares : 
@@ -142,3 +149,5 @@ class Circle(Form) :
                     self.square = pawn.square
                     self.position.x = pawn.square.position.x + (self.square.getWidth() / 2)
                     self.position.y = pawn.square.position.y + (self.square.getHeigth() / 2)
+        
+        return None

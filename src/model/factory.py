@@ -153,6 +153,10 @@ class Factory :
             if element.__class__ == Square and element.getId() == Square.empty_square_id :
                 
                 element.setColor("Black")
+            
+            elif element.__class__ == Square and element.getId() != Square.empty_square_id :
+                
+                element.setColor("Blue")
         
         return forms
     
