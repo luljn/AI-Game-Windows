@@ -444,16 +444,16 @@ class Controller :
             
             if(self.game_status == GameStatus.phase_2.value) :
                 
-                self.window.clock.tick(10)
+                self.window.clock.tick(5)
                 
                 if Turn.getTurn() == 0 :
                     
-                    MinMax.minmax1(Factory.circles, Factory.circles_cpu, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner)
+                    MinMax.minmax1(Factory.circles, Factory.circles_cpu, Factory.squares_without_circle, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner, self.factory, self.forms, self.window)
                     Turn.setTurn(1)
                 
                 if Turn.getTurn() == 1 :
                     
-                    MinMax.minmax2(Factory.circles_cpu, Factory.circles, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner)
+                    MinMax.minmax2(Factory.circles_cpu, Factory.circles, Factory.squares_without_circle, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner, self.factory, self.forms, self.window)
                     Turn.setTurn(0)
             
             # Check the winner of the game.

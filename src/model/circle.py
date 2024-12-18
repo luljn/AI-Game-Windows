@@ -139,7 +139,13 @@ class Circle(Form) :
     
     def changeSquare(self, squares, new_square_id) :
         
-        if new_square_id != Square.empty_square_id :
+        circles_id = [] # List of circles id (circle on squares without pawn).
+            
+        for circle in squares :
+            
+            circles_id.append(circle.square.id)
+        
+        if new_square_id != Square.empty_square_id and new_square_id in circles_id :
             
             print("Le nouvel id est ", new_square_id)
             for pawn in squares : 
