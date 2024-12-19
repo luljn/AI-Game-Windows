@@ -1,0 +1,1 @@
+pyinstaller --onefile --windowed --add-data "resources/img/*.png;img" --additional-hooks-dir=src src/force_3.py

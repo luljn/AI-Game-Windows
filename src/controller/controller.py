@@ -5,11 +5,14 @@ from pygame_textinput import TextInputVisualizer, TextInputManager
 from sys import exit
 
 from controller.checkWinner import *
+from controller.gameStatus import GameStatus
 
 from model.buttonAction import ButtonAction
 from model.factory import *
 from model.config import Config
+from model.minmax import MinMax
 from model.sound import Sound
+from model.turn import Turn
 
 from view.view import View
 from view.window import *
@@ -27,10 +30,13 @@ class Controller :
         # Game loop variable
         self.running = True
         
+        # To determine if someone (player or cpu) has won the game.
+        self.getAwinner = False
+        
         # Game configurations
         self.configs = Config.loadConfig()
         
-        #
+        # View and model
         self.window = Window()
         self.factory = Factory()
         
@@ -39,6 +45,9 @@ class Controller :
         
         # Buttons
         self.buttons = self.factory.buttonFactory(self.window, View.WELCOME.value)
+        
+        # Game status
+        self.game_status = GameStatus.phase_1.value
     
     # main controller method
     def run(self) :
@@ -112,12 +121,17 @@ class Controller :
                 # key(s) pressed
                 if(event.type == pygame.KEYDOWN) :
                     
-                    # Add player pawns on the board.
-                    self.factory.circleFactory(self.window, event, self.forms)
-                    # Add cpu pawns on the board.
-                    self.factory.cpuCircleFactory(self.window, self.forms)
-                    # Add transparent paws on squares without pawns to move them.
-                    self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                    if(self.game_status == GameStatus.phase_1.value) :
+                        # Add player pawns on the board.
+                        self.factory.circleFactory(self.window, event, self.forms)
+                        # Add cpu pawns on the board.
+                        self.factory.cpuCircleFactory(self.window, self.forms)
+                        # Add transparent paws on squares without pawns to move them.
+                        self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                        # Change the phase of the game.
+                        if(len(Factory.circles) == 3 and len(Factory.circles_cpu) == 3) :
+                            
+                            self.game_status = GameStatus.phase_2.value
                     
                     # If the key associated to the id of the pawn's square is pressed, we can move it.
                     for circle in Factory.circles :
@@ -134,7 +148,7 @@ class Controller :
                             
                             circle.canMove = True
                             print(circle.square.id + 48)
-                            
+                    
                     # move cpu pawns.
                     for circle in Factory.circles_cpu :
                         
@@ -181,6 +195,12 @@ class Controller :
                             
                             circle.changeSquare(Factory.squares_without_circle, event.key - 48)
                             self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                    
+                    # Give the turn to the cpu (MinMax AI play).
+                    if(self.game_status == GameStatus.phase_2.value and event.key == pygame.K_RETURN) :
+                        
+                        Turn.setTurn(1)
+                        MinMax.minmax(Factory.circles_cpu, Factory.circles, Factory.squares_without_circle, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.factory, self.forms, self.window)
                 
                 # key(s) released.
                 if(event.type == pygame.KEYUP) :
@@ -220,6 +240,12 @@ class Controller :
                         else :
                             
                             circle.canMove = False
+                    
+                    # Give the turn to the player.
+                    if(self.game_status == GameStatus.phase_2.value and event.key == pygame.K_RETURN) :
+                        
+                        Turn.setTurn(0)
+                        print("nouveau tour : ", Turn.getTurn())
             
             # Mode 2 : CPU_1 vs CPU_2.
             elif self.configs[3] == "2" and self.window.getView() == View.GAME.value :
@@ -227,6 +253,10 @@ class Controller :
                 self.factory.cpu1CircleFactory(self.window, self.forms)
                 self.factory.cpu2CircleFactory(self.window, self.forms)
                 self.factory.transparentCircles(Factory.circles, Factory.circles_cpu, self.forms, self.window)
+                
+                if(len(Factory.circles) == 3 and len(Factory.circles_cpu) == 3) :
+                    
+                    self.game_status = GameStatus.phase_2.value
             
             # Buttons click management
             for button in buttons :
@@ -236,8 +266,6 @@ class Controller :
                     # Launch the game view.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.PLAY.value) :
                         
-                        # To load the configs before starting the game.
-                        # Config.loadConfig()
                         Factory.circles = []
                         Factory.circles_cpu = []
                         self.window.setView(View.GAME.value)
@@ -245,13 +273,7 @@ class Controller :
                     # Restart the game.
                     if (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.RESTART.value) :
                         
-                        Factory.circles = []
-                        Factory.circles_cpu = []
-                        self.forms = []
-                        self.forms = self.factory.formFactory(self.window)
-                        self.window.setView(View.GAME.value)
-                        self.buttons = self.factory.buttonFactory(self.window, View.GAME.value)
-                        self.game(self.forms, self.buttons)
+                        self.restartGame(View.GAME.value)
                     
                     # Launch the options view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.OPTIONS.value) :
@@ -315,14 +337,13 @@ class Controller :
                     # Back to the welcome view.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.BACK.value) :
                         
-                        self.window.setView(View.WELCOME.value)
-                        # self.forms = self.factory.formFactory(self.window)
-                        # Factory.circles = []
-                        # Factory.circles_cpu = []
+                        self.restartGame(View.WELCOME.value)
                     
                     # Close the window and quit the game.
                     elif (button.checkPosition(pygame.mouse.get_pos()) and button.text_input == ButtonAction.QUIT.value) :
                         
+                        # Reset the turn.
+                        Config.changeTurn(0)
                         self.quit()
     
     def welcome(self, buttons) :
@@ -332,15 +353,19 @@ class Controller :
         
         if self.configs[3] == "1" :
             
-            self.window.displayTextOnTheView("Mode actuel : Player vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
-            self.window.displayTextOnTheView(f"Couleur {self.configs[0]} : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
-            self.window.displayTextOnTheView(f"Couleur CPU : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+            color_player = "VERT" if self.configs[1] == "GREEN" else "ROUGE"
+            color_cpu = "ROUGE" if self.configs[2] == "RED" else "VERT"
+            self.window.displayTextOnTheView("Mode actuel : Joueur vs CPU", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
+            self.window.displayTextOnTheView(f"Couleur {self.configs[0]} : {color_player}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU : {color_cpu}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
         
         elif self.configs[3] == "2" :
             
+            color_cpu_1 = "VERT" if self.configs[1] == "GREEN" else "ROUGE"
+            color_cpu_2 = "ROUGE" if self.configs[2] == "RED" else "VERT"
             self.window.displayTextOnTheView("Mode actuel : CPU_1 vs CPU_2", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 10))
-            self.window.displayTextOnTheView(f"Couleur CPU_1 : {self.configs[1]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
-            self.window.displayTextOnTheView(f"Couleur CPU_2 : {self.configs[2]}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
+            self.window.displayTextOnTheView(f"Couleur CPU_1 : {color_cpu_1}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 50))
+            self.window.displayTextOnTheView(f"Couleur CPU_2 : {color_cpu_2}", 17, (self.window.getScreenWidth() / 1.5, (self.window.getScreenHeight() / 10) + 100))
         
         if self.configs[4] == "ON" :
             
@@ -364,22 +389,28 @@ class Controller :
             for form in forms :
                 
                 form.drawSprite()
-                form.move()
+                # form.move()
             
             # Put pawns on the board.
             for circle in Factory.circles :
                 
                 circle.drawSprite()
-                circle.move()
+                if self.game_status == GameStatus.phase_2.value and circle.canMove and not self.getAwinner :
+                    
+                    circle.move()
             
             for circle in Factory.circles_cpu :
                 
                 circle.drawSprite()
-                circle.move()
+                if self.game_status == GameStatus.phase_2.value and not self.getAwinner :
+                    
+                    circle.move()
             
             for circle in Factory.squares_without_circle :
                 
-                circle.move()
+                if self.game_status == GameStatus.phase_2.value and circle.canMove and not self.getAwinner :
+                    
+                    circle.move()
             
             # Check the winner of the game.
             winner = CheckWinner.checkPlayerVsAiWinner(Factory.circles, Factory.circles_cpu)
@@ -387,10 +418,12 @@ class Controller :
             if winner == "player" :
                 
                 self.window.displayTextOnTheView(f"{self.configs[0]} a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+                self.stopGame()
             
             elif winner == "cpu" :
                 
                 self.window.displayTextOnTheView("CPU a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
+                self.stopGame()
         
         # Mode 2 : CPU_1 vs CPU_2.
         elif self.configs[3] == "2" :
@@ -399,22 +432,33 @@ class Controller :
             for form in forms :
                 
                 form.drawSprite()
-                form.move()
             
             # Put pawns on the board.
             for circle in Factory.circles :
                 
                 circle.drawSprite()
-                circle.move()
             
             for circle in Factory.circles_cpu :
                 
                 circle.drawSprite()
-                circle.move()
             
             for circle in Factory.squares_without_circle :
                 
                 circle.move()
+            
+            if(self.game_status == GameStatus.phase_2.value) :
+                
+                self.window.clock.tick(10)
+                
+                if Turn.getTurn() == 0 :
+                    
+                    MinMax.minmax1(Factory.circles, Factory.circles_cpu, Factory.squares_without_circle, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner, self.factory, self.forms, self.window)
+                    Turn.setTurn(1)
+                
+                if Turn.getTurn() == 1 :
+                    
+                    MinMax.minmax2(Factory.circles_cpu, Factory.circles, Factory.squares_without_circle, self.window.getScreenWidth() / 2, self.window.getScreenHeight() / 2, self.getAwinner, self.factory, self.forms, self.window)
+                    Turn.setTurn(0)
             
             # Check the winner of the game.
             winner = CheckWinner.checkAiVsAiWinner(Factory.circles, Factory.circles_cpu)
@@ -422,10 +466,12 @@ class Controller :
             if winner == "cpu_1" :
                 
                 self.window.displayTextOnTheView("CPU_1 a gagné", 15, (self.window.screen_width / 4, self.window.screen_height / 2))
+                self.stopGame()
             
             elif winner == "cpu_2" :
                 
                 self.window.displayTextOnTheView("CPU_2 a gagné", 15, (self.window.screen_width / 1.35, self.window.screen_height / 2))
+                self.stopGame()
         
         pygame.display.flip()
     
@@ -441,9 +487,43 @@ class Controller :
         pygame.display.flip()
         pygame.display.update()
     
+    def restartGame(self, view:View) :
+        
+        system("cls")
+        Square.empty_square_id = 4
+        Factory.circles = []
+        Factory.circles_cpu = []
+        Factory.squares_without_circle = []
+        self.forms = []
+        self.forms = self.factory.formFactory(self.window)
+        self.window.setView(view)
+        self.buttons = self.factory.buttonFactory(self.window, view)
+        self.game_status = GameStatus.phase_1.value
+        self.getAwinner = False
+        Turn.setTurn(0)
+        self.game(self.forms, self.buttons)
+    
+    def stopGame(self) :
+        
+        for circle in Factory.circles :
+            
+            circle.canMove = False
+        
+        for circle in Factory.circles_cpu :
+            
+            circle.canMove = False
+        
+        for circle in Factory.squares_without_circle :
+            
+            circle.canMove = False
+        
+        self.getAwinner = True
+        self.window.clock.tick(60)
+    
     # Close the window and quit the program
     def quit(self):
         
+        Config.changeTurn(0)
         self.running == False
         pygame.quit()
         exit()

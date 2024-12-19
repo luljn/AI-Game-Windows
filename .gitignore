@@ -1,8 +1,15 @@
-#Cache files
+# Cache files
 __pycache__
 
-#Project code specifications
+# Project code specifications
 infos.txt
 
-#Gitignore file
-.gitignore
+# Build files
+build/*
+
+# Build specifications
+force_3.spec
+
+# Resources for the built app
+dist/configurations
+dist/resources
