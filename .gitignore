@@ -4,9 +4,6 @@ __pycache__
 # Project code specifications
 infos.txt
 
-# Gitignore file
-.gitignore
-
 # Build files
 build/*
 
