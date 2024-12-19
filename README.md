@@ -6,6 +6,7 @@ A two-player game (Force 3) powered by Artificial Initelligence (for Windows OS)
 
 - Python. <a href="https://www.python.org/" target="_blank" rel="noreferrer"> <img src="resources/img/python-svgrepo-com.svg" alt="python" width="40" height="40"/> </a>
 - Pygame. <a href="https://www.pygame.org/" target="_blank" rel="noreferrer"> <img src="resources/img/pygame_logo.png" alt="pygame" width="120" height="40"/> </a>
+- PyInstaller. 
 
 # Run the code.
 
@@ -23,6 +24,9 @@ Credits View
 
 Configurations View
 <img src="resources/img/configs.png"/>
+
+## .exe file
+-> The application (force_3.exe) is available in the folder "dist", before running it you have to copy folders "configurations" and "resources" in "dist".
 
 ## Author
 
