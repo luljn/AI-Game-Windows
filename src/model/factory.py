@@ -10,6 +10,7 @@ from model.font import *
 from model.square import Square
 
 from view.view import View
+from view.window import Window
 
 
 
@@ -25,7 +26,7 @@ class Factory :
         super().__init__()
         self.configs = []
     
-    def buttonFactory(self, window, view = "") : 
+    def buttonFactory(self, window:Window, view:View = "") : 
         
         rect_img_path = "resources/img/rect.png"
         position_x = window.getScreenWidth() / 3.05
@@ -65,7 +66,7 @@ class Factory :
         
         return buttons
     
-    def formFactory(self, window) :
+    def formFactory(self, window:Window) :
         
         forms = []
         #squares dimensions
@@ -160,7 +161,7 @@ class Factory :
         
         return forms
     
-    def circleFactory(self, window, event, squares) :
+    def circleFactory(self, window:Window, event:pygame.event, squares:list[Square]) :
         
         self.configs = Config.loadConfig()
         circles_id = [] # Id of players pawns.
@@ -252,7 +253,7 @@ class Factory :
                 # After the player has put his pawn, the turn goes to cpu
                 # Config.changeTurn(1)
     
-    def cpuCircleFactory(self, window, squares) :
+    def cpuCircleFactory(self, window:Window, squares:list[Square]) :
         
         self.configs = Config.loadConfig()
         position_to_put_pawn = randint(0, 8)
@@ -341,7 +342,7 @@ class Factory :
                 
                 self.cpuCircleFactory(window, squares)
     
-    def transparentCircles(self, player_pawns, cpu_pawns, squares, window) :
+    def transparentCircles(self, player_pawns:list[Circle], cpu_pawns:list[Circle], squares:list[Square], window:Window) :
         
         circles_id = [] # Id of players pawns.
         circles_cpu_id = [] # Id of cpu pawns.
@@ -372,7 +373,7 @@ class Factory :
                     Factory.squares_without_circle.append(circle)
                     print(f"{square.id} - Square without pawn !")
     
-    def cpu1CircleFactory(self, window, squares) :
+    def cpu1CircleFactory(self, window:Window, squares:list[Square]) :
         
         self.configs = Config.loadConfig()
         position_to_put_pawn = randint(0, 8)
@@ -461,7 +462,7 @@ class Factory :
                 
                 self.cpu1CircleFactory(window, squares)
     
-    def cpu2CircleFactory(self, window, squares) :
+    def cpu2CircleFactory(self, window:Window, squares:list[Square]) :
         
         self.configs = Config.loadConfig()
         position_to_put_pawn = randint(0, 8)

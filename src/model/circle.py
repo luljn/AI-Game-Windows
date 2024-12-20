@@ -58,7 +58,7 @@ class Circle(Form) :
             
             return None
     
-    def moveUp(self, position_y, square_width) : 
+    def moveUp(self, position_y:float, square_width:int) : 
         
         # If the square is not on the first line, we can move up.
         if (self.square.id != 0 and self.square.id != 1 and self.square.id != 2 
@@ -76,7 +76,7 @@ class Circle(Form) :
             self.square.id -= 3
             Square.empty_square_id += 3
     
-    def moveDown(self, position_y, square_width) : 
+    def moveDown(self, position_y:float, square_width:int) : 
         
         # If the square is not on the 3rd line, we can move down.
         if (self.square.id != 6 and self.square.id != 7 and self.square.id != 8 
@@ -94,7 +94,7 @@ class Circle(Form) :
             self.square.id += 3
             Square.empty_square_id -= 3
     
-    def moveLeft(self, position_x, distance) :
+    def moveLeft(self, position_x:float, distance:int) :
         
         # If the square is not on the 1st column, we can move left.
         if (self.square.id != 0 and self.square.id != 3 and self.square.id != 6 
@@ -112,7 +112,7 @@ class Circle(Form) :
             self.square.id -= 1
             Square.empty_square_id += 1
     
-    def moveRight(self, position_x, distance) :
+    def moveRight(self, position_x:float, distance:int) :
         
         # If the square is not on the 3rd column, we can move right.
         if (self.square.id != 2 and self.square.id != 5 and self.square.id != 8 
@@ -130,7 +130,7 @@ class Circle(Form) :
             self.square.id += 1
             Square.empty_square_id -= 1
     
-    def changeSquare(self, squares, new_square_id) :
+    def changeSquare(self, squares, new_square_id:int) :
         
         circles_id = [] # List of circles id (circle on squares without pawn).
             

@@ -1,15 +1,19 @@
 # MinMax management class.
 from random import choice
 
+from model.circle import Circle
+from model.factory import Factory
 from model.square import Square
 from model.turn import Turn
+
+from view.window import Window
 
 
 
 class MinMax : 
     
     @staticmethod
-    def minmax(cpu_pawns, player_pawns, squares_without_pawn, position_x, position_y, factory, forms, window) :
+    def minmax(cpu_pawns:list[Circle], player_pawns:list[Circle], squares_without_pawn:list[Circle], position_x:float, position_y:float, factory:Factory, forms:list[Square], window:Window) :
         
         circles_id = [] # Id of player pawns.
         circles_cpu_id = [] # Id of cpu pawns.
@@ -71,7 +75,7 @@ class MinMax :
                         break
     
     @staticmethod
-    def minmax1(cpu_pawns, player_pawns, squares_without_pawn, position_x, position_y, getAwinner, factory, forms, window) :
+    def minmax1(cpu_pawns:list[Circle], player_pawns:list[Circle], squares_without_pawn:list[Circle], position_x:float, position_y:float, getAwinner:bool, factory:Factory, forms:list[Square], window:Window) :
         
         circles_id = [] # Id of player pawns.
         circles_cpu_id = [] # Id of cpu pawns.
@@ -133,7 +137,7 @@ class MinMax :
                         return None
     
     @staticmethod
-    def minmax2(cpu_pawns, player_pawns, squares_without_pawn, position_x, position_y, getAwinner, factory, forms, window) :
+    def minmax2(cpu_pawns:list[Circle], player_pawns:list[Circle], squares_without_pawn:list[Circle], position_x:float, position_y:float, getAwinner:bool, factory:Factory, forms:list[Square], window:Window) :
         
         circles_id = [] # Id of player pawns.
         circles_cpu_id = [] # Id of cpu pawns.

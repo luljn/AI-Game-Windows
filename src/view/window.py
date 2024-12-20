@@ -1,6 +1,8 @@
 # View management.
 import pygame
+from pygame_textinput import TextInputVisualizer
 
+from model.button import Button
 from model.config import Config
 from model.font import Font
 
@@ -36,7 +38,7 @@ class Window :
         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
     
     # To display the welcome view.
-    def welcomeView(self, buttons) :
+    def welcomeView(self, buttons:list[Button]) :
         
         pygame_logo = pygame.image.load("resources/img/pygame_logo.png").convert()
         menu = pygame.image.load("resources/img/menu.png").convert()
@@ -50,7 +52,7 @@ class Window :
             self.updateButton(button)
     
     # To display the game view.
-    def gameView(self, buttons) :
+    def gameView(self, buttons:list[Button]) :
         
         configs = Config.loadConfig()
         self.screen.fill("black")
@@ -72,7 +74,7 @@ class Window :
             self.updateButton(button)
     
     # To display the options(configurations) view.
-    def optionsView(self, buttons, text_input) :
+    def optionsView(self, buttons:list[Button], text_input:TextInputVisualizer) :
         
         # Update of the text with the events list.
         text_input.update(pygame.event.get())
@@ -96,7 +98,7 @@ class Window :
             self.updateButton(button)
     
     # To display the credits view.
-    def creditsView(self, buttons) :
+    def creditsView(self, buttons:list[Button]) :
         
         self.screen.fill("black")
         self.displayTitleOfTheView(View.CREDITS.value)
@@ -110,21 +112,21 @@ class Window :
             self.updateButton(button)
     
     # To display the title of the view.
-    def displayTitleOfTheView(self, title) :
+    def displayTitleOfTheView(self, title:str) :
         
         title_ = Font.getFont(45).render(title.upper(), True, "White")
         title_rect = title_.get_rect(center = (self.screen_width / 2, self.screen_height / 15.2))
         self.screen.blit(title_, title_rect)
     
     # To display a text of the view.
-    def displayTextOnTheView(self, text, text_size, position) : 
+    def displayTextOnTheView(self, text:str, text_size:int, position:pygame.Vector2) : 
         
         text = Font.getFont(text_size).render(text, True, "White")
         text_rect = text.get_rect(center = (position[0], position[1]))
         self.screen.blit(text, text_rect)
     
     # To update a button on a viaw.
-    def updateButton(self, button) : 
+    def updateButton(self, button:Button) : 
         
         button.changeColor(self.mouse_position)
         button.update(self.screen)
