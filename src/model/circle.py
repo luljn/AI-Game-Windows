@@ -4,11 +4,13 @@ import pygame
 from model.form import Form
 from model.square import Square
 
+from view.window import Window
+
 
 
 class Circle(Form) :
     
-    def __init__(self, window, position, color, square, radius = 30) :
+    def __init__(self, window:Window, position:pygame.Vector2, color:str, square:Square, radius:int = 30) :
         
         super().__init__(window, position)
         self.color = color
