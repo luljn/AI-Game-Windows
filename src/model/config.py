@@ -32,17 +32,17 @@ class Config :
             config_file.writelines(lines)
     
     @staticmethod
-    def changePlayerName(player_name) :
+    def changePlayerName(player_name:str) :
         
         Config.changeConfiguration("PLAYER_NAME", 0, player_name)
     
     @staticmethod
-    def changeColor(color) :
+    def changeColor(color:str) :
         
         Config.changeConfiguration("COLOR", 1, color)
     
     @staticmethod
-    def changeCpuColor(color) :
+    def changeCpuColor(color:str) :
         
         Config.changeConfiguration("CPU_COLOR", 2, color)
     
@@ -62,7 +62,7 @@ class Config :
         Config.changeConfiguration("TURN", 5, turn)
     
     @staticmethod
-    def changeConfiguration(config, line_number, new_config) : 
+    def changeConfiguration(config, line_number:int, new_config) : 
         
         with open(Config.configuration_file_path, "r") as config_file :
             

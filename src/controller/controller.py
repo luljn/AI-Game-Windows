@@ -81,7 +81,7 @@ class Controller :
         self.quit()
     
     # To display the rigth view.
-    def viewsManager(self, forms, text_input) :
+    def viewsManager(self, forms:list[Square], text_input:TextInputVisualizer) :
         
         if(self.window.getView() == View.WELCOME.value) : 
             
@@ -105,7 +105,7 @@ class Controller :
     
     ''' Events management. '''
     # Events management handler.
-    def eventHandler(self, buttons, text_manager) : 
+    def eventHandler(self, buttons:list[Button], text_manager:TextInputManager) : 
         
         keys = pygame.key.get_pressed()
         
@@ -346,7 +346,7 @@ class Controller :
                         Config.changeTurn(0)
                         self.quit()
     
-    def welcome(self, buttons) :
+    def welcome(self, buttons:list[Button]) :
         
         self.window.welcomeView(buttons)
         self.window.displayTextOnTheView("Infos ", 17, (self.window.getScreenWidth() / 1.5, self.window.getScreenHeight() / 20))
@@ -378,7 +378,7 @@ class Controller :
         pygame.display.flip()
         pygame.display.update()
     
-    def game(self, forms, buttons) :
+    def game(self, forms:list[Square], buttons:list[Button]) :
         
         self.window.gameView(buttons)
         
@@ -475,13 +475,13 @@ class Controller :
         
         pygame.display.flip()
     
-    def options(self, buttons, text_input) :
+    def options(self, buttons:list[Button], text_input:TextInputVisualizer) :
         
         self.window.optionsView(buttons, text_input)
         pygame.display.flip()
         pygame.display.update()
     
-    def credits(self, buttons) : 
+    def credits(self, buttons:list[Button]) : 
         
         self.window.creditsView(buttons)
         pygame.display.flip()

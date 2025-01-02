@@ -1,12 +1,14 @@
 # Check Winner Controller.
 import numpy as np
 
+from model.circle import Circle
+
 
 
 class CheckWinner :
     
     @staticmethod
-    def checkPlayerVsAiWinner(player_pawns, cpu_pawns) :
+    def checkPlayerVsAiWinner(player_pawns:list[Circle], cpu_pawns:list[Circle]) :
         
         if len(player_pawns) == 3 and len(cpu_pawns) == 3 :
             
@@ -110,7 +112,7 @@ class CheckWinner :
                 return "cpu"
     
     @staticmethod
-    def checkAiVsAiWinner(cpu_1_pawns, cpu_2_pawns) :
+    def checkAiVsAiWinner(cpu_1_pawns:list[Circle], cpu_2_pawns:list[Circle]) :
         
         if len(cpu_1_pawns) == 3 and len(cpu_2_pawns) == 3 :
             

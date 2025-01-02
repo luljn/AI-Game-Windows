@@ -9,7 +9,7 @@ class Sound :
     default_music = "resources/sounds/Treachery.mp3"
     
     @staticmethod
-    def getAndPlaySound(sound_path) :
+    def getAndPlaySound(sound_path:str) :
         
         pygame.mixer.music.load(sound_path)
         pygame.mixer.music.play(-1)

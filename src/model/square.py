@@ -3,6 +3,8 @@ import pygame
 
 from model.form import Form
 
+from view.window import Window
+
 
 
 class Square(Form) :
@@ -11,7 +13,7 @@ class Square(Form) :
     empty_square_id = 4
     # canMove = False
     
-    def __init__(self, id, window, width, height, position, color = "Blue") :
+    def __init__(self, id:int, window:Window, width:float, height:float, position:pygame.Vector2, color:str = "Blue") :
         
         super().__init__(window, position)
         self.id = id
@@ -37,7 +39,7 @@ class Square(Form) :
         
         return self.height
     
-    def setColor(self, color) :
+    def setColor(self, color:str) :
         
         self.color = color
     
